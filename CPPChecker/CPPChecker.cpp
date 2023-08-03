@@ -306,9 +306,8 @@ namespace STUDENT {
 M_FALLBACKS
 M_OUTPUT
 M_CLASS_HANDLING
-//! Custom Settings
 
-// Example for what is possbile
+//! Custom Settings
 
 M_CLASS_HAS_MEMBER_T( checks_AMP_T , AMP , int )
 M_CLASS_HAS_MEMBER_T( checks_OHM_f_T , OHM( ) , void )

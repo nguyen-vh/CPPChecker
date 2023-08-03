@@ -28,5 +28,5 @@ jobs:
       - name: Run Catch2 Tests
         working-directory: CPPChecker/Catch2_Tests
         run: |
-          ./build/test
+          ./build/test.cpp
 

@@ -1,6 +1,6 @@
 # **CPPChecker**
 
-CPPChecker is a C++ program developed to automatically check provided C++ code for the existence of classes, functions, variables, and their types, as well as the output. The primary goal is to verify the provided code after it's known that it can run by itself without causing errors during the checking process. To achieve this, the program utilizes SFINAE techniques and hiding in namespaces to prevent compiler errors when the class, function, etc., is missing.
+CPPChecker is an automated C++ program designed to thoroughly examine provided C++ code for the presence of classes, functions, variables, and their corresponding data types, along with verifying the output. The main objective of CPPChecker is to validate the given code after ensuring its independent functionality, guaranteeing that it runs smoothly without encountering errors during the checking process. To achieve this robustness, the program leverages SFINAE (Substitution Failure Is Not An Error) techniques and hides certain elements within namespaces, effectively circumventing compiler errors that might occur when classes, functions, or other components are absent. Overall, CPPChecker serves as a powerful tool for code verification.
 
 ## **Download**
 

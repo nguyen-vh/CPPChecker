@@ -319,7 +319,7 @@ M_CLASS_HAS_MEMBER( checks_AMP , AMP )
 M_CLASS_AND_MEMBER_3( MyClassX , checks_IDE , "IDE" , checks_printed_f , "printed()" , checks_AMP , "AMP" )
 M_CLASS_AND_MEMBER_2( MyClassY , checks_IDE , "IDE" , checks_printed_f , "printed()" )
 //? M_CLASS_AND_MEMBER_2( Classname, 1st Name of the SFINAE-Template, string of 1st Membername, 2nd Name of the SFINAE-Template, string of 2nd Membername )
-M_CLASS_AND_MEMBER_2( MyClassZ , checks_AMP_T , "AMP" , checks_OHM_f_T , "OHM()" )
+M_CLASS_AND_MEMBER_2( MyClassZ , checks_AMP_T , "int AMP" , checks_OHM_f_T , "void OHM()" )
 //! Mains
 M_MAIN( "Printed...\n" , MyClassX , MyClassY , MyClassZ , SomeFunctionX , Filler , Filler , Schokolade , Snake , Filler )
 //? C_MAIN( string Output, Class1, Class2, Class3, FreeFunction1, FreeFunction2, FreeFunction3, Variable1, Variable2, Variable3 )

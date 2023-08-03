@@ -128,34 +128,39 @@ template <typename T> \
 struct NAME<T , std::void_t<decltype( std::declval<T>( ).MEMBER )>> : std::is_same<decltype(std::declval<T>( ).MEMBER), TYPE>{};
 
 
+//* Fallback for M_MAIN
+#define M_FALLBACKS \
+struct Filler {}; \
+template <typename T , typename = void> \
+struct check_Filler : std::true_type {}; \
+template <typename = void> \
+    bool check_free_function_Filler( ){ return true; } \
+template <typename = void> \
+    bool check_free_variable_Filler( ){ return true; } \
+namespace TASK::TESTER { struct No {}; } 
+
+
 //* Checks for the Existence of a Class
-#define M_CLASS_HANDLING( ) \
-template <typename T> \
-bool check_class( ) { \
-std::string strClassN = typeid( T ).name( ) , strClassNreadable {}; \
+#define M_CLASS_HANDLING \
+    template <typename T> \
+    bool check_class( ) { \
+        std::string strClassN = typeid( T ).name( ) , strClassNreadable {}; \
         strClassN = strClassN.erase( 0 , 9 ); \
         for ( int i = 0; i < strClassN.length( ); ++i ) { \
             if ( std::isdigit( strClassN [ i ] ) ) { \
                 if ( !std::isdigit( strClassN [ i + 1 ] ) ) { \
-                    strClassNreadable = strClassN.substr( i + 1 ); } } } \
-                    strClassNreadable.pop_back( ); \
-    if ( !std::is_same<T , TASK::TESTER::No>::value ) { \
-        std::cout << "+ Class '" << strClassNreadable << "' found" << std::endl; \
-        return true; } else { \
-        std::cout << "- Class in Assignment not found. " << std::endl; \
-        return false; }} \
-\
-struct Filler {}; \
-    template <typename T , typename = void> \
-    struct check_Filler : std::true_type {}; \
- template <typename = void> \
- bool check_free_function_Filler( ){ return true; } \
-template <typename = void> \
- bool check_free_variable_Filler( ){ return true; }
+                strClassNreadable = strClassN.substr( i + 1 ); } } } \
+            strClassNreadable.pop_back( ); \
+            if ( !std::is_same<T , TASK::TESTER::No>::value ) { \
+                std::cout << "+ Class '" << strClassNreadable << "' found" << std::endl; \
+                        return true; } else { \
+                std::cout << "- Class in Assignment not found. " << std::endl; \
+                        return false; } }
 
 
-//* Evaluates the output from Student
-#define M_OUTPUT( ) \
+
+  //* Evaluates the output from Student
+#define M_OUTPUT \
 template <typename T> \
 bool check_output( T&& main_call , const std::string& expectedOutput ) { \
     std::stringstream output_stream; \
@@ -169,8 +174,7 @@ bool check_output( T&& main_call , const std::string& expectedOutput ) { \
         std::cout << "\n- Student Output incorrect" << std::endl; \
         std::cout << "   > Expected Output: " << expectedOutput   \
          << "   >  Student Output: " << STUDENTOutput << std::endl; \
-        return false; }} \
-namespace TASK::TESTER { struct No {}; }
+        return false; }}
 
 
 //* Check for Free Function
@@ -258,5 +262,6 @@ void testing( ) { \
         ::evaluation( expectedOutput, Bt1, Bt2, Bt3, Bt4, Bt5, Bt6, Bt7, Bt8, Bt9 ); } } \
 \
 int main( ) { std::cout << std::endl; STUDENT::TASK::testing( ); return 0; }
+
 
 #endif

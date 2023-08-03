@@ -1,9 +1,6 @@
 #ifndef FREE_FUNCTION_T_CHECK_HPP
 #define FREE_FUNCTION_T_CHECK_HPP
 
-#include <iostream>
-#include <type_traits>
-
 //* Check for Free Function
 #define M_FREE_FUNCTION( FUNCTION_NAME, TYPE ) \
 namespace TASK::TESTER{ char FUNCTION_NAME( ); } \

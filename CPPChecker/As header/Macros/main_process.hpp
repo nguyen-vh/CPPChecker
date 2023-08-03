@@ -1,11 +1,10 @@
 #ifndef MAIN_PROCESS_HPP
 #define MAIN_PROCESS_HPP
 
-#include <iostream>
-#include <type_traits>
+// include "M_FALLBACKS"
 
 //* Main Input Processing
-#define C_MAIN( ExpectedOutput, Class1, Class2, Class3, FreeFunction1, FreeFunction2, FreeFunction3, FreeVariable1, FreeVariable2, FreeVariable3 ) \
+#define M_MAIN( ExpectedOutput, Class1, Class2, Class3, FreeFunction1, FreeFunction2, FreeFunction3, FreeVariable1, FreeVariable2, FreeVariable3 ) \
 void evaluation( const std::string& expectedOutput, const bool& Bt1, const bool& Bt2, \
     const bool& Bt3, const bool& Bt4, const bool& Bt5, const bool& Bt6, const bool& Bt7, const bool& Bt8, const bool& Bt9 ) { \
     if ( Bt1 && Bt2 && Bt3 && Bt4 && Bt5 && Bt6 && Bt7 && Bt8 && Bt9 ) { \

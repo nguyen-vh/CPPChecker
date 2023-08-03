@@ -1,9 +1,6 @@
 #ifndef FREE_VARIABLE_T_CHECK_HPP
 #define FREE_VARIABLE_T_CHECK_HPP
 
-#include <iostream>
-#include <type_traits>
-
 //* Check for Free Variable
 #define M_FREE_VARIABLE( VARIABLE_NAME, TYPE ) \
 namespace TASK::TESTER{ char VARIABLE_NAME{}; } \

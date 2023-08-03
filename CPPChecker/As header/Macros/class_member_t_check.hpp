@@ -1,9 +1,6 @@
 #ifndef CLASS_MEMBER_T_CHECK_HPP
 #define CLASS_MEMBER_T_CHECK_HPP
 
-#include <iostream>
-#include <type_traits>
-
 //* SFINAE Check for a Member with specific type
 #define M_CLASS_HAS_MEMBER_T( NAME, MEMBER, TYPE ) \
 template <typename T, typename = void> \

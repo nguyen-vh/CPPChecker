@@ -1,12 +1,8 @@
 #ifndef M_OUTPUT_HPP
 #define M_OUTPUT_HPP
 
-#include <iostream>
-#include <sstream>
-#include <type_traits>
-
 //* Evaluates the output from Student
-#define M_OUTPUT( ) \
+#define M_OUTPUT \
 template <typename T> \
 bool check_output( T&& main_call , const std::string& expectedOutput ) { \
     std::stringstream output_stream; \
@@ -20,7 +16,6 @@ bool check_output( T&& main_call , const std::string& expectedOutput ) { \
         std::cout << "\n- Student Output incorrect" << std::endl; \
         std::cout << "   > Expected Output: " << expectedOutput   \
          << "   >  Student Output: " << STUDENTOutput << std::endl; \
-        return false; }} \
-namespace TASK::TESTER { struct No {}; }
+        return false; }}
 
 #endif

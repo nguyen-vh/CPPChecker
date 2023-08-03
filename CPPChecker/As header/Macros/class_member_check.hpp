@@ -1,9 +1,6 @@
 #ifndef CLASS_MEMEBER_CHECK_HPP
 #define CLASS_MEMEBER_CHECK_HPP
 
-#include <iostream>
-#include <type_traits>
-
 //* SFINAE Check for a Member (Member can be for example Function with () and Variable)
 #define M_CLASS_HAS_MEMBER( NAME, MEMBER ) \
 template <typename T, typename = void> \

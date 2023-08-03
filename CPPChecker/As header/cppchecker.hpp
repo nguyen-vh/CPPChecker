@@ -6,8 +6,6 @@
 #include <type_traits>
 
 
-//! Macros
-
 //* SFINAE Check for a Member (Member can be for example Function with () and Variable)
 #define M_CLASS_HAS_MEMBER( NAME, MEMBER ) \
 template <typename T, typename = void> \

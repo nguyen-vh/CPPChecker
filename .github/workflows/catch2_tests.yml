@@ -1,0 +1,33 @@
+name: Catch2 Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CPPChecker/**'
+  pull_request:
+
+jobs:
+  test:
+    name: Run Catch2 Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Catch2
+        run: |
+          git clone https://github.com/catchorg/Catch2.git
+          cd Catch2
+          cmake -Bbuild -H. -DBUILD_TESTING=OFF
+          cmake --build build/ --target install
+
+      - name: Build and run tests
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+          ctest --output-on-failure

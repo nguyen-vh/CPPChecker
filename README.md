@@ -11,7 +11,7 @@ This program has the intention of running dependancy free, so no third-party-lib
 
 + Tested program with **C++20** and **C++23** (August 2023)
 + For better comments experience download **"Better Comments"** by Aaron Bond (VS Code)
-+ For more color in code download **Better C++ Syntax** by Jeff Hykin (VS Code)
++ For more color in code download **"Better C++ Syntax"** by Jeff Hykin (VS Code)
 
 ### **Important**
 

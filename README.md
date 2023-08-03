@@ -15,7 +15,8 @@ This program has the intention of running dependancy free, so no third-party-lib
 
 ### **Important**
 
-There is a Github-Action which tests "CPPChecker.cpp" and if it fails, **DO NOT DOWNLOAD IT!**
+There is a Github-Action which tests "CPPChecker.cpp", if it fails, **DO NOT DOWNLOAD IT!**
+
 
 
 

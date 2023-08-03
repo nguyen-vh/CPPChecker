@@ -17,15 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build Catch2_Tests
-        working-directory: CPPChecker/As_header/catch2_Tests
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          cmake --build .
+      - name: Set up CMake
+        uses: elgohr/Publish-CMake@v1
+
+      - name: Configure CMake
+        run: cmake -S . -B build
+
+      - name: Build Catch2 Tests
+        run: cmake --build build
 
       - name: Run Catch2 Tests
-        working-directory: CPPChecker/As_header/catch2_Tests/build
         run: |
+          cd build/CPPChecker/As_header/catch2_Tests
           ctest
+

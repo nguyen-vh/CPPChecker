@@ -20,6 +20,10 @@ There's a Github Action in place that tests "[CPPChecker.cpp](https://github.com
 
 For more information click [here](https://github.com/nguyen-vh/CPPChecker/wiki)
 
+## **Purpose**
+
+This tool is designed to facilitate the thorough evaluation of students' code, ensuring that they have successfully adhered to the specified task requirements. With the Tool, instructors can systematically assess the submitted code for accuracy, completeness, and alignment with the given assignment.
+
 ## **Next Steps**
 
 + Full unit test

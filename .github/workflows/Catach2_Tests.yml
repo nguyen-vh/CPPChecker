@@ -1,4 +1,4 @@
-name: Run Catch2 Tests on CPPChecker
+name: Run Catch2 Tests on test.cpp
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up CMake
-        uses: elgohr/Publish-CMake@v1
+        uses: elgohr/CMake-action@v1
 
       - name: Configure CMake
         run: cmake -S . -B build
@@ -30,4 +30,3 @@ jobs:
         run: |
           cd build/CPPChecker/As_header/catch2_Tests
           ctest
-

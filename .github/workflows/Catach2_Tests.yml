@@ -1,0 +1,32 @@
+name: Run Catch2 Tests on CPPChecker
+
+on:
+  push:
+    paths:
+      - 'CPPChecker/**'
+  pull_request:
+    paths:
+      - 'CPPChecker/**'
+
+jobs:
+  test:
+    name: Run Catch2 Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Catch2_Tests
+        working-directory: CPPChecker/Catch2_Tests
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Run Catch2 Tests
+        working-directory: CPPChecker/Catch2_Tests
+        run: |
+          ./build/test
+

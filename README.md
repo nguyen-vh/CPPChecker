@@ -16,6 +16,9 @@ This program is designed to be dependency-free, meaning no third-party libraries
 
 There's a Github Action in place that tests "CPPChecker.cpp". If it fails, **DO NOT DOWNLOAD IT!**
 
+## **Wiki**
+
+For more information click [here](https://github.com/nguyen-vh/CPPChecker/wiki)
 
 
 

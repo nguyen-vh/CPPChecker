@@ -18,16 +18,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Catch2_Tests
-        working-directory: CPPChecker/Catch2_Tests
+        working-directory: CPPChecker/As_header/catch2_Tests
         run: |
           mkdir build
           cd build
-          ctest
           cmake ..
-          cmake --build  .
-        
-      - name: Run Catch2 Tests
-        working-directory: CPPChecker/Catch2_Tests
-        run: |
-          ./build/test.cpp
+          cmake --build .
 
+      - name: Run Catch2 Tests
+        working-directory: CPPChecker/As_header/catch2_Tests/build
+        run: |
+          ctest

@@ -1,0 +1,32 @@
+name: C++ Compile Test CPPChecker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CPPChecker/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'CPPChecker/**' 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install g++
+        run: sudo apt-get install -y g++
+
+      - name: Compile C++ files with g++ (C++20)
+        run: |
+          for file in CPPChecker/*.cpp
+          do
+            g++ -std=c++20 -o "${file%.cpp}" "$file"
+          done
+        working-directory: ${{ github.workspace }}

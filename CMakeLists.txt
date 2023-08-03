@@ -1,26 +1,33 @@
-cmake_minimum_required(VERSION 3.10)
-project(MyProject)
+cmake_minimum_required(VERSION 3.12)
 
-# Set the C++ standard
+# Set CPP Standard
 set(CMAKE_CXX_STANDARD 20)
 
-# Include Catch2 library
-add_subdirectory(CPPChecker)
+project(YourProjectName)
 
-# Add the main executable
+# Add the Main executable
 add_executable(Main main.cpp)
 
-# Link the main executable with the CPPChecker library
+# Add the CPPChecker library
+add_library(CPPChecker CPPChecker/CPPChecker.cpp)
+
+# Include directories for Main and CPPChecker
+target_include_directories(Main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/CPPChecker)
+
+# Link the Main executable with the CPPChecker library
 target_link_libraries(Main PRIVATE CPPChecker)
 
 # Add the Catch2 test executable
-add_executable(catch2_tests CPPChecker/catch2_Tests/test.cpp)
+add_executable(catch2_test CPPChecker/As_header/catch2_Tests/test.cpp)
 
-# Link the Catch2 test executable with the CPPChecker library
-target_link_libraries(catch2_tests PRIVATE CPPChecker)
+# Include directories for catch2_test
+target_include_directories(catch2_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/CPPChecker)
+
+# Link the catch2_test with the CPPChecker library
+target_link_libraries(catch2_test PRIVATE CPPChecker)
 
 # Enable testing with CTest
 enable_testing()
 
-# Add the Catch2 test as a test case
-add_test(NAME MyCatch2Test COMMAND catch2_tests)
+# Add a test that runs the catch2_test executable
+add_test(NAME Catch2Tests COMMAND catch2_test)

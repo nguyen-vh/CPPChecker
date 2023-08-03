@@ -4,7 +4,7 @@ CPPChecker is an automated C++ program designed to thoroughly examine provided C
 
 ## **Download**
 
-This program is designed to be dependency-free, meaning no third-party libraries are used. To use the code, include **< iostream >** and **< sstream >**. If there's an error, include < type_traits >. You can easily copy and paste the code since the program runs on its own.
+This program is designed to be dependency-free, meaning no third-party libraries are used. To use the code, include **<iostream>** and **<sstream>**. If there's an error, include <type_traits>. You can easily copy and paste the code since the program runs on its own.
 
 ### **Setup**
 

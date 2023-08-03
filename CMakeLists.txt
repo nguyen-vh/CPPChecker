@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 20)
 project(CMake_Catch2Test)
 add_executable(Main main.cpp)

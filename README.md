@@ -4,7 +4,7 @@ CPPChecker is an automated C++ program designed to thoroughly examine provided C
 
 ## Download
 
-This program is designed to be dependency-free, meaning no third-party libraries are used. To use the code, include "iostream" and "sstream". If there's an error, include "type_traits". You can easily copy and paste the code since the program runs on its own.
+This program is designed to be **dependency-free**, meaning no third-party libraries are used. To use the code, include "**iostream**" and "**sstream**". If there's an error, include "type_traits". You can easily copy and paste the code since the program runs on its own.
 
 ### Setup
 
@@ -15,11 +15,11 @@ This program is designed to be dependency-free, meaning no third-party libraries
 ### Important
 
 1. There's a Github Action in place that tests if "[CPPChecker.cpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker)" compiles. If it fails, **DO NOT DOWNLOAD IT!**
-2. There is a Unit Test for "[cppchecker.hpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker/As_header)" and if the Github Action for this fails, **DO NOT DOWNLOAD IT!**
+2. There is a **Unit Test** for "[cppchecker.hpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker/As_header)" and if the Github Action for this fails, **DO NOT DOWNLOAD IT!**
 
 ## Wiki
 
-For more information click [here](https://github.com/nguyen-vh/CPPChecker/wiki)
+For more information click **[here](https://github.com/nguyen-vh/CPPChecker/wiki)**
 
 ## Purpose
 

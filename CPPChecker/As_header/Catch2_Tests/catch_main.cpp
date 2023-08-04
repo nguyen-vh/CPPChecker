@@ -110,7 +110,7 @@ namespace STUDENT::TASK {
 
     TEST_CASE( "Check M_CLASS_HAS_MEMBER" ) {
         //has member
-        REQUIRE( check_IDE<MyClassX>( ) == true );
+        CHECK( check_IDE<MyClassX>( ) == true );
         CHECK_FALSE( check_IDE<MyClassXA>( ) == true );
         //has not member
         CHECK( check_printed_f<MyClassX>( ) == true );
@@ -194,7 +194,7 @@ namespace STUDENT::TASK {
     TEST_CASE( "Check Filler" ) {
         CHECK( check_Filler<Filler>( ) == true );
         CHECK( check_free_function_Filler<>( ) == true );
-        REQUIRE_FALSE( check_free_variable_Filler<>( ) == true );
+        CHECK_FALSE( check_free_variable_Filler<>( ) == true );
         }
 
 

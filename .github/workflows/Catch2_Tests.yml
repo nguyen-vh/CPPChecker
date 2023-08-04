@@ -30,9 +30,7 @@ jobs:
         working-directory: ${{ github.workspace }}
         continue-on-error: true  # Continue even if the tests fail
 
-      - name: Display test output
-        run: cat test_output.txt
-        working-directory: ${{ github.workspace }}/CPPChecker/As_header/Catch2_Tests
+ 
 
 
 

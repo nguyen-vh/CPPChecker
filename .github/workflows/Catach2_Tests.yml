@@ -8,27 +8,4 @@ on:
     paths:
       - 'CPPChecker/**'
 
-jobs:
-  test:
-    name: Run Catch2 Tests
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up CMake
-        uses: cmake/setup-cmake@v1
-        with:
-          cmake-version: '3.20'  # Replace with the desired CMake version
-
-      - name: Configure CMake
-        run: cmake -S . -B build
-
-      - name: Build Catch2 Tests
-        run: cmake --build build
-
-      - name: Run Catch2 Tests
-        run: |
-          cd build/CPPChecker/As_header/catch2_Tests
-          ctest

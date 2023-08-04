@@ -260,7 +260,7 @@ void testing( ) { \
         std::string expectedOutput = ExpectedOutput; \
         ::evaluation( expectedOutput, Bt1, Bt2, Bt3, Bt4, Bt5, Bt6, Bt7, Bt8, Bt9 ); } } \
 \
-int main( ) { std::cout << std::endl; STUDENT::TASK::testing( ); return 0; }
+int main( int argc, char * argv[] ) { std::cout << std::endl; STUDENT::TASK::testing( ); return 0; }
 
 
 #endif

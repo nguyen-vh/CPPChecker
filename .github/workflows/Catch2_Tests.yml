@@ -28,3 +28,13 @@ jobs:
           g++ -std=c++20 -o catch_main CPPChecker/As_header/Catch2_Tests/catch_main.cpp
         working-directory: ${{ github.workspace }}
 
+      - name: Run catch_main.cpp
+        run: |
+          ./catch_main
+        working-directory: ${{ github.workspace }}
+        id: catch_output
+
+      - name: Display catch_main.cpp output
+        run: echo "Output from catch_main.cpp: ${{ steps.catch_output.outputs.stdout }}"
+
+

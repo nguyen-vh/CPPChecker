@@ -1,4 +1,4 @@
-name: Run Catch2 Tests on test.cpp
+name: Run Catch2 Tests on catch_main.cpp
 
 on:
   push:

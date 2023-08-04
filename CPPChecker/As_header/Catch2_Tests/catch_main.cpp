@@ -192,9 +192,9 @@ namespace STUDENT::TASK {
 
 
     TEST_CASE( "Check Filler" ) {
-        CHECK_FALSE( check_Filler<Filler>( ) == true );
+        CHECK( check_Filler<Filler>( ) == true );
         CHECK( check_free_function_Filler<>( ) == true );
-        CHECK_FALSE( check_free_variable_Filler<>( ) == true );
+        CHECK( check_free_variable_Filler<>( ) == true );
         }
 
 

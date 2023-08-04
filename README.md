@@ -14,8 +14,8 @@ This program is designed to be dependency-free, meaning no third-party libraries
 
 ### Important
 
-There's a Github Action in place that tests if "[CPPChecker.cpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker)" compiles. If it fails, **DO NOT DOWNLOAD IT!**
-There is a Unit Test for "[cppchecker.hpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker/As_header)" and if the Github Action for this fails, **DO NOT DOWNLOAD IT!**
+1.There's a Github Action in place that tests if "[CPPChecker.cpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker)" compiles. If it fails, **DO NOT DOWNLOAD IT!**
+1.There is a Unit Test for "[cppchecker.hpp](https://github.com/nguyen-vh/CPPChecker/tree/main/CPPChecker/As_header)" and if the Github Action for this fails, **DO NOT DOWNLOAD IT!**
 
 ## Wiki
 

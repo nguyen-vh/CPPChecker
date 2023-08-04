@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'CPPChecker/As header/**'
+      - 'CPPChecker/As_header/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'CPPChecker/As header/**' 
+      - 'CPPChecker/As_header/**' 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
 
       - name: Compile C++ files with g++ (C++20)
         run: |
-          for file in CPPChecker/As header/Catch2_Tests/*.cpp
+          for file in CPPChecker/As_header/Catch2_Tests/*.cpp
           do
             g++ -std=c++20 -o "${file%.cpp}" "$file"
           done

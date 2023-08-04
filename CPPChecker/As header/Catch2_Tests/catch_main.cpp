@@ -4,4 +4,5 @@
 
 TEST_CASE( ) {
     REQUIRE( 6 * 6 == 36 );
+    REQUIRE( 5 * 5 == 25 );
     }

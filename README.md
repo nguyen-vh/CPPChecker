@@ -27,7 +27,7 @@ This tool is designed to facilitate the thorough evaluation of students' code, e
 
 ## Next Steps
 
-+ OPEN
++ open for suggestions
   
 
 

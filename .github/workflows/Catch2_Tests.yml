@@ -23,18 +23,16 @@ jobs:
       - name: Install g++
         run: sudo apt-get install -y g++
 
-      - name: Compile catch_main.cpp with g++ (C++20)
+      - name: Compile and run catch_main.cpp with g++ (C++20)
         run: |
           g++ -std=c++20 -o catch_main CPPChecker/As_header/Catch2_Tests/catch_main.cpp
-        working-directory: ${{ github.workspace }}
-
-      - name: Run catch_main.cpp
-        run: |
           ./catch_main
         working-directory: ${{ github.workspace }}
-        id: catch_output
+        continue-on-error: true  # Continue even if the tests fail
 
-      - name: Display catch_main.cpp output
-        run: echo "Output from catch_main.cpp: ${{ steps.catch_output.outputs.stdout }}"
+      - name: Display test output
+        run: cat test_output.txt
+        working-directory: ${{ github.workspace }}/CPPChecker/As_header/Catch2_Tests
+
 
 

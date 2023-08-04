@@ -28,7 +28,7 @@ jobs:
           g++ -std=c++20 -o catch_main CPPChecker/As_header/Catch2_Tests/catch_main.cpp
           ./catch_main
         working-directory: ${{ github.workspace }}
-        continue-on-error: true  # Continue even if the tests fail
+
 
  
 

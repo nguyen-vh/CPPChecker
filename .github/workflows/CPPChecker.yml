@@ -1,4 +1,4 @@
-name: C++ Compile Test CPPChecker
+name: Compile Test CPPChecker.cpp
 
 on:
   push:

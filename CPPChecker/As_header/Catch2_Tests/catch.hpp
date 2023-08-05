@@ -877,7 +877,7 @@ constexpr auto operator "" _catch_sr( char const* rawChars, std::size_t size ) n
     struct TestName : INTERNAL_CATCH_REMOVE_PARENS(ClassName)<TestType> { \
         void test();\
     }
-
+ 
 #define INTERNAL_CATCH_DECLARE_SIG_TEST_METHOD_X(TestName, ClassName, signature, ...)\
     template<INTERNAL_CATCH_REMOVE_PARENS(signature)> \
     struct TestName : INTERNAL_CATCH_REMOVE_PARENS(ClassName)<__VA_ARGS__> { \

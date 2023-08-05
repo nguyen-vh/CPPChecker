@@ -6,7 +6,6 @@
 #include <type_traits>
 
 
-
 //* SFINAE Check for a Member (Member can be for example Function with () and Variable)
 #define M_CLASS_HAS_MEMBER( NAME, MEMBER ) \
 template <typename T, typename = void> \
@@ -136,7 +135,9 @@ template <typename = void> \
     bool check_free_function_Filler( ){ return true; } \
 template <typename = void> \
     bool check_free_variable_Filler( ){ return true; } \
-namespace TASK::TESTER { struct No {}; } 
+namespace TASK::TESTER { struct No {}; } \
+namespace TASK::TESTER { int main( ) { std::cout << "" << std::endl; return 0; } }
+
 
 
 //* Checks for the Existence of a Class
@@ -242,12 +243,11 @@ else { \
 
 //* Main Input Processing
 #define M_MAIN( ExpectedOutput, Class1, Class2, Class3, FreeFunction1, FreeFunction2, FreeFunction3, FreeVariable1, FreeVariable2, FreeVariable3 ) \
-void evaluation( const std::string& expectedOutput, const bool& Bt1, const bool& Bt2, \
+void evaluation( const bool& EO, const bool& Bt1, const bool& Bt2, \
     const bool& Bt3, const bool& Bt4, const bool& Bt5, const bool& Bt6, const bool& Bt7, const bool& Bt8, const bool& Bt9 ) { \
-    if ( Bt1 && Bt2 && Bt3 && Bt4 && Bt5 && Bt6 && Bt7 && Bt8 && Bt9 ) { \
-        if ( check_output( *( STUDENT::main ), expectedOutput ) ) { \
+    if ( Bt1 && Bt2 && Bt3 && Bt4 && Bt5 && Bt6 && Bt7 && Bt8 && Bt9 && EO ) { \
             std::cout << "______________________________________" << std::endl; \
-            std::cout << "\n+ + + Student did a great Job! + + +\n" << std::endl; }} \
+            std::cout << "\n+ + + Student did a great Job! + + +\n" << std::endl; } \
     else { \
         std::cout << "______________________________________" << std::endl; \
         std::cout << "\n- Student forgot something!\n" << std::endl; }} \
@@ -257,10 +257,10 @@ void testing( ) { \
         bool Bt1 = check_##Class1<Class1>(); bool Bt2 = check_##Class2<Class2>(); bool Bt3 = check_##Class3<Class3>(); \
         bool Bt4 = check_free_function_##FreeFunction1<>(); bool Bt5 = check_free_function_##FreeFunction2<>(); bool Bt6 = check_free_function_##FreeFunction3<>(); \
         bool Bt7 = check_free_variable_##FreeVariable1<>(); bool Bt8 = check_free_variable_##FreeVariable2<>(); bool Bt9 = check_free_variable_##FreeVariable3<>(); \
-        std::string expectedOutput = ExpectedOutput; \
-        ::evaluation( expectedOutput, Bt1, Bt2, Bt3, Bt4, Bt5, Bt6, Bt7, Bt8, Bt9 ); } } \
-\
-int main( int argc, char * argv[] ) { std::cout << std::endl; STUDENT::TASK::testing( ); return 0; }
+        bool EO = check_output( *(main) , ExpectedOutput ); \
+        ::evaluation( EO , Bt1 , Bt2 , Bt3 , Bt4 , Bt5 , Bt6 , Bt7 , Bt8 , Bt9 );}} \
+ \
+     int main( int argc , char* argv [ ] ) { std::cout << std::endl; STUDENT::TASK::testing( ); return 0; }
 
 
 #endif

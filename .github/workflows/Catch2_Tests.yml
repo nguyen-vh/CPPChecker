@@ -1,4 +1,4 @@
-name: Catch2 Headerfile Test
+name: Catch2 Test cppcheck.hpp
 
 on:
   push:

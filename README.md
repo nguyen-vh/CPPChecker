@@ -8,7 +8,7 @@ This program is designed to be **dependency-free**, meaning no third-party libra
 
 ### Setup
 
-+ The program has been tested with **C++20** and **C++23** (August 2023)
++ The program has been tested with GCC **C++23** and compiled on the GitHub Server with **C++20** (August 2023)
 + For a better comments experience, consider downloading **"Better Comments"** by Aaron Bond (VS Code)
 + To add more color to the code, you can download **"Better C++ Syntax"** by Jeff Hykin (VS Code)
 

@@ -31,7 +31,7 @@ int main() {
                                         Students_Code_File + " 2>&1";
 
   std::ofstream output("Students_Results.txt");
-  std::streambuf* coutbuf = std::cout.rdbuf();
+  std::streambuf* std_buffer = std::cout.rdbuf();
   std::cout.rdbuf(output.rdbuf());
   // std::cout.rdbuf(coutbuf);  //! <- Remove line after debugging
 
@@ -233,6 +233,6 @@ int main() {
     std::cout << task_fStream.str() << std::endl;
   }
 
-  std::cout.rdbuf(coutbuf);
+  std::cout.rdbuf(std_buffer);
   return 0;
 }

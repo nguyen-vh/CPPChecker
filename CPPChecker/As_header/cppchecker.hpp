@@ -327,4 +327,9 @@
     return 0;                                                                \
   }
 
+#define M_START \
+  M_FALLBACKS   \
+  M_OUTPUT      \
+  M_CLASS_HANDLING
+
 #endif

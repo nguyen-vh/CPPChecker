@@ -192,7 +192,7 @@ int main() {
     }
 
     if (!conditionMet) {
-      std::cout << "Other Error Type";
+      std::cout << "Unknown Error Type";
     }
 
     std::string number = "";

@@ -233,5 +233,9 @@ int main() {
 
   std::cout.rdbuf(std_buffer);
 
+#ifdef _WIN32
+  std::system("del *.exe");
+#endif
+
   return 0;
 }

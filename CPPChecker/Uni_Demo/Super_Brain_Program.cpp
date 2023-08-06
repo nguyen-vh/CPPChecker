@@ -33,7 +33,7 @@ int main() {
   std::ofstream output("Students_Results.txt");
   std::streambuf* std_buffer = std::cout.rdbuf();
   std::cout.rdbuf(output.rdbuf());
-  // std::cout.rdbuf(coutbuf);  //! <- Remove line after debugging
+  // std::cout.rdbuf(std_buffer);  //! <- Remove line after debugging
 
   std::stringstream errorStream;
   FILE* pipe = popen(compileCommand_Students.data(), "r");

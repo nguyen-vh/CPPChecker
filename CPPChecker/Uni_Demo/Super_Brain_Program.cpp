@@ -214,7 +214,7 @@ int main() {
         "Tasks/CPPChecker_Uni_Task_" M_Task_Number ".cpp";
     const std::string Task_File_compiled = M_task_file_compiled;
     std::string compileCommand_Task =
-        "g++ -std=c++20 -IHeaders -ITasks -include Headers/pch_uni.hpp -o " +
+        "g++ -std=c++23 -IHeaders -include Headers/pch_uni.hpp -o " +
         Task_File_compiled + " " + Task_File;
 
     // Compile Task File

@@ -1,0 +1,24 @@
+
++ Program compiled without errors
+______________________________________
+
++ Class 'MyClassX' found
++  > Member 'IDE' found
++  > Member 'printed()' found
+
++ Class 'MyClassY' found
++  > Member 'IDE' found
++  > Member 'printed()' found
+
++ Class 'MyClassZ' found
++  > Member 'void OHM()' found
+
++ Free Function 'SomeFunctionX' found
++ Free Variable 'Schokolade' found
+
++ Student Output correct
+______________________________________
+
++ + + Student did a great Job! + + +
+
+

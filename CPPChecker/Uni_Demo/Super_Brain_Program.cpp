@@ -52,8 +52,6 @@ int main() {
     size_t markerPos = errorMessage.find(marker);
     errorMessage.erase(markerPos);
 
-    std::cerr << "Compile errors:\n" << errorMessage << std::endl;
-
     bool conditionMet = false;
 
     //* Error Messages by GCC

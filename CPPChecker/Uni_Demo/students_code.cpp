@@ -16,7 +16,7 @@ class MyClassY {
 
 class MyClassZ {
  public:
-  void OHM(){};
+  void OHM() {}
   double AMP;
   float VOLT;
 };

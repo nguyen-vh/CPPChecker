@@ -1,5 +1,4 @@
 #include "Headers/pch_uni.hpp"
-
 //? Precompile all headers
 // g++ -x c++-header pch_uni.hpp -o pch_uni.hpp.gch
 //? include precompiled header
@@ -206,7 +205,6 @@ int main() {
   } else {
     //! Students Code compiles
 
-    std::cout << std::endl;
     std::cout << "+ Program compiled without errors" << std::endl;
     std::cout << "______________________________________" << std::endl;
 
@@ -234,5 +232,6 @@ int main() {
   }
 
   std::cout.rdbuf(std_buffer);
+
   return 0;
 }

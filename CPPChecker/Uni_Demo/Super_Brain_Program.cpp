@@ -38,7 +38,7 @@ int main() {
   std::stringstream errorStream;
   FILE* pipe = popen(compileCommand_Students.data(), "r");
 
-  char buffer[64];
+  char buffer[8];
   while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
     errorStream << buffer;
   }

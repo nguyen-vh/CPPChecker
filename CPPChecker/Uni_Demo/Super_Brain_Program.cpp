@@ -205,7 +205,7 @@ int main() {
   } else {
     //! Students Code compiles
 
-    std::cout << "+ Program compiled without errors" << std::endl;
+    std::cout << "+ Program compiled without error" << std::endl;
     std::cout << "______________________________________" << std::endl;
 
     const std::string Task_File =

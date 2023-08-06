@@ -5,7 +5,7 @@
 //! Macros
 
 //* SFINAE Check for a Member (Member can be for example Function with () and
-//Variable)
+// Variable)
 #define M_CLASS_HAS_MEMBER(NAME, MEMBER)                          \
   template <typename T, typename = void>                          \
   struct NAME : std::false_type {};                               \
@@ -326,6 +326,11 @@
     return 0;                                                                \
   }
 
+#define M_START \
+  M_FALLBACKS   \
+  M_OUTPUT      \
+  M_CLASS_HANDLING
+
 //! STUDENT Code
 namespace STUDENT {
 //* Students code starts here . . .
@@ -369,32 +374,17 @@ int main() {
 //* Student code ends here.
 }  // namespace STUDENT
 
-M_FALLBACKS
-M_OUTPUT
-M_CLASS_HANDLING
+M_START
 
-//! Custom Settings
-
+M_CLASS_HAS_MEMBER(checks_IDE, IDE)
+M_CLASS_HAS_MEMBER(checks_printed_f, printed())
 M_CLASS_HAS_MEMBER_T(checks_AMP_T, AMP, int)
 M_CLASS_HAS_MEMBER_T(checks_OHM_f_T, OHM(), void)
 M_FREE_VARIABLE(Schokolade, int)
-//? M_FREE_VARIABLE( Variablename, type )
-M_FREE_VARIABLE(Snake, std::string)
 M_FREE_FUNCTION(SomeFunctionX, void)
-//? M_FREE_FUNCTION( Variablename, type )
-M_CLASS_HAS_MEMBER(checks_IDE, IDE)
-//? M_CLASS_HAS_MEMBER( Name for SFINAE-Template, Membername )
-M_CLASS_HAS_MEMBER(checks_printed_f, printed())
-M_CLASS_HAS_MEMBER(checks_AMP, AMP)
-M_CLASS_AND_MEMBER_3(MyClassX, checks_IDE, "IDE", checks_printed_f, "printed()",
-                     checks_AMP, "AMP")
+M_CLASS_AND_MEMBER_2(MyClassX, checks_IDE, "IDE", checks_printed_f, "printed()")
 M_CLASS_AND_MEMBER_2(MyClassY, checks_IDE, "IDE", checks_printed_f, "printed()")
-//? M_CLASS_AND_MEMBER_2( Classname, 1st Name of the SFINAE-Template, string of
-//1st Membername, 2nd Name of the SFINAE-Template, string of 2nd Membername )
-M_CLASS_AND_MEMBER_2(MyClassZ, checks_AMP_T, "int AMP", checks_OHM_f_T,
-                     "void OHM()")
-//! Mains
+M_CLASS_AND_MEMBER_1(MyClassZ, checks_OHM_f_T, "void OHM()")
+
 M_MAIN("Printed...\n", MyClassX, MyClassY, MyClassZ, SomeFunctionX, Filler,
-       Filler, Schokolade, Snake, Filler)
-//? C_MAIN( string Output, Class1, Class2, Class3, FreeFunction1, FreeFunction2,
-//FreeFunction3, Variable1, Variable2, Variable3 )
+       Filler, Schokolade, Filler, Filler)

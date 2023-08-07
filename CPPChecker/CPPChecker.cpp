@@ -240,11 +240,11 @@
     bool has_free_function_##FUNCTION_NAME =                                 \
         is_free_function##FUNCTION_NAME<decltype(FUNCTION_NAME)>::value;     \
     if (has_free_function_##FUNCTION_NAME) {                                 \
-      std::cout << "+ Free Function '" << #FUNCTION_NAME << "' found"        \
-                << std::endl;                                                \
+      std::cout << "+ Free Function '" << #TYPE " " #FUNCTION_NAME           \
+                << "' found" << std::endl;                                   \
     } else {                                                                 \
-      std::cout << "- Free Function '" << #FUNCTION_NAME << "' not found"    \
-                << std::endl;                                                \
+      std::cout << "- Free Function '" << #TYPE " " #FUNCTION_NAME           \
+                << "' not found" << std::endl;                               \
     }                                                                        \
     return (has_free_function_##FUNCTION_NAME);                              \
   }                                                                          \
@@ -276,11 +276,11 @@
     bool has_free_variable_##VARIABLE_NAME =                                 \
         is_free_variable##VARIABLE_NAME<decltype(VARIABLE_NAME)>::value;     \
     if (has_free_variable_##VARIABLE_NAME) {                                 \
-      std::cout << "+ Free Variable '" << #VARIABLE_NAME << "' found"        \
-                << std::endl;                                                \
+      std::cout << "+ Free Variable '" << #TYPE " " #VARIABLE_NAME           \
+                << "' found" << std::endl;                                   \
     } else {                                                                 \
-      std::cout << "- Free Variable '" << #VARIABLE_NAME << "' not found"    \
-                << std::endl;                                                \
+      std::cout << "- Free Variable '" << #TYPE " " #VARIABLE_NAME           \
+                << "' not found" << std::endl;                               \
     }                                                                        \
     return (has_free_variable_##VARIABLE_NAME);                              \
   }                                                                          \

@@ -12,8 +12,8 @@ ________________________________
 + Class 'MyClassZ' found
 +  > Member 'void OHM()' found
 
-+ Free Function 'SomeFunctionX' found
-+ Free Variable 'Schokolade' found
++ Free Function 'void SomeFunctionX' found
++ Free Variable 'int Schokolade' found
 
 + Student Output correct
 ________________________________

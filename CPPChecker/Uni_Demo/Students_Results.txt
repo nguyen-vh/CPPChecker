@@ -1,5 +1,5 @@
 + Program compiled without error
-______________________________________
+________________________________
 
 + Class 'MyClassX' found
 +  > Member 'IDE' found
@@ -16,7 +16,7 @@ ______________________________________
 + Free Variable 'Schokolade' found
 
 + Student Output correct
-______________________________________
+________________________________
 
 > > Student did a great Job! < <
 

@@ -206,7 +206,7 @@ int main() {
     //! Students Code compiles
 
     std::cout << "+ Program compiled without error" << std::endl;
-    std::cout << "______________________________________" << std::endl;
+    std::cout << "________________________________" << std::endl;
 
     const std::string Task_File =
         "Tasks/CPPChecker_Uni_Task_" M_Task_Number ".cpp";

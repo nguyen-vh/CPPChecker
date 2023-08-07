@@ -12,10 +12,10 @@
                   const bool& Bt5, const bool& Bt6, const bool& Bt7,           \
                   const bool& Bt8, const bool& Bt9) {                          \
     if (Bt1 && Bt2 && Bt3 && Bt4 && Bt5 && Bt6 && Bt7 && Bt8 && Bt9 && EO) {   \
-      std::cout << "______________________________________" << std::endl;      \
+      std::cout << "________________________________" << std::endl;            \
       std::cout << "\n> > Student did a great Job! < <\n" << std::endl;        \
     } else {                                                                   \
-      std::cout << "______________________________________" << std::endl;      \
+      std::cout << "________________________________" << std::endl;            \
       std::cout << "\n> > Student forgot something! < <\n" << std::endl;       \
     }                                                                          \
   }                                                                            \

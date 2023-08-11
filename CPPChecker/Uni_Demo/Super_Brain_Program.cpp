@@ -1,8 +1,4 @@
 #include "Headers/pch_uni.hpp"
-//? Precompile all headers
-// g++ -x c++-header pch_uni.hpp -o pch_uni.hpp.gch
-//? include precompiled header
-// g++ -include pch_uni.hpp Super_Brain_Program.cpp
 
 #define M_Task_Number "19"
 
@@ -14,13 +10,6 @@
 #define M_Students_Code_compiled "./students_code"
 #define M_task_file_compiled "./CPPChecker_Uni_Task_" M_Task_Number
 #endif
-
-/* Incase pch_uni.hpp is not included
-#include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-*/
 
 int main() {
   const std::string Students_Code_File = "students_code.cpp";
@@ -232,10 +221,6 @@ int main() {
   }
 
   std::cout.rdbuf(std_buffer);
-
-#ifdef _WIN32
-  std::system("del *.exe");
-#endif
 
   return 0;
 }

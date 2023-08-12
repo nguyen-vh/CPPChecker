@@ -348,6 +348,7 @@ class MyClassX {
 
 class MyClassY {
  public:
+  int Zaun;
   int printed();
   int IDE;
 };

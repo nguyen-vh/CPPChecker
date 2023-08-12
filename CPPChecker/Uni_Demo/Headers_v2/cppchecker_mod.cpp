@@ -8,19 +8,22 @@
 //! Call Macros in global namespace
 
 /*
+All Macros
+
 HAS_CLASS(CLASS)
 CLASS_HAS_MEMBERVAR(CLASS, MEMBER)
 CLASS_HAS_MEMBERFUNC(CLASS, MEMBER)
-?CLASS_HAS_STATIC_MEMBERVAR(CLASS, MEMBER)
-?CLASS_HAS_STATIC_MEMBERFUNC(CLASS, MEMBER)
+?   CLASS_HAS_STATIC_MEMBERVAR(CLASS, MEMBER)
+?   CLASS_HAS_STATIC_MEMBERFUNC(CLASS, MEMBER)
 CLASS_HAS_MEMBERVAR_OF_TYPE(CLASS, MEMBER, TYPE)
 CLASS_HAS_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)
-?CLASS_HAS_STATIC_MEMBERVAR_OF_TYPE(CLASS, MEMBER, TYPE)
-?CLASS_HAS_STATIC_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)
+?   CLASS_HAS_STATIC_MEMBERVAR_OF_TYPE(CLASS, MEMBER, TYPE)
+?   CLASS_HAS_STATIC_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)
 HAS_FREE_FUNCTION(FUNCTIONNAME)
 HAS_FREE_FUNCTION_OF_TYPE(FUNCTIONNAME, TYPE)
 HAS_FREE_VARIABLE(VARIABLE)
 HAS_FREE_VARIABLE_OF_TYPE(VARIABLE, TYPE)
+IS_OUTPUT_SAME(TEXT)
 */
 
 /*
@@ -464,12 +467,57 @@ struct special_return_type {};
 //  End of HAS_FREE_VARIABLE_OF_TYPE
 
 /*
+!   Find a way to either switch between calling main() and
+!   main(int argc, char**argv) or make 2 CCPChecker and which one fails has
+!   the wrong main
+*/
+
+//? Creates a check to determine if the specified namespace outputs
+//? the right string into std::cout
+//* bool Check::is_output_same_v
+#define IS_OUTPUT_SAME(TEXT)                                                  \
+                                                                              \
+  namespace NAMESPACE_TO_CHECK::TASK {                                        \
+  using namespace ::TASK::TESTER;                                             \
+  bool check_namespace_output() {                                             \
+    std::stringstream output_stream;                                          \
+    std::streambuf* std_buffer = std::cout.rdbuf(output_stream.rdbuf());      \
+    main(1, nullptr); /*For int main(int argc, char** argv)*/                 \
+    /*main(); For int main()*/                                                \
+    std::cout.rdbuf(std_buffer);                                              \
+    std::string NamespaceOutput_arg = output_stream.str();                    \
+    return NamespaceOutput_arg == TEXT;                                       \
+  }                                                                           \
+  }                                                                           \
+                                                                              \
+  namespace Check {                                                           \
+  bool is_output_same_v = NAMESPACE_TO_CHECK::TASK::check_namespace_output(); \
+  }
+
+//* Fallback for main
+namespace TASK::TESTER {
+int main() {
+  std::cout << "#" << std::endl;
+  return 0;
+}
+
+int main(int argc, char** argv) {
+  std::cout << "#" << std::endl;
+  return 0;
+}
+
+}  // namespace TASK::TESTER
+
+//  End of IS_OUTPUT_SAME
+
+/*
 
 ! Start of the Testing
 
 */
 
 namespace STUDENT {
+
 class ClassX {
  public:
   int Zaun{};
@@ -482,7 +530,13 @@ void Wind(){};
 int Sonne{};
 int Stern{};
 
-};  // namespace STUDENT
+int main(int argc, char** argv) {
+  std::cout << "Hello World" << std::endl;
+
+  return 0;
+}
+
+}  // namespace STUDENT
 
 /*
 
@@ -531,6 +585,8 @@ HAS_FREE_VARIABLE(Mond)   //  existiert nicht
 
 HAS_FREE_VARIABLE_OF_TYPE(Stern, int)      //  ist int
 HAS_FREE_VARIABLE_OF_TYPE(Galaxy, double)  //  existiert nicht
+
+IS_OUTPUT_SAME("Hello World\n")
 
 /*
 
@@ -588,6 +644,8 @@ int main() {
   std::cout << "HAS_FREE_VARIABLE_OF_TYPE" << std::endl;
   std::cout << Check::has_free_variable_Stern_of_type_int_v << std::endl;
   std::cout << Check::has_free_variable_Galaxy_of_type_double_v << std::endl;
+  std::cout << "IS_OUTPUT_SAME" << std::endl;
+  std::cout << Check::is_output_same_v << std::endl;
 
   return 0;
 }

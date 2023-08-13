@@ -19,8 +19,8 @@ CLASS_HAS_MEMBERVAR_OF_TYPE(CLASS, MEMBER, TYPE)
 CLASS_HAS_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)
 ?   CLASS_HAS_STATIC_MEMBERVAR_OF_TYPE(CLASS, MEMBER, TYPE)
 ?   CLASS_HAS_STATIC_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)
-HAS_FREE_FUNCTION(FUNCTIONNAME)
-HAS_FREE_FUNCTION_OF_TYPE(FUNCTIONNAME, TYPE)
+HAS_FREE_FUNCTION(FUNCTION)
+HAS_FREE_FUNCTION_OF_TYPE(FUNCTION, TYPE)
 HAS_FREE_VARIABLE(VARIABLE)
 HAS_FREE_VARIABLE_OF_TYPE(VARIABLE, TYPE)
 IS_OUTPUT_SAME(TEXT)
@@ -59,7 +59,7 @@ bool check_class() {
   return !std::is_same_v<T, TASK::TESTER::No>;
 }
 
-//  End of HAS_CLASS()
+//  End of HAS_CLASS
 
 /*
 
@@ -170,7 +170,7 @@ TODO Find a way to check static Member Function
 
 //? Creates a check to determine if a specific class has a specific
 //? static memberfunction in the specified namespace
-//*V  bool Check::class_'CLASS'_has_static_memberfunc_'MEMBER'_v
+//*F  bool Check::class_'CLASS'_has_static_memberfunc_'MEMBER'_v
 #define CLASS_HAS_STATIC_MEMBERFUNC(CLASS, MEMBER)                      \
                                                                         \
   namespace TASK::TESTER {                                              \
@@ -232,7 +232,7 @@ TODO Find a way to check static Member Function
           class_##CLASS##_has_membervar_##MEMBER##_of_type_##TYPE;         \
   }
 
-//  End of CLASS_HAS_MEMBERVAR
+//  End of CLASS_HAS_MEMBERVAR_OF_TYPE
 
 /*
 
@@ -242,7 +242,7 @@ TODO Find a way to check static Member Function
 
 //? Creates a check to determine if a specific class has a specific
 //? memberfunction of a specific type in the specified namespace
-//*V  bool Check::class_'CLASS'_has_memberfunc_'MEMBER'_of_type_'TYPE'_v
+//*F  bool Check::class_'CLASS'_has_memberfunc_'MEMBER'_of_type_'TYPE'_v
 #define CLASS_HAS_MEMBERFUNC_OF_TYPE(CLASS, MEMBER, TYPE)                   \
                                                                             \
   namespace TASK::TESTER {                                                  \
@@ -268,7 +268,7 @@ TODO Find a way to check static Member Function
           class_##CLASS##_has_memberfunc_##MEMBER##_of_type_##TYPE;         \
   }
 
-//  End of CLASS_HAS_MEMBERVAR
+//  End of CLASS_HAS_MEMBERFUNC_OF_TYPE
 
 /*
 
@@ -305,20 +305,20 @@ TODO  Static test
 //? Creates a check to determine if the specified namespace has a specific
 //? free function
 //* bool Check::has_free_function_'FUNCTIONNAME'_v
-#define HAS_FREE_FUNCTION(FUNCTIONNAME)                                        \
+#define HAS_FREE_FUNCTION(FUNCTION)                                            \
                                                                                \
   namespace TASK::TESTER {                                                     \
-  special_return_type FUNCTIONNAME();                                          \
+  special_return_type FUNCTION();                                              \
   }                                                                            \
   namespace NAMESPACE_TO_CHECK::TASK {                                         \
   using namespace ::TASK::TESTER;                                              \
   template <typename T, typename = void>                                       \
-  struct has_free_function_##FUNCTIONNAME##_sfinae : std::false_type {};       \
+  struct has_free_function_##FUNCTION##_sfinae : std::false_type {};           \
   template <typename T>                                                        \
-  struct has_free_function_##FUNCTIONNAME##_sfinae<                            \
-      T, std::void_t<decltype(FUNCTIONNAME)>>                                  \
-      : std::conjunction<std::is_function<decltype(FUNCTIONNAME)>,             \
-                         std::negation<std::is_same<decltype(FUNCTIONNAME),    \
+  struct has_free_function_##FUNCTION##_sfinae<                                \
+      T, std::void_t<decltype(FUNCTION)>>                                      \
+      : std::conjunction<std::is_function<decltype(FUNCTION)>,                 \
+                         std::negation<std::is_same<decltype(FUNCTION),        \
                                                     special_return_type()>>> { \
   };                                                                           \
   template <typename T>                                                        \
@@ -350,36 +350,36 @@ struct special_return_type {};
 
 //? Creates a check to determine if the specified namespace has a specific
 //? free function of a specific type
-//* bool Check::has_free_function_'FUNCTIONNAME'_of_type_'TYPE'_v
-#define HAS_FREE_FUNCTION_OF_TYPE(FUNCTIONNAME, TYPE)                      \
+//* bool Check::has_free_function_'FUNCTION'_of_type_'TYPE'_v
+#define HAS_FREE_FUNCTION_OF_TYPE(FUNCTION, TYPE)                          \
                                                                            \
   namespace TASK::TESTER {                                                 \
-  special_return_type FUNCTIONNAME();                                      \
+  special_return_type FUNCTION();                                          \
   }                                                                        \
   namespace NAMESPACE_TO_CHECK::TASK {                                     \
   using namespace ::TASK::TESTER;                                          \
   template <typename T, typename = void>                                   \
-  struct has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_sfinae        \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae            \
       : std::false_type {};                                                \
   template <typename T>                                                    \
-  struct has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_sfinae<       \
-      T, std::void_t<decltype(FUNCTIONNAME)>>                              \
-      : std::conjunction<std::is_function<decltype(FUNCTIONNAME)>,         \
-                         std::is_same<decltype(FUNCTIONNAME), TYPE()>> {}; \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<           \
+      T, std::void_t<decltype(FUNCTION)>>                                  \
+      : std::conjunction<std::is_function<decltype(FUNCTION)>,             \
+                         std::is_same<decltype(FUNCTION), TYPE()>> {};     \
   template <typename T>                                                    \
-  struct has_free_function_##FUNCTIONNAME##_of_type_##TYPE {               \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE {                   \
     static constexpr bool value =                                          \
-        has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_sfinae<T>();   \
+        has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<T>();       \
   };                                                                       \
-  bool has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_v =             \
-      has_free_function_##FUNCTIONNAME##_of_type_##TYPE<                   \
-          decltype(FUNCTIONNAME)>::value;                                  \
+  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =                 \
+      has_free_function_##FUNCTION##_of_type_##TYPE<                       \
+          decltype(FUNCTION)>::value;                                      \
   }                                                                        \
                                                                            \
   namespace Check {                                                        \
-  bool has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_v =             \
+  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =                 \
       NAMESPACE_TO_CHECK::TASK::                                           \
-          has_free_function_##FUNCTIONNAME##_of_type_##TYPE##_v;           \
+          has_free_function_##FUNCTION##_of_type_##TYPE##_v;               \
   }
 
 //  End of HAS_FREE_FUNCTION_OF_TYPE

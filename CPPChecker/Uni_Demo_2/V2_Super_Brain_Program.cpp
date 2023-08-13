@@ -1,30 +1,42 @@
 #include "Headers/pch_uni.hpp"
 
-#define M_Task_Number "19"
+//? Comment out if not debugging
+// #define DEBUG
 
-#ifdef _WIN32
-#define M_Students_Code_compiled "students_code.exe"
-#define M_task_file_compiled "CPPChecker_Uni_Task_" M_Task_Number ".exe"
+int main(int argc, char* argv[]) {
+  std::string Task_NO = argv[1];
+  std::string StudentName{};
 
-#else
-#define M_Students_Code_compiled "./students_code"
-#define M_task_file_compiled "./CPPChecker_Uni_Task_" M_Task_Number
-#endif
+  for (int i = 2; i < argc; i++) {
+    StudentName += argv[i];
+    if (i < argc - 1) {
+      StudentName += "_";
+    }
+  }
 
-int main() {
-  const std::string Students_Code_File = "students_code.cpp";
-  const std::string Students_Code_compiled = M_Students_Code_compiled;
-  std::string compileCommand_Students = "g++ -std=c++20 -o " +
-                                        Students_Code_compiled + " " +
-                                        Students_Code_File + " 2>&1";
+  std::string StudentName_ = StudentName;
+  std::replace(StudentName.begin(), StudentName.end(), '_', ' ');
 
-  std::ofstream output("Students_Results.txt");
+  const std::string gcc_command_studentCode =
+      "g++ -std=c++20 -g Student_Answers/studentCode_" + StudentName_ +
+      ".cpp -o Student_Answers/studentCode_T" + Task_NO + "_" + StudentName_ +
+      " 2>&1";
+
+  const std::string gcc_command_CPPChecker =
+      "g++ -std=c++20 Tasks/CPPChecker_Uni_Task_" + Task_NO +
+      ".cpp -o Tasks/CPPChecker_Uni_Task_" + Task_NO +
+      " -IHeaders -include Headers/pch_uni.hpp";
+
+  const std::string gcc_command_CPPCheckerEXE =
+      "cd Tasks && CPPChecker_Uni_Task_" + Task_NO;
+
+  std::ofstream output("Results/studentResults_T" + Task_NO + "_" +
+                       StudentName_ + ".txt");
   std::streambuf* std_buffer = std::cout.rdbuf();
   std::cout.rdbuf(output.rdbuf());
-  // std::cout.rdbuf(std_buffer);  //! <- Remove line after debugging
 
   std::stringstream errorStream;
-  FILE* pipe = popen(compileCommand_Students.data(), "r");
+  FILE* pipe = popen(gcc_command_studentCode.data(), "r");
 
   char buffer[128];
   while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
@@ -35,6 +47,7 @@ int main() {
   if (compileResult != 0) {
     //? Students Code didnt compile
 
+    //? Filter out the first error message
     std::string errorMessage = errorStream.str();
     std::string marker = "      |";
     size_t markerPos = errorMessage.find(marker);
@@ -183,6 +196,7 @@ int main() {
       std::cout << "Unknown Error Type";
     }
 
+    //? Extracting the right Line Number
     std::string number = "";
     auto is_num = [](char num) { return std::isdigit(num); };
     auto num_start =
@@ -193,34 +207,86 @@ int main() {
 
   } else {
     //? Students Code compiles
-
-    std::cout << "+ Program compiled without error" << std::endl;
+    std::cout << "Program compiled without error" << std::endl;
     std::cout << "________________________________" << std::endl;
 
-    const std::string Task_File =
-        "Tasks/CPPChecker_Uni_Task_" M_Task_Number ".cpp";
-    const std::string Task_File_compiled = M_task_file_compiled;
-    std::string compileCommand_Task =
-        "g++ -std=c++20 -IHeaders -include Headers/pch_uni.hpp -o " +
-        Task_File_compiled + " " + Task_File;
-
-    // Compile Task File
-    FILE* compilePipe = popen(compileCommand_Task.data(), "r");
-    pclose(compilePipe);
-
-    // Execute Task File
-    std::stringstream task_fStream;
-    FILE* executePipe = popen(Task_File_compiled.data(), "r");
-
-    while (fgets(buffer, sizeof(buffer), executePipe) != nullptr) {
-      task_fStream << buffer;
+    //? Paste studentCode into different file to check
+    std::ifstream studentCode_Name("Student_Answers/studentCode_" +
+                                   StudentName_ + ".cpp");
+    std::ofstream studentCodeOverwrite("studentCodeOverwrite.cpp");
+    std::string sline;
+    while (std::getline(studentCode_Name, sline)) {
+      studentCodeOverwrite << sline << std::endl;
     }
-    pclose(executePipe);
+    studentCode_Name.close();
+    studentCodeOverwrite.close();
 
-    std::cout << task_fStream.str() << std::endl;
+    //? Compile CPPChecker
+    FILE* pipe = popen(gcc_command_CPPChecker.data(), "r");
+    pclose(pipe);
+
+    //? Execute CPPChecker
+    std::stringstream checkerStream;
+    FILE* cpipe = popen(gcc_command_CPPCheckerEXE.data(), "r");
+
+    while (fgets(buffer, sizeof(buffer), cpipe) != nullptr) {
+      checkerStream << buffer;
+    }
+    pclose(cpipe);
+
+    std::cout << checkerStream.str() << std::endl;
   }
 
   std::cout.rdbuf(std_buffer);
 
+  /*
+
+  File to archive
+
+  */
+
+  std::ofstream outputArchive("Archive/T" + Task_NO + "_" + StudentName_ +
+                              ".txt");
+  std::cout.rdbuf(outputArchive.rdbuf());
+
+  std::ifstream codeFile("Student_Answers/studentCode_" + StudentName_ +
+                         ".cpp");
+
+  std::string cFile;
+  std::string cline;
+
+  while (std::getline(codeFile, cline)) {
+    cFile += cline + "\n";
+  }
+  codeFile.close();
+
+  //? Hashing Students Code with their Name
+  const std::string HashCode = hmac_sha256(StudentName, cFile);
+
+  std::ifstream resultFile("Results/studentResults_T" + Task_NO + "_" +
+                           StudentName_ + ".txt");
+
+  std::string rFile;
+  std::string rline;
+
+  while (std::getline(resultFile, rline)) {
+    rFile += rline + "\n";
+  }
+  resultFile.close();
+  std::cout << rFile << std::endl;
+
+  auto now = std::chrono::system_clock::now();
+  auto in_time_t = std::chrono::system_clock::to_time_t(now);
+
+  std::stringstream ss;
+  ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X");
+  std::string Time = ss.str();
+
+  std::cout << "________________________________" << std::endl;
+  std::cout << StudentName << " / Task: " << Task_NO << std::endl;
+  std::cout << "Compiled at: " << Time << std::endl;
+  std::cout << "Hash-Code: " << HashCode << std::endl;
+
+  std::cout.rdbuf(std_buffer);
   return 0;
 }

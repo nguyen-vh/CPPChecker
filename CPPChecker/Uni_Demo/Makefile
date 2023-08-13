@@ -12,7 +12,7 @@ else
     endif
 endif
 
-CPP_VERSION := c++20
+CPP_VERSION := c++23
 
 ifeq ($(shell g++ -dumpversion | cut -d. -f1),11)
 	

@@ -1,13 +1,5 @@
 #include "pch_uni.hpp"
 
-/*
-#include <iostream>
-#include <sstream>
-#include <type_traits>
-
-#include "cppchecker.hpp"
-*/
-
 //! STUDENT Code
 namespace STUDENT {
 

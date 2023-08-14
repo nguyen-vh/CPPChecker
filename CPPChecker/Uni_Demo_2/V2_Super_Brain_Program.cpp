@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
       " -IHeaders -include Headers/pch_uni.hpp";
 
   const std::string gcc_command_CPPCheckerEXE =
-      "cd Tasks && CPPChecker_Uni_Task_" + Task_NO;
+      "cd Tasks && ./CPPChecker_Uni_Task_" + Task_NO;
 
   std::ofstream output("Results/studentResults_T" + Task_NO + "_" +
                        StudentName_ + ".txt");

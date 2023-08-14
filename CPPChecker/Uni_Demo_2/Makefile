@@ -9,7 +9,7 @@ E = Ramirez Elena
 
 EXECUTABLE := SBProgram
 
-CPP_VERSION := c++23
+CPP_VERSION := c++20
 
 ifeq ($(shell g++ -dumpversion | cut -d. -f1),11)
 	

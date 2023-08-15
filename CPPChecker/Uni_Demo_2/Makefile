@@ -7,7 +7,7 @@ C := Williams Noah Benjamin
 D := Johnson Ethan Michael
 E := Ramirez Elena 
 
-EXECUTABLE := SBProgram
+EXECUTABLE := ./Tasks/SBProgram
 
 CPP_VERSION := c++20
 
@@ -27,11 +27,11 @@ Headers/pch_uni.pch: Headers/pch_uni.hpp
 
 #	Ultimately it should read the Names.txt
 run: $(EXECUTABLE)
-	./$(EXECUTABLE) $(TASK) $(A)
-	./$(EXECUTABLE) $(TASK) $(B)
-	./$(EXECUTABLE) $(TASK) $(C)
-	./$(EXECUTABLE) $(TASK) $(D)
-	./$(EXECUTABLE) $(TASK) $(E)
+	$(EXECUTABLE) $(TASK) $(A)
+	$(EXECUTABLE) $(TASK) $(B)
+	$(EXECUTABLE) $(TASK) $(C)
+	$(EXECUTABLE) $(TASK) $(D)
+	$(EXECUTABLE) $(TASK) $(E)
 
 clean:
 	rm -f Results/*.txt Archive/*.txt Headers/pch_uni.pch $(EXECUTABLE) Tasks/CPPChecker_Uni_Task_19 Tasks/CPPChecker_Uni_Task_20

@@ -1,11 +1,11 @@
 #	19 or 20
-TASK = 19
+TASK := 19
 
-A = Anderson Sofia
-B = Patel Jackson
-C = Williams Noah Benjamin
-D = Johnson Ethan Michael
-E = Ramirez Elena 
+A := Anderson Sofia
+B := Patel Jackson
+C := Williams Noah Benjamin
+D := Johnson Ethan Michael
+E := Ramirez Elena 
 
 EXECUTABLE := SBProgram
 
@@ -17,7 +17,7 @@ CPP_VERSION := c++20
 
 endif
 
-all: Headers/pch_uni.pch run
+all: $(EXECUTABLE) run
 
 $(EXECUTABLE): 
 	g++ -std=$(CPP_VERSION) V2_Super_Brain_Program.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE)

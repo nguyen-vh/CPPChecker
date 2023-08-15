@@ -2,12 +2,6 @@
 
 using namespace std;
 
-class MyClassX {
- public:
-  int IDE;
-  void printed() { cout << "Printed..." << endl; }
-};
-
 class MyClassY {
  public:
   int printed();
@@ -27,8 +21,4 @@ void SomeFunctionX() {}
 
 std::string Snake;
 
-int main() {
-  MyClassX x;
-  x.printed();
-  return 0;
-}
+int main() { return 0; }

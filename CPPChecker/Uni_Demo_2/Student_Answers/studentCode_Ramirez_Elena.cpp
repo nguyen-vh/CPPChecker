@@ -21,7 +21,7 @@ class MyClassZ {
   float VOLT;
 };
 
-int Schokolade{12};
+int Schokolade { 12 }
 
 void SomeFunctionX() {}
 

@@ -1,0 +1,36 @@
+name: Catch2 Test cppcheck.hpp
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CPPChecker/As_header/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'CPPChecker/As_header/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install g++
+        run: sudo apt-get install -y g++
+
+      - name: Compile and run UT_cppchecker_hpp.cpp with g++ (C++20)
+        run: |
+          g++ -std=c++20 -o UT_cppchecker_hpp CPPChecker/As_header/Catch2_Tests/UT_cppchecker_hpp.cpp
+          ./UT_cppchecker_hpp
+        working-directory: ${{ github.workspace }}
+
+
+ 
+
+
+

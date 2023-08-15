@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "../cppchecker.hpp"
+#include "../cppchecker_fulloutput.hpp"
 #include "catch.hpp"
 
 namespace STUDENT {

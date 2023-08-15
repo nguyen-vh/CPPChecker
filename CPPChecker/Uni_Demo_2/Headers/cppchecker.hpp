@@ -325,17 +325,16 @@ TODO  Static test
                                                     special_return_type()>>> { \
   };                                                                           \
   template <typename T>                                                        \
-  struct has_free_function_##FUNCTIONNAME {                                    \
-    static constexpr bool value =                                              \
-        has_free_function_##FUNCTIONNAME##_sfinae<T>();                        \
+  struct has_free_function_##FUNCTION {                                        \
+    static constexpr bool value = has_free_function_##FUNCTION##_sfinae<T>();  \
   };                                                                           \
-  bool has_free_function_##FUNCTIONNAME##_v =                                  \
-      has_free_function_##FUNCTIONNAME<decltype(FUNCTIONNAME)>::value;         \
+  bool has_free_function_##FUNCTION##_v =                                      \
+      has_free_function_##FUNCTION<decltype(FUNCTION)>::value;                 \
   }                                                                            \
                                                                                \
   namespace Check {                                                            \
-  bool has_free_function_##FUNCTIONNAME##_v =                                  \
-      NAMESPACE_TO_CHECK::TASK::has_free_function_##FUNCTIONNAME##_v;          \
+  bool has_free_function_##FUNCTION##_v =                                      \
+      NAMESPACE_TO_CHECK::TASK::has_free_function_##FUNCTION##_v;              \
   }
 
 //* Fallback Free Function/ Variable

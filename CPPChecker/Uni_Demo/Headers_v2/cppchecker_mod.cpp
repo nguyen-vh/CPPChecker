@@ -322,17 +322,16 @@ TODO  Static test
                                                     special_return_type()>>> { \
   };                                                                           \
   template <typename T>                                                        \
-  struct has_free_function_##FUNCTIONNAME {                                    \
-    static constexpr bool value =                                              \
-        has_free_function_##FUNCTIONNAME##_sfinae<T>();                        \
+  struct has_free_function_##FUNCTION {                                        \
+    static constexpr bool value = has_free_function_##FUNCTION##_sfinae<T>();  \
   };                                                                           \
-  bool has_free_function_##FUNCTIONNAME##_v =                                  \
-      has_free_function_##FUNCTIONNAME<decltype(FUNCTIONNAME)>::value;         \
+  bool has_free_function_##FUNCTION##_v =                                      \
+      has_free_function_##FUNCTION<decltype(FUNCTION)>::value;                 \
   }                                                                            \
                                                                                \
   namespace Check {                                                            \
-  bool has_free_function_##FUNCTIONNAME##_v =                                  \
-      NAMESPACE_TO_CHECK::TASK::has_free_function_##FUNCTIONNAME##_v;          \
+  bool has_free_function_##FUNCTION##_v =                                      \
+      NAMESPACE_TO_CHECK::TASK::has_free_function_##FUNCTION##_v;              \
   }
 
 //* Fallback Free Function/ Variable
@@ -351,35 +350,35 @@ struct special_return_type {};
 //? Creates a check to determine if the specified namespace has a specific
 //? free function of a specific type
 //* bool Check::has_free_function_'FUNCTION'_of_type_'TYPE'_v
-#define HAS_FREE_FUNCTION_OF_TYPE(FUNCTION, TYPE)                          \
-                                                                           \
-  namespace TASK::TESTER {                                                 \
-  special_return_type FUNCTION();                                          \
-  }                                                                        \
-  namespace NAMESPACE_TO_CHECK::TASK {                                     \
-  using namespace ::TASK::TESTER;                                          \
-  template <typename T, typename = void>                                   \
-  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae            \
-      : std::false_type {};                                                \
-  template <typename T>                                                    \
-  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<           \
-      T, std::void_t<decltype(FUNCTION)>>                                  \
-      : std::conjunction<std::is_function<decltype(FUNCTION)>,             \
-                         std::is_same<decltype(FUNCTION), TYPE()>> {};     \
-  template <typename T>                                                    \
-  struct has_free_function_##FUNCTION##_of_type_##TYPE {                   \
-    static constexpr bool value =                                          \
-        has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<T>();       \
-  };                                                                       \
-  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =                 \
-      has_free_function_##FUNCTION##_of_type_##TYPE<                       \
-          decltype(FUNCTION)>::value;                                      \
-  }                                                                        \
-                                                                           \
-  namespace Check {                                                        \
-  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =                 \
-      NAMESPACE_TO_CHECK::TASK::                                           \
-          has_free_function_##FUNCTION##_of_type_##TYPE##_v;               \
+#define HAS_FREE_FUNCTION_OF_TYPE(FUNCTION, TYPE)                      \
+                                                                       \
+  namespace TASK::TESTER {                                             \
+  special_return_type FUNCTION();                                      \
+  }                                                                    \
+  namespace NAMESPACE_TO_CHECK::TASK {                                 \
+  using namespace ::TASK::TESTER;                                      \
+  template <typename T, typename = void>                               \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae        \
+      : std::false_type {};                                            \
+  template <typename T>                                                \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<       \
+      T, std::void_t<decltype(FUNCTION)>>                              \
+      : std::conjunction<std::is_function<decltype(FUNCTION)>,         \
+                         std::is_same<decltype(FUNCTION), TYPE()>> {}; \
+  template <typename T>                                                \
+  struct has_free_function_##FUNCTION##_of_type_##TYPE {               \
+    static constexpr bool value =                                      \
+        has_free_function_##FUNCTION##_of_type_##TYPE##_sfinae<T>();   \
+  };                                                                   \
+  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =             \
+      has_free_function_##FUNCTION##_of_type_##TYPE<                   \
+          decltype(FUNCTION)>::value;                                  \
+  }                                                                    \
+                                                                       \
+  namespace Check {                                                    \
+  bool has_free_function_##FUNCTION##_of_type_##TYPE##_v =             \
+      NAMESPACE_TO_CHECK::TASK::                                       \
+          has_free_function_##FUNCTION##_of_type_##TYPE##_v;           \
   }
 
 //  End of HAS_FREE_FUNCTION_OF_TYPE
@@ -526,6 +525,8 @@ class ClassX {
   static void Käfer(){};
 };
 
+class ClassZ;
+
 void Wind(){};
 int Sonne{};
 int Stern{};
@@ -546,8 +547,9 @@ int main(int argc, char** argv) {
 
 HAS_CLASS(ClassX)  // existiert
 HAS_CLASS(ClassY)  // existiert nicht
+HAS_CLASS(ClassZ)
 
-CLASS_HAS_MEMBERVAR(ClassX, Zaun)   // existiert
+CLASS_HAS_MEMBERVAR(ClassY, Zaun)   // existiert
 CLASS_HAS_MEMBERVAR(ClassX, Zäune)  // existiert nicht
 
 CLASS_HAS_MEMBERFUNC(ClassX, Baum)   // existiert
@@ -598,8 +600,9 @@ int main() {
   std::cout << "HAS_CLASS" << std::endl;
   std::cout << Check::has_class_ClassX_v << std::endl;
   std::cout << Check::has_class_ClassY_v << std::endl;
+  std::cout << Check::has_class_ClassZ_v << std::endl;
   std::cout << "CLASS_HAS_MEMBERVAR" << std::endl;
-  std::cout << Check::class_ClassX_has_membervar_Zaun_v << std::endl;
+  std::cout << Check::class_ClassY_has_membervar_Zaun_v << std::endl;
   std::cout << Check::class_ClassX_has_membervar_Zäune_v << std::endl;
   std::cout << "CLASS_HAS_MEMBERFUNC" << std::endl;
   std::cout << Check::class_ClassX_has_memberfunc_Baum_v << std::endl;

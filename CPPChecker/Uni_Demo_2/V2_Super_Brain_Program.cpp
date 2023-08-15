@@ -3,6 +3,12 @@
 //? Comment out if not debugging
 // #define DEBUG
 
+#ifdef _WIN32
+#define CMD_Prefix "\\"
+#else
+#define CMD_Prefix "/"
+#endif
+
 int main(int argc, char* argv[]) {
   std::string Task_NO = argv[1];
   std::string StudentName{};
@@ -28,7 +34,7 @@ int main(int argc, char* argv[]) {
       " -IHeaders -include Headers/pch_uni.hpp";
 
   const std::string gcc_command_CPPCheckerEXE =
-      "cd Tasks && CPPChecker_Uni_Task_" + Task_NO;
+      "cd Tasks && ." CMD_Prefix "CPPChecker_Uni_Task_" + Task_NO;
 
   std::ofstream output("Results/studentResults_T" + Task_NO + "_" +
                        StudentName_ + ".txt");

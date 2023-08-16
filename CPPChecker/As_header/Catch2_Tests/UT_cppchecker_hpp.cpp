@@ -30,8 +30,8 @@ void f2(){};
 HAS_CLASS(NotExistant)
 HAS_CLASS(DeclaredOnly)
 HAS_CLASS(DefinedButEmpty)
-// HAS_CLASS(f1)                                    // geht nicht
-// HAS_CLASS(f2)                                    // geht nicht
+// HAS_CLASS(f1)  // geht nicht
+//  HAS_CLASS(f2)                                    // geht nicht
 
 CLASS_HAS_MEMBERVAR(NotExistant, none)
 CLASS_HAS_MEMBERVAR(DeclaredOnly, none)

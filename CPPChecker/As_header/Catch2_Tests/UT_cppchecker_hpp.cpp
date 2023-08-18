@@ -55,8 +55,7 @@ CLASS_HAS_MEMBERFUNC(ClassWithVars, ld)
 CLASS_HAS_MEMBERFUNC(ClassWithFuncs, none)
 CLASS_HAS_MEMBERFUNC(ClassWithFuncs, m1)
 CLASS_HAS_MEMBERFUNC(ClassWithFuncs, m2)
-CLASS_HAS_MEMBERFUNC(ClassWithFuncs,
-                     m3)  // Cannot distinguish between const and non-const
+CLASS_HAS_MEMBERFUNC(ClassWithFuncs, m3)  // Cannot distinguish between const and non-const
 // Const Test
 CLASS_HAS_CONST_MEMBERFUNC(ClassWithFuncs, m3)
 
@@ -81,6 +80,19 @@ CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(ClassWithFuncs, none, bool)
 CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(ClassWithFuncs, m1, char)
 CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(ClassWithFuncs, m2, int)
 CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(ClassWithFuncs, m3, int)
+
+CLASS_HAS_MEMBERFUNC_OF_TYPE(NotExistant, m1, void)
+/*CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(DeclaredOnly, m2, int)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(DefinedButEmpty, m3, double)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithVars, m1, bool)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithVars, m1,void)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithVars, m2, char)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithVars, m2, void)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithFuncs, none, void)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithFuncs, m1,void)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithFuncs, m2,int)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithFuncs, m3,int)
+CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(ClassWithFuncs, m3,bool)*/
 
 TEST_CASE("HAS_CLASS") {
   REQUIRE(Check::has_class_NotExistant_v == false);
@@ -120,7 +132,6 @@ TEST_CASE("CLASS_HAS_MEMBERFUNC") {
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m1_v == true);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m2_v == true);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_v == true);
-
   REQUIRE(Check::class_ClassWithFuncs_has_const_memberfunc_m3_v == true);
 }
 
@@ -128,21 +139,32 @@ TEST_CASE("CLASS_HAS_MEMBERVAR_OF_TYPE") {
   using namespace Check;
   REQUIRE(class_NotExistant_has_membervar_none_of_returntype_void_v == false);
   REQUIRE(class_DeclaredOnly_has_membervar_none_of_returntype_void_v == false);
-  REQUIRE(class_DefinedButEmpty_has_membervar_none_of_returntype_int_v ==
-          false);
+  REQUIRE(class_DefinedButEmpty_has_membervar_none_of_returntype_int_v == false);
   REQUIRE(class_ClassWithVars_has_membervar_none_of_returntype_int_v == false);
   REQUIRE(class_ClassWithVars_has_membervar_vp_of_returntype_void_v == false);
   REQUIRE(class_ClassWithVars_has_membervar_vp_of_returntype_pvoid_v == true);
-  using pvoid = void *;
-
   REQUIRE(class_ClassWithVars_has_membervar_b_of_returntype_int_v == false);
   REQUIRE(class_ClassWithVars_has_membervar_b_of_returntype_bool_v == true);
   REQUIRE(class_ClassWithVars_has_membervar_ld_of_returntype_void_v == false);
-  REQUIRE(class_ClassWithVars_has_membervar_ld_of_returntype_longdouble_v ==
-          true);
-  REQUIRE(class_ClassWithFuncs_has_membervar_none_of_returntype_bool_v ==
-          false);
+  REQUIRE(class_ClassWithVars_has_membervar_ld_of_returntype_longdouble_v == true);
+  REQUIRE(class_ClassWithFuncs_has_membervar_none_of_returntype_bool_v == false);
   REQUIRE(class_ClassWithFuncs_has_membervar_m1_of_returntype_char_v == false);
   REQUIRE(class_ClassWithFuncs_has_membervar_m2_of_returntype_int_v == false);
   REQUIRE(class_ClassWithFuncs_has_membervar_m3_of_returntype_int_v == false);
+}
+
+TEST_CASE("CLASS_HAS_MEMBERFUNC_OF_TYPE") {
+  using namespace Check;
+  REQUIRE(class_NotExistant_has_memberfunc_m1_of_returntype_void_v == false);
+/*  REQUIRE(class_DeclaredOnly_has_memberfunc_m2_of_returntype_int == false);
+  REQUIRE(class_DefinedButEmpty_has_memberfunc_m3_of_returntype_double == false);
+  REQUIRE(class_ClassWithVars_has_memberfunc_m1_of_returntype_bool == false);
+  REQUIRE(class_ClassWithVars_has_memberfunc_m1_of_returntype_void == false);
+  REQUIRE(class_ClassWithVars_has_memberfunc_m2_of_returntype_char == false);
+  REQUIRE(class_ClassWithVars_has_memberfunc_m2_of_returntype_void == false);
+  REQUIRE(class_ClassWithFuncs_has_memberfunc_none_of_returntype_void == false);
+  REQUIRE(class_ClassWithFuncs_has_memberfunc_m1_of_returntype_void == true);
+  REQUIRE(class_ClassWithFuncs_has_memberfunc_m2_of_returntype_int == false);
+  REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_of_returntype_int == true);
+  REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_of_returntype_bool == false);*/
 }

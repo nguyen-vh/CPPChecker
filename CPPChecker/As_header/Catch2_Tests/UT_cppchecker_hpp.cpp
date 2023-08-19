@@ -20,6 +20,8 @@ class ClassWithFuncs {
   void m1();  // incomplete
   void m2(){};
   int m3() const { return 42; };
+  void m3() {};// Wenn entkommentiert, schlägt die folgende Assertion fehl:
+  REQUIRE( class_ClassWithFuncs_has_memberfunc_m3_of_returntype_int_v == true )
 };
 
 void f1();
@@ -58,7 +60,8 @@ CLASS_HAS_MEMBERFUNC(ClassWithFuncs, m2)
 CLASS_HAS_MEMBERFUNC(ClassWithFuncs,
                      m3)  // Cannot distinguish between const and non-const
 // Const Test
-CLASS_HAS_CONST_MEMBERFUNC(ClassWithFuncs, m3)
+//CLASS_HAS_CONST_MEMBERFUNC(ClassWithFuncs, m3)
+CLASS_HAS_CONST_MEMBERFUNC(ClassWithFuncs, m2)
 
 CLASS_HAS_MEMBERVAR_OF_TYPE(NotExistant, none, void)
 CLASS_HAS_MEMBERVAR_OF_TYPE(DeclaredOnly, none, void)
@@ -133,7 +136,6 @@ TEST_CASE("CLASS_HAS_MEMBERFUNC") {
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m1_v == true);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m2_v == true);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_v == true);
-  REQUIRE(Check::class_ClassWithFuncs_has_const_memberfunc_m3_v == true);
 }
 
 TEST_CASE("CLASS_HAS_MEMBERVAR_OF_TYPE") {
@@ -170,4 +172,10 @@ TEST_CASE("CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE") {
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m2_of_returntype_int_v == false);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_of_returntype_int_v == true);
   REQUIRE(class_ClassWithFuncs_has_memberfunc_m3_of_returntype_bool_v == false);
+}
+
+TEST_CASE("CLASS_HAS CONST_MEMBERFUNC") {
+  using namespace Check;
+  //REQUIRE(class_ClassWithFuncs_has_const_memberfunc_m3_v == true);
+  REQUIRE(class_ClassWithFuncs_has_const_memberfunc_m2_v == false);
 }

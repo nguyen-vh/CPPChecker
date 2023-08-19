@@ -21,14 +21,14 @@ CLASS_HAS_CONST_MEMBERFUNC(CLASS, MEMBERFUNC)
 
 ?   CLASS_HAS_STATIC_MEMBERVAR(CLASS, MEMBERVAR)
 ?   CLASS_HAS_STATIC_MEMBERFUNC(CLASS, MEMBERFUNC)
-CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(CLASS, MEMBERVAR, RETURNTYPE)
+CLASS_HAS_MEMBERVAR_OF_TYPE(CLASS, MEMBERVAR, TYPE)
 CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(CLASS, MEMBERFUNC, RETURNTYPE)
-?   CLASS_HAS_STATIC_MEMBERVAR_OF_RETURNTYPE(CLASS, MEMBERVAR, RETURNTYPE)
+?   CLASS_HAS_STATIC_MEMBERVAR_OF_TYPE(CLASS, MEMBERVAR, TYPE)
 ?   CLASS_HAS_STATIC_MEMBERFUNC_OF_RETURNTYPE(CLASS, MEMBERFUNC, RETURNTYPE)
 HAS_FREE_FUNCTION(FUNCTION)
 HAS_FREE_FUNCTION_OF_RETURNTYPE(FUNCTION, RETURNTYPE)
 HAS_FREE_VARIABLE(VARIABLE)
-HAS_FREE_VARIABLE_OF_RETURNTYPE(VARIABLE, RETURNTYPE)
+HAS_FREE_VARIABLE_OF_TYPE(VARIABLE, TYPE)
 IS_OUTPUT_SAME(TEXT)
 */
 
@@ -249,37 +249,35 @@ TODO Find a way to check static Member Function
 */
 
 //? Creates a check to determine if a specific class has a specific
-//? membervariable of a specific returntype in the specified namespace
+//? membervariable of a specific type in the specified namespace
 //*V  bool Check::class_'CLASS'_has_membervar_'MEMBERVAR'_of
-//*     _returntype_'RETURNTYPE'_v
-#define CLASS_HAS_MEMBERVAR_OF_RETURNTYPE(CLASS, MEMBERVAR, RETURNTYPE)                \
-                                                                                       \
-  namespace TASK::TESTER {                                                             \
-  using CLASS = No;                                                                    \
-  }                                                                                    \
-  template <typename T, typename = void>                                               \
-  struct                                                                               \
-      class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE##_sfinae  \
-      : std::false_type {};                                                            \
-  template <typename T>                                                                \
-  struct                                                                               \
-      class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE##_sfinae< \
-          T, std::void_t<decltype(std::declval<T>().MEMBERVAR)>>                       \
-      : std::is_same<decltype(std::declval<T>().MEMBERVAR), RETURNTYPE> {};            \
-  namespace NAMESPACE_TO_CHECK::TASK {                                                 \
-  using namespace ::TASK::TESTER;                                                      \
-  bool class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE =        \
-      class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE##_sfinae< \
-          CLASS>();                                                                    \
-  }                                                                                    \
-                                                                                       \
-  namespace Check {                                                                    \
-  bool class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE##_v =    \
-      NAMESPACE_TO_CHECK::TASK::                                                       \
-          class_##CLASS##_has_membervar_##MEMBERVAR##_of_returntype_##RETURNTYPE;      \
+//*     _type_'TYPE'_v
+#define CLASS_HAS_MEMBERVAR_OF_TYPE(CLASS, MEMBERVAR, TYPE)                   \
+                                                                              \
+  namespace TASK::TESTER {                                                    \
+  using CLASS = No;                                                           \
+  }                                                                           \
+  template <typename T, typename = void>                                      \
+  struct class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE##_sfinae  \
+      : std::false_type {};                                                   \
+  template <typename T>                                                       \
+  struct class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE##_sfinae< \
+      T, std::void_t<decltype(std::declval<T>().MEMBERVAR)>>                  \
+      : std::is_same<decltype(std::declval<T>().MEMBERVAR), TYPE> {};         \
+  namespace NAMESPACE_TO_CHECK::TASK {                                        \
+  using namespace ::TASK::TESTER;                                             \
+  bool class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE =           \
+      class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE##_sfinae<    \
+          CLASS>();                                                           \
+  }                                                                           \
+                                                                              \
+  namespace Check {                                                           \
+  bool class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE##_v =       \
+      NAMESPACE_TO_CHECK::TASK::                                              \
+          class_##CLASS##_has_membervar_##MEMBERVAR##_of_type_##TYPE;         \
   }
 
-//  End of CLASS_HAS_MEMBERVAR_OF_RETURNTYPE
+//  End of CLASS_HAS_MEMBERVAR_OF_TYPE
 
 /*
 
@@ -291,7 +289,7 @@ TODO Find a way to check static Member Function
 //? memberfunction of a specific returntype in the specified namespace
 //*F  bool Check::class_'CLASS'_has_memberfunc_'MEMBERFUNC'_of
 //*     _returntype_'RETURNTYPE'_v
-#define CLASS_HAS_MEMBERFUNC_OF_TYPE(CLASS, MEMBERFUNC, RETURNTYPE)                      \
+#define CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE(CLASS, MEMBERFUNC, RETURNTYPE)                \
                                                                                          \
   namespace TASK::TESTER {                                                               \
   using CLASS = No;                                                                      \
@@ -327,10 +325,10 @@ TODO  Static test
 */
 
 //? Creates a check to determine if a specific class has a specific
-//? static membervariable of a specific returntype in the specified namespace
+//? static membervariable of a specific type in the specified namespace
 //*V  bool Check::class_'CLASS'_has_static_membervar_'MEMBERVAR'_of_
-//*V    returntype_'RETURNTYPE'_v
-#define CLASS_HAS_STATIC_MEMBERVAR_OF_RETURNTYPE(CLASS, MEMBERVAR, RETURNTYPE)
+//*V    returntype_'TYPE'_v
+#define CLASS_HAS_STATIC_MEMBERVAR_OF_TYPE(CLASS, MEMBERVAR, TYPE)
 
 //  End of CLASS_HAS_STATIC_MEMBERVAR_OF_RETURNTYPE
 
@@ -341,12 +339,12 @@ TODO  Static test
 */
 
 //? Creates a check to determine if a specific class has a specific
-//? static memberfunction of a specific returntype in the specified namespace
+//? static memberfunction of a specific type in the specified namespace
 //*F  bool Check::class_'CLASS'_has_static_membervar_'MEMBERFUNC'_of
-//*     _returntype_'RETURNTYPE'_v
-#define CLASS_HAS_STATIC_MEMBERFUNC_OF_RETURNTYPE(CLASS, MEMBERFUNC, RETURNTYPE)
+//*     _type_'TYPE'_v
+#define CLASS_HAS_STATIC_MEMBERFUNC_OF_TYPE(CLASS, MEMBERFUNC, TYPE)
 
-//  End of CLASS_HAS_STATIC_MEMBERFUNC_OF_RETURNTYPE
+//  End of CLASS_HAS_STATIC_MEMBERFUNC_OF_TYPE
 
 /*
 
@@ -483,41 +481,40 @@ struct special_return_type {};
 */
 
 //? Creates a check to determine if the specified namespace has a specific
-//? free variable of a specific returntype
-//* bool Check::has_free_variable_'VARIABLE'_of_returntype_'RETURNTYPE'_v
-#define HAS_FREE_VARIABLE_OF_RETURNTYPE(VARIABLE, RETURNTYPE)                \
-                                                                             \
-  namespace TASK::TESTER {                                                   \
-  special_return_type VARIABLE{};                                            \
-  }                                                                          \
-  namespace NAMESPACE_TO_CHECK::TASK {                                       \
-  using namespace ::TASK::TESTER;                                            \
-  template <typename T, typename = void>                                     \
-  struct has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_sfinae  \
-      : std::false_type {};                                                  \
-  template <typename T>                                                      \
-  struct has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_sfinae< \
-      T, std::void_t<decltype(VARIABLE)>>                                    \
-      : std::conjunction<std::is_object<decltype(VARIABLE)>,                 \
-                         std::is_same<decltype(VARIABLE), RETURNTYPE>> {};   \
-  template <typename T>                                                      \
-  struct has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE {         \
-    static constexpr bool value =                                            \
-        has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_sfinae<  \
-            T>::value;                                                       \
-  };                                                                         \
-  bool has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_v =       \
-      has_free_variable_##VARIABLE##_of_returntype_##TRETURNTYPEYPE<         \
-          decltype(VARIABLE)>::value;                                        \
-  }                                                                          \
-                                                                             \
-  namespace Check {                                                          \
-  bool has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_v =       \
-      NAMESPACE_TO_CHECK::TASK::                                             \
-          has_free_variable_##VARIABLE##_of_returntype_##RETURNTYPE##_v;     \
+//? free variable of a specific type
+//* bool Check::has_free_variable_'VARIABLE'_of_type_'TYPE'_v
+#define HAS_FREE_VARIABLE_OF_TYPE(VARIABLE, TYPE)                         \
+                                                                          \
+  namespace TASK::TESTER {                                                \
+  special_return_type VARIABLE{};                                         \
+  }                                                                       \
+  namespace NAMESPACE_TO_CHECK::TASK {                                    \
+  using namespace ::TASK::TESTER;                                         \
+  template <typename T, typename = void>                                  \
+  struct has_free_variable_##VARIABLE##_of_type_##TYPE##_sfinae           \
+      : std::false_type {};                                               \
+  template <typename T>                                                   \
+  struct has_free_variable_##VARIABLE##_of_type_##TYPE##_sfinae<          \
+      T, std::void_t<decltype(VARIABLE)>>                                 \
+      : std::conjunction<std::is_object<decltype(VARIABLE)>,              \
+                         std::is_same<decltype(VARIABLE), TYPE>> {};      \
+  template <typename T>                                                   \
+  struct has_free_variable_##VARIABLE##_of_type_##TYPE {                  \
+    static constexpr bool value =                                         \
+        has_free_variable_##VARIABLE##_of_type_##TYPE##_sfinae<T>::value; \
+  };                                                                      \
+  bool has_free_variable_##VARIABLE##_of_type_##TYPE##_v =                \
+      has_free_variable_##VARIABLE##_of_type_##TYPE<                      \
+          decltype(VARIABLE)>::value;                                     \
+  }                                                                       \
+                                                                          \
+  namespace Check {                                                       \
+  bool has_free_variable_##VARIABLE##_of_type_##TYPE##_v =                \
+      NAMESPACE_TO_CHECK::TASK::                                          \
+          has_free_variable_##VARIABLE##_of_type_##TYPE##_v;              \
   }
 
-//  End of HAS_FREE_VARIABLE_OF_RETURNTYPE
+//  End of HAS_FREE_VARIABLE_OF_TYPE
 
 /*
 !   Find a way to either switch between calling main() and

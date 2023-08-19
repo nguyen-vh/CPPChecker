@@ -154,7 +154,7 @@ TEST_CASE("CLASS_HAS_MEMBERVAR_OF_TYPE") {
   REQUIRE(class_ClassWithFuncs_has_membervar_m3_of_type_int_v == false);
 }
 
-TEST_CASE("CLASS_HAS_MEMBERFUNC_OF_TYPE") {
+TEST_CASE("CLASS_HAS_MEMBERFUNC_OF_RETURNTYPE") {
   using namespace Check;
   REQUIRE(class_NotExistant_has_memberfunc_m1_of_returntype_void_v == false);
   REQUIRE(class_DeclaredOnly_has_memberfunc_m2_of_returntype_int_v == false);

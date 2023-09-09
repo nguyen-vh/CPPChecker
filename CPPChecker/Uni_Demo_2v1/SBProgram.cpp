@@ -206,7 +206,7 @@ void archivedFile(const std::string& Task_NO, const std::string& StudentName,
   std::ifstream iStream_CPPChecker("Tasks/CPPChecker_Uni_Task_" + Task_NO +
                                    ".cpp");
 
-  //? Here should be the input of the task in string
+  //! Here should be the input of the task in string
   std::string TaskTextInstructions{};
 
   std::string File_Task;
@@ -262,7 +262,7 @@ int main(int argc, char* argv[]) {
   std::string Task_NO{"19"};
   std::string StudentName{"Anderson Sofia"};
 #else
-  //? Gets Name from Commandline
+  //? Gets Tasknumber and Student Name
   std::string Task_NO = argv[1];
   std::string StudentName{};
 
@@ -334,7 +334,7 @@ int main(int argc, char* argv[]) {
     std::cout << "\nProgram compiled without error\n" << std::endl;
     std::cout << "---------------------------------" << std::endl;
 
-    //? Paste studentCode into different file to check
+    //? Paste studentCode into studentCodeOverwrite to run CPPChecker
     std::ifstream iStream_studentCode("Student_Answers/studentCode_" +
                                       StudentName_ + ".cpp");
     std::ofstream oStream_studentCodeOverwrite("studentCodeOverwrite.cpp");

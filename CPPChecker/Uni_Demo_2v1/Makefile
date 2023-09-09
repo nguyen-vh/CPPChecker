@@ -17,11 +17,11 @@ CPP_VERSION := c++20
 
 endif
 
-all: $(EXECUTABLE) run
+all: run
 
-save: $(EXECUTABLE) srun
+save: srun
 
-$(EXECUTABLE): 
+EXECUTABLE: 
 	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE)
 
 EXECUTABLE_S: 
@@ -31,7 +31,7 @@ Headers/pch_uni.pch: Headers/pch_uni.hpp
 	g++ -std=$(CPP_VERSION) Headers/pch_uni.hpp -o Headers/pch_uni.pch
 
 #	Ultimately it should read the Names.txt
-run: $(EXECUTABLE)
+run: EXECUTABLE
 	$(EXECUTABLE) $(TASK) $(A)
 	$(EXECUTABLE) $(TASK) $(B)
 	$(EXECUTABLE) $(TASK) $(C)

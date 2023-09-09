@@ -5,8 +5,10 @@
 
 #ifdef _WIN32
 #define CMD_Prefix "\\"
+#define CMD_BlackHole "2>NUL"
 #else
 #define CMD_Prefix "/"
+#define CMD_BlackHole "2>/dev/null"
 #endif
 
 void evaluateErrorMessage(const std::string& ErrorMessage) {
@@ -282,7 +284,7 @@ int main(int argc, char* argv[]) {
   const std::string gcc_command_CPPChecker =
       "g++ -std=c++20 Tasks/CPPChecker_Uni_Task_" + Task_NO +
       ".cpp -o Tasks/CPPChecker_Uni_Task_" + Task_NO +
-      " -IHeaders -include Headers/pch_uni.hpp";
+      " -IHeaders -include Headers/pch_uni.hpp " + CMD_BlackHole;
 
   const std::string gcc_command_CPPCheckerEXE =
       "cd Tasks && ." CMD_Prefix "CPPChecker_Uni_Task_" + Task_NO;

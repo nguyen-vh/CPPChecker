@@ -182,7 +182,8 @@ void executeCPPChecker(const std::string& gcc_command_CPPCheckerEXE) {
 }
 
 void archivedFile(const std::string& Task_NO, const std::string& StudentName,
-                  const std::string& StudentName_, std::string& Hash_Control) {
+                  const std::string& StudentName_, std::string& Hash_Control,
+                  std::string& DateTime) {
   std::ofstream oStream_Archive("Archive/T" + Task_NO + "_" + StudentName_ +
                                 ".txt");
   std::cout.rdbuf(oStream_Archive.rdbuf());
@@ -239,7 +240,7 @@ void archivedFile(const std::string& Task_NO, const std::string& StudentName,
 
   std::stringstream Stream_DateTime;
   Stream_DateTime << std::put_time(std::localtime(&in_time_t), "%d-%m-%Y %X");
-  std::string DateTime = Stream_DateTime.str();
+  DateTime = Stream_DateTime.str();
 
   std::cout << "---------------------------------" << std::endl;
   std::cout << "\n" << StudentName << " | Task: " << Task_NO << std::endl;
@@ -361,8 +362,9 @@ int main(int argc, char* argv[]) {
   }
 
   //? Create File to be archived
+  std::string DateTime{};
   std::string Hash_Control{};
-  archivedFile(Task_NO, StudentName, StudentName_, Hash_Control);
+  archivedFile(Task_NO, StudentName, StudentName_, Hash_Control, DateTime);
 
   std::cout.rdbuf(std_buffer);
 
@@ -384,6 +386,9 @@ int main(int argc, char* argv[]) {
   iStream_Save.close();
 
   std::ofstream oStream_Save("T" + Task_NO + "_Savefile.txt");
+
+  oStream_Save << "Saved at: " << DateTime << "\n" << std::endl;
+
   for (const auto& pair : mapSave) {
     oStream_Save << pair.first << "|" << pair.second << std::endl;
   }

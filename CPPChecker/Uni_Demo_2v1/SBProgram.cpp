@@ -376,9 +376,9 @@ int main(int argc, char* argv[]) {
   while (std::getline(iStream_Save, File_SaveLine)) {
     size_t SavePos = File_SaveLine.find('|');
     if (SavePos != std::string::npos) {
-      std::string name = File_SaveLine.substr(0, SavePos);
-      std::string hash = File_SaveLine.substr(SavePos + 1);
-      mapSave[name] = hash;
+      std::string Save_StudentName = File_SaveLine.substr(0, SavePos);
+      std::string Save_Hash_Control = File_SaveLine.substr(SavePos + 1);
+      mapSave[Save_StudentName] = Save_Hash_Control;
     }
   }
 

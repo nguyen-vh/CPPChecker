@@ -6,6 +6,7 @@ N3 := Williams Noah Benjamin
 N4 := Anna Na
 N5 := Johnson Ethan Michael
 N6 := Ramirez Elena
+N7 := Karl Mueller
 
 EXECUTABLE := ./Tasks/SBProgram
 
@@ -31,6 +32,7 @@ run: Headers/pch_uni.pch $(EXECUTABLE)
 	$(EXECUTABLE) $(TASK) $(N4)
 	$(EXECUTABLE) $(TASK) $(N5)
 	$(EXECUTABLE) $(TASK) $(N6)
+	$(EXECUTABLE) $(TASK) $(N7)
 
 srun: Headers/pch_uni.pch EXECUTABLE_S
 	$(EXECUTABLE) $(TASK) $(N1)
@@ -39,6 +41,7 @@ srun: Headers/pch_uni.pch EXECUTABLE_S
 	$(EXECUTABLE) $(TASK) $(N4)
 	$(EXECUTABLE) $(TASK) $(N5)
 	$(EXECUTABLE) $(TASK) $(N6)
+	$(EXECUTABLE) $(TASK) $(N7)
 
 clean:
 	rm -f Results/*.txt Archive/*.txt $(EXECUTABLE)
@@ -49,3 +52,4 @@ clean:
 	rm -f Student_Answers/studentCode_T$(TASK)_Anna_Na
 	rm -f Student_Answers/studentCode_T$(TASK)_Johnson_Ethan_Michael
 	rm -f Student_Answers/studentCode_T$(TASK)_Ramirez_Elena
+	rm -f Student_Answers/studentCode_T$(TASK)_Karl_Mueller

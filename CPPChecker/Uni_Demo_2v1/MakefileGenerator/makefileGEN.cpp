@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 std::string CleanName(const std::string& Name) {
   std::stringstream cleanedName;
@@ -28,6 +29,51 @@ std::string CleanName(const std::string& Name) {
   return CleanedName;
 }
 
+std::string ReplaceUmlauts(const std::string& input) {
+  std::string result = input;
+
+  size_t pos = result.find("ä");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "ae");
+    pos = result.find("ä", pos + 2);
+  }
+  pos = result.find("Ä");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "Ae");
+    pos = result.find("Ä", pos + 2);
+  }
+
+  pos = result.find("ö");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "oe");
+    pos = result.find("ö", pos + 2);
+  }
+  pos = result.find("Ö");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "Oe");
+    pos = result.find("Ö", pos + 2);
+  }
+
+  pos = result.find("ü");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "ue");
+    pos = result.find("ü", pos + 2);
+  }
+  pos = result.find("Ü");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "Ue");
+    pos = result.find("Ü", pos + 2);
+  }
+
+  pos = result.find("ß");
+  while (pos != std::string::npos) {
+    result.replace(pos, 2, "ss");
+    pos = result.find("ß", pos + 1);
+  }
+
+  return result;
+}
+
 int main(int argc, char* argv[]) {
   std::string year = argv[1];
 
@@ -42,6 +88,7 @@ int main(int argc, char* argv[]) {
 
   while (std::getline(iStream_Makefile, File_MakefileLine)) {
     File_MakefileLine = CleanName(File_MakefileLine);
+    File_MakefileLine = ReplaceUmlauts(File_MakefileLine);
 
     if (File_MakefileLine.empty()) {
       continue;
@@ -100,6 +147,7 @@ int main(int argc, char* argv[]) {
 
   while (std::getline(iStream2_Makefile, File_MakefileLine)) {
     File_MakefileLine = CleanName(File_MakefileLine);
+    File_MakefileLine = ReplaceUmlauts(File_MakefileLine);
 
     if (File_MakefileLine.empty()) {
       continue;

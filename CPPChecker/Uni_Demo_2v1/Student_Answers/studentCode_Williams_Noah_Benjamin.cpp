@@ -19,6 +19,6 @@ int MyClassX{12};
 
 void SomeFunctionX() {}
 
-std::string Snake;
+std::string Snakes;
 
 int main() { return 0; }

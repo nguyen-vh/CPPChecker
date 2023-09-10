@@ -41,4 +41,11 @@ srun: Headers/pch_uni.pch EXECUTABLE_S
 	$(EXECUTABLE) $(TASK) $(N6)
 
 clean:
-	rm -f Results/*.txt Archive/*.txt Headers/pch_uni.pch $(EXECUTABLE) Tasks/CPPChecker_Uni_Task_19 Tasks/CPPChecker_Uni_Task_20
+	rm -f Results/*.txt Archive/*.txt Headers/pch_uni.pch $(EXECUTABLE)
+	rm -f Tasks/CPPChecker_Uni_Task_$(TASK)
+	rm -f Student_Answers/studentCode_T$(TASK)_Anderson_Sofia
+	rm -f Student_Answers/studentCode_T$(TASK)_Patel_Jackson
+	rm -f Student_Answers/studentCode_T$(TASK)_Williams_Noah_Benjamin
+	rm -f Student_Answers/studentCode_T$(TASK)_Anna_Na
+	rm -f Student_Answers/studentCode_T$(TASK)_Johnson_Ethan_Michael
+	rm -f Student_Answers/studentCode_T$(TASK)_Ramirez_Elena

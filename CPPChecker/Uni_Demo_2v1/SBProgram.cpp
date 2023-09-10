@@ -337,7 +337,8 @@ int main(int argc, char* argv[]) {
     //? Paste studentCode into studentCodeOverwrite to run CPPChecker
     std::ifstream iStream_studentCode("Student_Answers/studentCode_" +
                                       StudentName_ + ".cpp");
-    std::ofstream oStream_studentCodeOverwrite("studentCodeOverwrite.cpp");
+    std::ofstream oStream_studentCodeOverwrite(
+        "Student_Answers/studentCodeOverwrite.cpp");
     std::string File_studentCodeLine;
 
     while (std::getline(iStream_studentCode, File_studentCodeLine)) {

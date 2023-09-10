@@ -1,18 +1,19 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-
-#define YEAR "2023"
 
 std::string cleanName(const std::string& input) {
   std::string result;
 
   bool inWhitespace = false;
+  bool leadingWhitespace = true;
 
   for (char c : input) {
     if (!std::isspace(c)) {
       result += c;
       inWhitespace = false;
-    } else if (!inWhitespace) {
+      leadingWhitespace = false;
+    } else if (!inWhitespace && !leadingWhitespace) {
       result += ' ';
       inWhitespace = true;
     }
@@ -24,11 +25,13 @@ std::string cleanName(const std::string& input) {
 }
 
 int main(int argc, char* argv[]) {
+  std::string year = argv[1];
+
   std::ofstream oStream_Makefile("../Makefile");
 
   oStream_Makefile << "TASK := 19\n" << std::endl;
 
-  std::ifstream iStream_Makefile("Names" YEAR ".txt");
+  std::ifstream iStream_Makefile("Names" + year + ".txt");
   std::string File_MakefileLine;
 
   int NumberCount{0};
@@ -45,6 +48,7 @@ int main(int argc, char* argv[]) {
     oStream_Makefile << "N" << NumberCount << " := " << File_MakefileLine
                      << std::endl;
   }
+
   iStream_Makefile.close();
 
   oStream_Makefile << "\nEXECUTABLE := ./Tasks/SBProgram\n" << std::endl;
@@ -82,9 +86,28 @@ int main(int argc, char* argv[]) {
 
   oStream_Makefile << "\nclean:\n";
   oStream_Makefile << "\trm -f Results/*.txt Archive/*.txt Headers/pch_uni.pch "
-                      "$(EXECUTABLE) Tasks/CPPChecker_Uni_Task_19 "
-                      "Tasks/CPPChecker_Uni_Task_20"
-                   << std::endl;
+                      "$(EXECUTABLE)\n";
+  oStream_Makefile << "\trm -f Tasks/CPPChecker_Uni_Task_$(TASK)" << std::endl;
+
+  std::ifstream iStream2_Makefile("Names" + year + ".txt");
+
+  NumberCount = 0;
+
+  while (std::getline(iStream2_Makefile, File_MakefileLine)) {
+    File_MakefileLine = cleanName(File_MakefileLine);
+
+    if (File_MakefileLine.empty()) {
+      continue;
+    }
+
+    NumberCount++;
+    std::replace(File_MakefileLine.begin(), File_MakefileLine.end(), ' ', '_');
+
+    oStream_Makefile << "\trm -f Student_Answers/studentCode_T$(TASK)_"
+                     << File_MakefileLine << std::endl;
+  }
+
+  iStream2_Makefile.close();
 
   oStream_Makefile.close();
 

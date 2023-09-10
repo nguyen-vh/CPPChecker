@@ -16,10 +16,10 @@ all: run
 save: srun clean
 
 $(EXECUTABLE):
-	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE)
+	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DNODEBUG
 
 EXECUTABLE_S:
-	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DSAVE
+	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DNODEBUG -DSAVE
 
 Headers/pch_uni.pch: Headers/pch_uni.hpp
 	g++ -std=$(CPP_VERSION) Headers/pch_uni.hpp -o Headers/pch_uni.pch

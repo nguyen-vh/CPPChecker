@@ -64,14 +64,16 @@ int main(int argc, char* argv[]) {
   oStream_Makefile << "save: srun clean\n" << std::endl;
 
   oStream_Makefile << "$(EXECUTABLE):\n";
-  oStream_Makefile << "\tg++ -std=$(CPP_VERSION) SBProgram.cpp -include "
-                      "Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE)\n"
-                   << std::endl;
+  oStream_Makefile
+      << "\tg++ -std=$(CPP_VERSION) SBProgram.cpp -include "
+         "Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DNODEBUG\n"
+      << std::endl;
 
   oStream_Makefile << "EXECUTABLE_S:\n";
-  oStream_Makefile << "\tg++ -std=$(CPP_VERSION) SBProgram.cpp -include "
-                      "Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DSAVE\n"
-                   << std::endl;
+  oStream_Makefile
+      << "\tg++ -std=$(CPP_VERSION) SBProgram.cpp -include "
+         "Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE) -DNODEBUG -DSAVE\n"
+      << std::endl;
 
   oStream_Makefile << "Headers/pch_uni.pch: Headers/pch_uni.hpp\n";
   oStream_Makefile << "\tg++ -std=$(CPP_VERSION) Headers/pch_uni.hpp -o "

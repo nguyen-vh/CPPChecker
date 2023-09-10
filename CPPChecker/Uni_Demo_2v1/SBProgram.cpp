@@ -1,6 +1,6 @@
 #include "Headers/pch_uni.hpp"
 
-// #define DEBUG
+// #define NODEBUG
 // #define SAVE
 
 #ifdef _WIN32
@@ -257,10 +257,7 @@ void archivedFile(const std::string& Task_NO, const std::string& StudentName,
 }
 
 int main(int argc, char* argv[]) {
-#ifdef DEBUG
-  std::string Task_NO{"19"};
-  std::string StudentName{"Anderson Sofia"};
-#else
+#ifdef NODEBUG
   //? Gets Tasknumber and Student Name
   std::string Task_NO = argv[1];
   std::string StudentName{};
@@ -271,6 +268,9 @@ int main(int argc, char* argv[]) {
       StudentName += " ";
     }
   }
+#else
+  std::string Task_NO{"19"};
+  std::string StudentName{"Anderson Sofia"};
 #endif
 
   std::string StudentName_ = StudentName;

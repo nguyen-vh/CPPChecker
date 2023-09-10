@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 
   oStream_Makefile << "all: run\n" << std::endl;
 
-  oStream_Makefile << "save: srun\n" << std::endl;
+  oStream_Makefile << "save: srun clean\n" << std::endl;
 
   oStream_Makefile << "$(EXECUTABLE):\n";
   oStream_Makefile << "\tg++ -std=$(CPP_VERSION) SBProgram.cpp -include "

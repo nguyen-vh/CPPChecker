@@ -13,7 +13,7 @@ CPP_VERSION := c++20
 
 all: run
 
-save: srun
+save: srun clean
 
 $(EXECUTABLE):
 	g++ -std=$(CPP_VERSION) SBProgram.cpp -include Headers/pch_uni.hpp -IHeaders -o $(EXECUTABLE)

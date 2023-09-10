@@ -11,7 +11,7 @@
 #define CMD_BlackHole "2>/dev/null"
 #endif
 
-void evaluateErrorMessage(const std::string& ErrorMessage) {
+void simplifyErrorMessage(const std::string& ErrorMessage) {
   bool OneConditionMatched = false;
   std::cout << std::endl;
 
@@ -323,7 +323,7 @@ int main(int argc, char* argv[]) {
       ErrorMessage.erase(MarkerPos);
 
       //? Outputs simplified Error Message
-      evaluateErrorMessage(ErrorMessage);
+      simplifyErrorMessage(ErrorMessage);
 
       //? Adds the Line to the Error Message
       addLineNumber(ErrorMessage);
@@ -334,6 +334,7 @@ int main(int argc, char* argv[]) {
     //? Students Code compiles
 
     std::cout << "\nProgram compiled without error\n" << std::endl;
+
     std::cout << "---------------------------------" << std::endl;
 
     //? Paste studentCode into studentCodeOverwrite to run CPPChecker
@@ -370,6 +371,7 @@ int main(int argc, char* argv[]) {
   //? Create File to be archived
   std::string DateTime{};
   std::string Hash_Control{};
+
   archivedFile(Task_NO, StudentName, StudentName_, Hash_Control, DateTime);
 
   std::cout.rdbuf(std_buffer);

@@ -1,27 +1,31 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
-std::string cleanName(const std::string& input) {
-  std::string result;
-
-  bool inWhitespace = false;
+std::string CleanName(const std::string& Name) {
+  std::stringstream cleanedName;
   bool leadingWhitespace = true;
 
-  for (char c : input) {
+  for (char c : Name) {
     if (!std::isspace(c)) {
-      result += c;
-      inWhitespace = false;
+      cleanedName << c;
       leadingWhitespace = false;
-    } else if (!inWhitespace && !leadingWhitespace) {
-      result += ' ';
-      inWhitespace = true;
+    } else if (!leadingWhitespace) {
+      cleanedName << ' ';
+      leadingWhitespace = true;
     }
   }
 
-  result.erase(result.find_last_not_of(' ') + 1);
+  std::string CleanedName = cleanedName.str();
 
-  return result;
+  size_t lastNonSpace = CleanedName.find_last_not_of(' ');
+
+  if (lastNonSpace != std::string::npos) {
+    CleanedName.erase(lastNonSpace + 1);
+  }
+
+  return CleanedName;
 }
 
 int main(int argc, char* argv[]) {
@@ -37,7 +41,7 @@ int main(int argc, char* argv[]) {
   int NumberCount{0};
 
   while (std::getline(iStream_Makefile, File_MakefileLine)) {
-    File_MakefileLine = cleanName(File_MakefileLine);
+    File_MakefileLine = CleanName(File_MakefileLine);
 
     if (File_MakefileLine.empty()) {
       continue;
@@ -94,7 +98,7 @@ int main(int argc, char* argv[]) {
   NumberCount = 0;
 
   while (std::getline(iStream2_Makefile, File_MakefileLine)) {
-    File_MakefileLine = cleanName(File_MakefileLine);
+    File_MakefileLine = CleanName(File_MakefileLine);
 
     if (File_MakefileLine.empty()) {
       continue;

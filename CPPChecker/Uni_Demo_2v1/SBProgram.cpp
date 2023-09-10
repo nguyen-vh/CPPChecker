@@ -242,7 +242,6 @@ void archivedFile(const std::string& Task_NO, const std::string& StudentName,
   Stream_DateTime << std::put_time(std::localtime(&in_time_t), "%d-%m-%Y %X");
   DateTime = Stream_DateTime.str();
 
-  std::cout << "---------------------------------" << std::endl;
   std::cout << "\n" << StudentName << " | Task: " << Task_NO << std::endl;
   std::cout << "Compiled with: GNU C++ Compiler | C++20" << std::endl;
   std::cout << "Compiled at: " << DateTime << std::endl;
@@ -319,6 +318,7 @@ int main(int argc, char* argv[]) {
     if (MarkerPos == std::string::npos) {
       std::cout << "\nCode is empty\n" << std::endl;
 
+      std::cout << "---------------------------------" << std::endl;
     } else {
       ErrorMessage.erase(MarkerPos);
 
@@ -327,6 +327,8 @@ int main(int argc, char* argv[]) {
 
       //? Adds the Line to the Error Message
       addLineNumber(ErrorMessage);
+
+      std::cout << "---------------------------------" << std::endl;
     }
   } else {
     //? Students Code compiles
@@ -355,8 +357,11 @@ int main(int argc, char* argv[]) {
     if (CantCompileCode == true) {
       std::cout << "\nClassname is used for a Value\n" << std::endl;
 
+      std::cout << "---------------------------------" << std::endl;
     } else {
       executeCPPChecker(gcc_command_CPPCheckerEXE);
+
+      std::cout << "---------------------------------" << std::endl;
     }
 
     std::cout.rdbuf(std_buffer);

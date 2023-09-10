@@ -89,8 +89,7 @@ int main(int argc, char* argv[]) {
   }
 
   oStream_Makefile << "\nclean:\n";
-  oStream_Makefile << "\trm -f Results/*.txt Archive/*.txt Headers/pch_uni.pch "
-                      "$(EXECUTABLE)\n";
+  oStream_Makefile << "\trm -f Results/*.txt Archive/*.txt $(EXECUTABLE)\n";
   oStream_Makefile << "\trm -f Tasks/CPPChecker_Uni_Task_$(TASK)" << std::endl;
 
   std::ifstream iStream2_Makefile("Names" + year + ".txt");

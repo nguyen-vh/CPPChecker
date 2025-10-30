@@ -23,9 +23,9 @@ jobs:
       - name: Install g++
         run: sudo apt-get install -y g++
 
-      - name: Compile and run UT_cppchecker_hpp.cpp with g++ (C++20)
+      - name: Compile and run UT_cppchecker_hpp.cpp with g++ (C++26)
         run: |
-          g++ -std=c++20 -o UT_cppchecker_hpp CPPChecker/As_header/Catch2_Tests/UT_cppchecker_hpp.cpp
+          g++ -std=c++26 -o UT_cppchecker_hpp CPPChecker/As_header/Catch2_Tests/UT_cppchecker_hpp.cpp
           ./UT_cppchecker_hpp -j 5
         working-directory: ${{ github.workspace }}
 

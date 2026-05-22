@@ -82,7 +82,7 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout << std::endl;
 
   std::cout << has_free_variable<"check::zloo"_ls>;
-  std::cout << " TRUE - No namespace break down yet" << std::endl;
+  std::cout << " TRUE - No namespace breakdown yet" << std::endl;
 
   return 0;
 }

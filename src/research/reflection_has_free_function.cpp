@@ -50,7 +50,13 @@ concept has_free_function = []() {
   return false;
 }();
 
-static double foo(int);
+namespace test {
+
+float goo();
+
+}
+
+double foo(int);
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout << has_free_function<"foo"_ls> << std::endl;
@@ -59,6 +65,8 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
 
   std::cout << has_free_function<"foos"_ls> << std::endl;
   std::cout << has_free_function<"foo"_ls, int> << std::endl;
+
+  std::cout << has_free_function<"test::goo"_ls> << std::endl;
 
   return 0;
 }

@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include "../../include/cxxchecker_reflection.hpp"

@@ -17,16 +17,15 @@ constexpr auto operator""_ls() {
   return LS;
 }
 
-struct unspecified_return_t {};
-
-template <LiteralString Membervar, typename Type = unspecified_return_t>
-concept has_free_variable = []() constexpr -> bool {
-  std::string_view full_name{Membervar};
+template <LiteralString Class>
+consteval auto get_class_by_name() -> std::meta::info {
+  std::string_view full_name{Class};
   auto scope = ^^::;
 
   while (!full_name.empty()) {
     auto pos = full_name.find("::");
     bool b_last_pos = (pos == std::string_view::npos);
+
     std::string_view part_of_name =
         b_last_pos ? full_name : full_name.substr(0, pos);
 
@@ -43,14 +42,10 @@ concept has_free_variable = []() constexpr -> bool {
         continue;
 
       if (b_last_pos) {
-        if (!std::meta::is_variable(member)) continue;
+        if (!std::meta::is_type(member)) continue;
+        if (!std::meta::is_class_type(member)) continue;
 
-        if constexpr (std::is_same_v<Type, unspecified_return_t>)
-          return true;
-        else if (std::meta::type_of(member) == ^^Type)
-          return true;
-
-        return false;
+        return member;
       }
 
       if (std::meta::is_namespace(member)) {
@@ -60,43 +55,26 @@ concept has_free_variable = []() constexpr -> bool {
         break;
       }
 
-      return false;
+      return {};
     }
 
-    if (!b_found) return false;
+    if (!b_found) return {};
 
     full_name.remove_prefix(b_last_pos ? full_name.size() : pos + 2);
   }
 
-  return false;
-}();
-
-namespace test {
-
-int goo;
-
+  return {};
 }
 
-double foo;
+struct unspecified_return_t {};
+
+template <LiteralString ClassName>
+concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
+
+class X {};
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
-  std::cout << has_free_variable<"foo"_ls> << std::endl;
-  std::cout << has_free_variable<"foo"_ls, double> << std::endl;
-
-  std::cout << std::endl;
-
-  std::cout << has_free_variable<"foo"_ls, int> << std::endl;
-  std::cout << has_free_variable<"foos"_ls> << std::endl;
-
-  std::cout << std::endl;
-
-  std::cout << has_free_variable<"test::foo"_ls, int> << std::endl;
-  std::cout << has_free_variable<"test::goos"_ls, float> << std::endl;
-
-  std::cout << std::endl;
-
-  std::cout << has_free_variable<"test::goo"_ls> << std::endl;
-  std::cout << has_free_variable<"test::goo"_ls, int> << std::endl;
+  std::cout << has_class<"XA"_ls> << std::endl;
 
   std::cout << std::endl;
 

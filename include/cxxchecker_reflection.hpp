@@ -32,7 +32,7 @@
 #define CXXCHECKER_REFLECTION_HPP
 
 //----------------------------------------------------------------------------//
-//*                             === INCLUDES ===                             *//
+// °                            === INCLUDES ===                            ° //
 //----------------------------------------------------------------------------//
 
 #include <iostream>
@@ -41,7 +41,7 @@
 #include <type_traits>
 
 //----------------------------------------------------------------------------//
-//*                         === LIST OF CONTENT ===                          *//
+// °                        === LIST OF CONTENT ===                         ° //
 //----------------------------------------------------------------------------//
 
 //
@@ -128,7 +128,7 @@
 //! CONCEPTS
 
 //----------------------------------------------------------------------------//
-//*                       === HELPER TEMPLATES ===                           *//
+// °                        === HELPER FUNCTIONS ===                        ° //
 //----------------------------------------------------------------------------//
 
 template <std::size_t N>
@@ -153,39 +153,44 @@ consteval auto get_class_by_name() -> std::meta::info {
   while (!full_name.empty()) {
     auto pos = full_name.find("::");
     bool b_last_pos = (pos == std::string_view::npos);
+
     std::string_view part_of_name =
         b_last_pos ? full_name : full_name.substr(0, pos);
+
     if (part_of_name.empty()) break;
 
     bool b_found = false;
+
     auto members =
         std::meta::members_of(scope, std::meta::access_context::unchecked());
 
     for (const auto& member : members) {
-      if (std::meta::has_identifier(member) &&
-          std::meta::identifier_of(member) == part_of_name) {
-        if (b_last_pos) {
-          if (!std::meta::is_type(member)) continue;
-          if (!std::meta::is_class_type(member)) continue;
+      if (!std::meta::has_identifier(member) ||
+          std::meta::identifier_of(member) != part_of_name)
+        continue;
 
-          return member;
-        }
+      if (b_last_pos) {
+        if (!std::meta::is_type(member)) continue;
+        if (!std::meta::is_class_type(member)) continue;
 
-        if (std::meta::is_namespace(member)) {
-          scope = member;
-          b_found = true;
-
-          break;
-        }
-
-        return {};
+        return member;
       }
+
+      if (std::meta::is_namespace(member)) {
+        scope = member;
+        b_found = true;
+
+        break;
+      }
+
+      return {};
     }
 
     if (!b_found) return {};
 
     full_name.remove_prefix(b_last_pos ? full_name.size() : pos + 2);
   }
+
   return {};
 }
 
@@ -204,8 +209,8 @@ concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -213,17 +218,16 @@ concept class_has_membervar = []() {
   for (const auto& member : members) {
     if (!std::meta::is_nonstatic_data_member(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>)
-        return true;
-      else if (std::meta::type_of(member) == ^^Type)
-        return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>)
+      return true;
+    else if (std::meta::type_of(member) == ^^Type)
+      return true;
   }
+
   return false;
 }();
 
@@ -233,8 +237,8 @@ concept class_has_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_public_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_public_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -243,17 +247,16 @@ concept class_has_public_membervar = []() {
     if (!std::meta::is_public(member)) continue;
     if (!std::meta::is_nonstatic_data_member(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>)
-        return true;
-      else if (std::meta::type_of(member) == ^^Type)
-        return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>)
+      return true;
+    else if (std::meta::type_of(member) == ^^Type)
+      return true;
   }
+
   return false;
 }();
 
@@ -263,8 +266,8 @@ concept class_has_public_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_protected_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_protected_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -273,17 +276,16 @@ concept class_has_protected_membervar = []() {
     if (!std::meta::is_protected(member)) continue;
     if (!std::meta::is_nonstatic_data_member(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>)
-        return true;
-      else if (std::meta::type_of(member) == ^^Type)
-        return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>)
+      return true;
+    else if (std::meta::type_of(member) == ^^Type)
+      return true;
   }
+
   return false;
 }();
 
@@ -293,8 +295,8 @@ concept class_has_protected_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_private_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_private_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -303,17 +305,16 @@ concept class_has_private_membervar = []() {
     if (!std::meta::is_private(member)) continue;
     if (!std::meta::is_nonstatic_data_member(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>)
-        return true;
-      else if (std::meta::type_of(member) == ^^Type)
-        return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>)
+      return true;
+    else if (std::meta::type_of(member) == ^^Type)
+      return true;
   }
+
   return false;
 }();
 
@@ -323,8 +324,8 @@ concept class_has_private_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_static_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_static_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -333,15 +334,14 @@ concept class_has_static_membervar = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_variable(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
-      if (std::meta::type_of(member) == ^^Type) return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
+    if (std::meta::type_of(member) == ^^Type) return true;
   }
+
   return false;
 }();
 
@@ -351,8 +351,8 @@ concept class_has_static_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_public_static_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_public_static_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -362,15 +362,14 @@ concept class_has_public_static_membervar = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_variable(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
-      if (std::meta::type_of(member) == ^^Type) return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
+    if (std::meta::type_of(member) == ^^Type) return true;
   }
+
   return false;
 }();
 
@@ -380,8 +379,8 @@ concept class_has_public_static_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_protected_static_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_protected_static_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -391,15 +390,14 @@ concept class_has_protected_static_membervar = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_variable(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
-      if (std::meta::type_of(member) == ^^Type) return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
+    if (std::meta::type_of(member) == ^^Type) return true;
   }
+
   return false;
 }();
 
@@ -409,8 +407,8 @@ concept class_has_protected_static_membervar = []() {
 
 template <LiteralString Class, LiteralString Membervar,
           typename Type = unspecified_return_t>
-concept class_has_private_static_membervar = []() {
-  if (!has_class<Class>) return false;
+concept class_has_private_static_membervar = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -420,15 +418,14 @@ concept class_has_private_static_membervar = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_variable(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
-      if (std::meta::type_of(member) == ^^Type) return true;
-    }
+    if constexpr (std::is_same_v<Type, unspecified_return_t>) return true;
+    if (std::meta::type_of(member) == ^^Type) return true;
   }
+
   return false;
 }();
 
@@ -436,12 +433,10 @@ concept class_has_private_static_membervar = []() {
 //~                      === class_has_memberfunc<> ===                      ~//
 //----------------------------------------------------------------------------//
 
-//? Also works for const
-
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -449,20 +444,18 @@ concept class_has_memberfunc = []() {
   for (const auto& member : members) {
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
-        return true;
-      } else if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-      } else if (std::meta::return_type_of(member) == ^^Returntype)
-        return true;
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -472,8 +465,8 @@ concept class_has_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_public_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_public_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -482,21 +475,18 @@ concept class_has_public_memberfunc = []() {
     if (!std::meta::is_public(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
-        return true;
-      } else if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-      } else {
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
+      return true;
+    } else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -506,8 +496,8 @@ concept class_has_public_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_protected_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_protected_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -516,21 +506,18 @@ concept class_has_protected_memberfunc = []() {
     if (!std::meta::is_protected(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
-        return true;
-      } else if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-      } else {
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -540,8 +527,8 @@ concept class_has_protected_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_private_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_private_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -550,21 +537,18 @@ concept class_has_private_memberfunc = []() {
     if (!std::meta::is_private(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
-        return true;
-      } else if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-      } else {
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -574,8 +558,8 @@ concept class_has_private_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_static_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_static_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -584,21 +568,18 @@ concept class_has_static_memberfunc = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
-        return true;
-      if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -608,8 +589,8 @@ concept class_has_static_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_public_static_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_public_static_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -619,21 +600,18 @@ concept class_has_public_static_memberfunc = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
-        return true;
-      if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -643,8 +621,8 @@ concept class_has_public_static_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_protected_static_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_protected_static_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -654,20 +632,16 @@ concept class_has_protected_static_memberfunc = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
-        return true;
-      if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
   return false;
 }();
@@ -678,8 +652,8 @@ concept class_has_protected_static_memberfunc = []() {
 
 template <LiteralString Class, LiteralString Memberfunc,
           typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_private_static_memberfunc = []() {
-  if (!has_class<Class>) return false;
+concept class_has_private_static_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
@@ -689,21 +663,18 @@ concept class_has_private_static_memberfunc = []() {
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_function(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(member)) {
-      if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
-        return true;
-      if constexpr (sizeof...(Inputtype) != 0) {
-        if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-          return true;
-
-        if (std::meta::return_type_of(member) == ^^Returntype) return true;
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
@@ -712,7 +683,7 @@ concept class_has_private_static_memberfunc = []() {
 //----------------------------------------------------------------------------//
 
 template <LiteralString Membervar, typename Type = unspecified_return_t>
-concept has_free_variable = []() {
+concept has_free_variable = []() constexpr -> bool {
   std::string_view full_name{Membervar};
   auto scope = ^^::;
 
@@ -730,27 +701,29 @@ concept has_free_variable = []() {
         std::meta::members_of(scope, std::meta::access_context::unchecked());
 
     for (const auto& member : members) {
-      if (std::meta::has_identifier(member) &&
-          std::meta::identifier_of(member) == part_of_name) {
-        if (b_last_pos) {
-          if (!std::meta::is_variable(member)) continue;
+      if (!std::meta::has_identifier(member) ||
+          std::meta::identifier_of(member) != part_of_name)
+        continue;
 
-          if constexpr (std::is_same_v<Type, unspecified_return_t>) {
-            return true;
-          } else if (std::meta::type_of(member) == ^^Type) {
-            return true;
-          }
-        }
+      if (b_last_pos) {
+        if (!std::meta::is_variable(member)) continue;
 
-        if (std::meta::is_namespace(member)) {
-          scope = member;
-          b_found = true;
-
-          break;
-        }
+        if constexpr (std::is_same_v<Type, unspecified_return_t>)
+          return true;
+        else if (std::meta::type_of(member) == ^^Type)
+          return true;
 
         return false;
       }
+
+      if (std::meta::is_namespace(member)) {
+        scope = member;
+        b_found = true;
+
+        break;
+      }
+
+      return false;
     }
 
     if (!b_found) return false;
@@ -766,7 +739,7 @@ concept has_free_variable = []() {
 //----------------------------------------------------------------------------//
 
 template <LiteralString Membervar, typename Type = unspecified_return_t>
-concept has_free_static_variable = []() {
+concept has_free_static_variable = []() constexpr -> bool {
   std::string_view full_name{Membervar};
   auto scope = ^^::;
 
@@ -784,28 +757,30 @@ concept has_free_static_variable = []() {
         std::meta::members_of(scope, std::meta::access_context::unchecked());
 
     for (const auto& member : members) {
-      if (std::meta::has_identifier(member) &&
-          std::meta::identifier_of(member) == part_of_name) {
-        if (b_last_pos) {
-          if (!std::meta::has_internal_linkage(member)) continue;
-          if (!std::meta::is_variable(member)) continue;
+      if (!std::meta::has_identifier(member) ||
+          std::meta::identifier_of(member) != part_of_name)
+        continue;
 
-          if constexpr (std::is_same_v<Type, unspecified_return_t>) {
-            return true;
-          } else if (std::meta::type_of(member) == ^^Type) {
-            return true;
-          }
-        }
+      if (b_last_pos) {
+        if (!std::meta::has_internal_linkage(member)) continue;
+        if (!std::meta::is_variable(member)) continue;
 
-        if (std::meta::is_namespace(member)) {
-          scope = member;
-          b_found = true;
-
-          break;
-        }
+        if constexpr (std::is_same_v<Type, unspecified_return_t>)
+          return true;
+        else if (std::meta::type_of(member) == ^^Type)
+          return true;
 
         return false;
       }
+
+      if (std::meta::is_namespace(member)) {
+        scope = member;
+        b_found = true;
+
+        break;
+      }
+
+      return false;
     }
 
     if (!b_found) return false;
@@ -822,7 +797,7 @@ concept has_free_static_variable = []() {
 
 template <LiteralString Memberfunc, typename Returntype = unspecified_return_t,
           typename... Inputtype>
-concept has_free_function = []() {
+concept has_free_function = []() constexpr -> bool {
   std::string_view full_name{Memberfunc};
   auto scope = ^^::;
 
@@ -840,31 +815,33 @@ concept has_free_function = []() {
         std::meta::members_of(scope, std::meta::access_context::unchecked());
 
     for (const auto& member : members) {
-      if (std::meta::has_identifier(member) &&
-          (std::meta::identifier_of(member) == part_of_name)) {
-        if (b_last_pos) {
-          if (!std::meta::is_function(member)) continue;
+      if (!std::meta::has_identifier(member) ||
+          std::meta::identifier_of(member) != part_of_name)
+        continue;
 
-          if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
+      if (b_last_pos) {
+        if (!std::meta::is_function(member)) continue;
+
+        if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+          return true;
+        else if constexpr (sizeof...(Inputtype) != 0) {
+          if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
             return true;
-          } else if constexpr (sizeof...(Inputtype) != 0) {
-            if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-              return true;
-          } else if (std::meta::return_type_of(std::meta::type_of(member)) ==
-                     ^^Returntype) {
-            return true;
-          }
-        }
-
-        if (std::meta::is_namespace(member)) {
-          scope = member;
-          b_found = true;
-
-          break;
-        }
+        } else if (std::meta::return_type_of(std::meta::type_of(member)) ==
+                   ^^Returntype)
+          return true;
 
         return false;
       }
+
+      if (std::meta::is_namespace(member)) {
+        scope = member;
+        b_found = true;
+
+        break;
+      }
+
+      return false;
     }
 
     if (!b_found) return false;
@@ -881,7 +858,7 @@ concept has_free_function = []() {
 
 template <LiteralString Memberfunc, typename Returntype = unspecified_return_t,
           typename... Inputtype>
-concept has_free_static_function = []() {
+concept has_free_static_function = []() constexpr -> bool {
   std::string_view full_name{Memberfunc};
   auto scope = ^^::;
 
@@ -899,32 +876,34 @@ concept has_free_static_function = []() {
         std::meta::members_of(scope, std::meta::access_context::unchecked());
 
     for (const auto& member : members) {
-      if (std::meta::has_identifier(member) &&
-          (std::meta::identifier_of(member) == part_of_name)) {
-        if (b_last_pos) {
-          if (!std::meta::has_internal_linkage(member)) continue;
-          if (!std::meta::is_function(member)) continue;
+      if (!std::meta::has_identifier(member) ||
+          std::meta::identifier_of(member) != part_of_name)
+        continue;
 
-          if constexpr (std::is_same_v<Returntype, unspecified_return_t>) {
+      if (b_last_pos) {
+        if (!std::meta::has_internal_linkage(member)) continue;
+        if (!std::meta::is_function(member)) continue;
+
+        if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+          return true;
+        else if constexpr (sizeof...(Inputtype) != 0) {
+          if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
             return true;
-          } else if constexpr (sizeof...(Inputtype) != 0) {
-            if (std::meta::type_of(member) == ^^Returntype(Inputtype...))
-              return true;
-          } else if (std::meta::return_type_of(std::meta::type_of(member)) ==
-                     ^^Returntype) {
-            return true;
-          }
-        }
-
-        if (std::meta::is_namespace(member)) {
-          scope = member;
-          b_found = true;
-
-          break;
-        }
+        } else if (std::meta::return_type_of(std::meta::type_of(member)) ==
+                   ^^Returntype)
+          return true;
 
         return false;
       }
+
+      if (std::meta::is_namespace(member)) {
+        scope = member;
+        b_found = true;
+
+        break;
+      }
+
+      return false;
     }
 
     if (!b_found) return false;

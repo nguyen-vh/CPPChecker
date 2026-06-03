@@ -39,40 +39,35 @@ concept has_class = (get_class_by_name<T>() != std::meta::info{});
 struct unspecified_return_t {};
 
 //**  class_has_static_memberfunc<>
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_static_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
-template <LiteralString T, LiteralString LS,
-          typename out = unspecified_return_t, typename... in>
-concept class_has_static_memberfunc = []() {
-  if (!has_class<T>) return false;
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
 
-  auto members = std::meta::members_of(get_class_by_name<T>(),
-                                       std::meta::access_context::current());
+  for (const auto& member : members) {
+    if (!std::meta::is_static_member(member)) continue;
+    if (!std::meta::is_function(member)) continue;
 
-  for (auto mem : members) {
-    if (!std::meta::is_static_member(mem)) continue;
-    if (!std::meta::is_function(mem)) continue;
-
-    if (std::meta::has_identifier(mem) &&
-        (std::meta::identifier_of(mem) != std::string_view(LS)))
+    if (std::meta::has_identifier(member) &&
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if (std::meta::has_identifier(mem)) {
-      if constexpr (std::is_same_v<out, unspecified_return_t>) {
-        return true;
-      } else if constexpr (sizeof...(in) != 0) {
-        if (std::meta::type_of(mem) == ^^out(in...)) return true;
-      } else {
-        if (std::meta::return_type_of(std::meta::type_of(mem)) == ^^out) {
-          return true;
-        }
-      }
-    }
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
   }
+
   return false;
 }();
 
 struct X {
-  static auto foo(std::string, int) -> std::vector<double> {}
+  static auto foo(std::string, int) -> std::vector<double> {};
 
   double foos;
 };
@@ -81,6 +76,9 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout << class_has_static_memberfunc<"X"_ls, "foo"_ls> << std::endl;
   std::cout << class_has_static_memberfunc<"X"_ls, "foo"_ls,
                                            std::vector<double>> << std::endl;
+  std::cout
+      << class_has_static_memberfunc<"X"_ls, "foo"_ls, std::vector<double>,
+                                     std::string, int> << std::endl;
   std::cout
       << class_has_static_memberfunc<"X"_ls, "foo"_ls, double> << std::endl;
   std::cout << class_has_static_memberfunc<"X"_ls, "foo"_ls, const double,

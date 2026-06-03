@@ -45,36 +45,33 @@
 //----------------------------------------------------------------------------//
 
 //
-//* bool has_class<>
+//~ bool has_class<>
 //  |
-//* |>   bool class_has_membervar<>
+//~ |>   bool class_has_membervar<>
 //  |     - bool class_has_public_membervar<>
 //  |     - bool class_has_protected_membervar<>
 //  |     - bool class_has_private_membervar<>
 //  |
-//  |
-//* |>  bool class_has_static_membervar<>
+//~ |>  bool class_has_static_membervar<>
 //  |     - bool class_has_public_static_membervar<>
 //  |     - bool class_has_protected_static_membervar<>
 //  |     - bool class_has_private_static_membervar<>
 //  |
-//  |
-//* |>  bool class_has_memberfunc<>
+//~ |>  bool class_has_memberfunc<>
 //  |     - bool class_has_public_memberfunc<>
 //  |     - bool class_has_protected_memberfunc<>
 //  |     - bool class_has_private_memberfunc<>
 //  |
-//  |
-//* |>  bool class_has_static_memberfunc<>
+//~ |>  bool class_has_static_memberfunc<>
 //  |     - bool class_has_public_static_memberfunc<>
 //  |     - bool class_has_protected_static_memberfunc<>
 //  |     - bool class_has_private_static_memberfunc<>
 //
 //
-//* bool has_free_variable<>
+//~ bool has_free_variable<>
 //    - bool has_free_static_variable<>
 //
-//* bool has_free_function<>
+//~ bool has_free_function<>
 //    - bool has_free_static_function<>
 //
 //
@@ -195,14 +192,14 @@ consteval auto get_class_by_name() -> std::meta::info {
 struct unspecified_return_t {};
 
 //----------------------------------------------------------------------------//
-//*                          === has_class<> ===                             *//
+//~                           === has_class<> ===                            ~//
 //----------------------------------------------------------------------------//
 
 template <LiteralString ClassName>
 concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
 
 //----------------------------------------------------------------------------//
-//*                      === class_has_membervar<> ===                       *//
+//~                      === class_has_membervar<> ===                       ~//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -231,7 +228,7 @@ concept class_has_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                    === class_has_public_membervar<> ===                  *//
+//*                   === class_has_public_membervar<> ===                   *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -261,7 +258,7 @@ concept class_has_public_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                   === class_has_protected_membervar<> ===                *//
+//*                 === class_has_protected_membervar<> ===                  *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -291,7 +288,7 @@ concept class_has_protected_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                    === class_has_private_membervar<> ===                 *//
+//*                  === class_has_private_membervar<> ===                   *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -321,7 +318,7 @@ concept class_has_private_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                   === class_has_static_membervar<> ===                   *//
+//~                   === class_has_static_membervar<> ===                   ~//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -349,7 +346,7 @@ concept class_has_static_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                 === class_has_public_static_membervar<> ===              *//
+//*               === class_has_public_static_membervar<> ===                *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -378,7 +375,7 @@ concept class_has_public_static_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                === class_has_protected_static_membervar<> ===            *//
+//*              === class_has_protected_static_membervar<> ===              *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -407,7 +404,7 @@ concept class_has_protected_static_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                === class_has_private_static_membervar<> ===              *//
+//*               === class_has_private_static_membervar<> ===               *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Membervar,
@@ -436,7 +433,7 @@ concept class_has_private_static_membervar = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                     === class_has_memberfunc<> ===                       *//
+//~                      === class_has_memberfunc<> ===                      ~//
 //----------------------------------------------------------------------------//
 
 //? Also works for const
@@ -470,7 +467,7 @@ concept class_has_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                     === class_has_public_memberfunc<> =                  *//
+//*                  === class_has_public_memberfunc<> ===                   *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -504,7 +501,7 @@ concept class_has_public_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                    === class_has_protected_memberfunc<> ===              *//
+//*                 === class_has_protected_memberfunc<> ===                 *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -538,7 +535,7 @@ concept class_has_protected_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                    === class_has_private_memberfunc<> ===                *//
+//*                  === class_has_private_memberfunc<> ===                  *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -572,7 +569,7 @@ concept class_has_private_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                   === class_has_static_memberfunc ===                    *//
+//~                   === class_has_static_memberfunc ===                    ~//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -606,7 +603,7 @@ concept class_has_static_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                === class_has_public_static_memberfunc<> ===              *//
+//*               === class_has_public_static_memberfunc<> ===               *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -641,7 +638,7 @@ concept class_has_public_static_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*               === class_has_protected_static_memberfunc<> ===            *//
+//*             === class_has_protected_static_memberfunc<> ===              *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -676,7 +673,7 @@ concept class_has_protected_static_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*               === class_has_private_static_memberfunc<> ===              *//
+//*              === class_has_private_static_memberfunc<> ===               *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Class, LiteralString Memberfunc,
@@ -711,7 +708,7 @@ concept class_has_private_static_memberfunc = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                        === has_free_variable<> ===                       *//
+//~                       === has_free_variable<> ===                        ~//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Membervar, typename Type = unspecified_return_t>
@@ -765,7 +762,7 @@ concept has_free_variable = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                      === has_free_static_variable<> ===                  *//
+//*                    === has_free_static_variable<> ===                    *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Membervar, typename Type = unspecified_return_t>
@@ -820,9 +817,8 @@ concept has_free_static_variable = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                        === has_free_function<> ===                       *//
-//----------------------------------------------------------------------------/
-// TODO: in namespace scope too
+//~                       === has_free_function<> ===                        ~//
+//----------------------------------------------------------------------------//
 
 template <LiteralString Memberfunc, typename Returntype = unspecified_return_t,
           typename... Inputtype>
@@ -880,7 +876,7 @@ concept has_free_function = []() {
 }();
 
 //----------------------------------------------------------------------------//
-//*                     === has_free_static_function<> ===                   *//
+//*                    === has_free_static_function<> ===                    *//
 //----------------------------------------------------------------------------//
 
 template <LiteralString Memberfunc, typename Returntype = unspecified_return_t,

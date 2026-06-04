@@ -46,33 +46,36 @@
 
 //
 //~ bool has_class<>
+//  |  - bool has_final_class<>
+//  |  - bool class_is_base_of<>
 //  |
 //~ |>   bool class_has_membervar<>
-//  |     - bool class_has_public_membervar<>
-//  |     - bool class_has_protected_membervar<>
-//  |     - bool class_has_private_membervar<>
-//  |
-//~ |>  bool class_has_static_membervar<>
-//  |     - bool class_has_public_static_membervar<>
-//  |     - bool class_has_protected_static_membervar<>
-//  |     - bool class_has_private_static_membervar<>
+//  |       - bool class_has_public_membervar<>
+//  |       - bool class_has_protected_membervar<>
+//  |       - bool class_has_private_membervar<>
+//~ |       - bool class_has_static_membervar<>
+//  |            - bool class_has_public_static_membervar<>
+//  |            - bool class_has_protected_static_membervar<>
+//  |            - bool class_has_private_static_membervar<>
 //  |
 //~ |>  bool class_has_memberfunc<>
-//  |     - bool class_has_public_memberfunc<>
-//  |     - bool class_has_protected_memberfunc<>
-//  |     - bool class_has_private_memberfunc<>
-//  |
-//~ |>  bool class_has_static_memberfunc<>
-//  |     - bool class_has_public_static_memberfunc<>
-//  |     - bool class_has_protected_static_memberfunc<>
-//  |     - bool class_has_private_static_memberfunc<>
+//  |      - bool class_has_public_memberfunc<>
+//  |      - bool class_has_protected_memberfunc<>
+//  |      - bool class_has_private_memberfunc<>
+//~ |      - bool class_has_static_memberfunc<>
+//  |           - bool class_has_public_static_memberfunc<>
+//  |           - bool class_has_protected_static_memberfunc<>
+//  |           - bool class_has_private_static_memberfunc<>
+//~ |      - bool class_has_virtual_memberfunc<>
+//~ |      - bool class_has_pure_virtual_memberfunc<>
+//~ |      - bool class_has_override_memberfunc<>
 //
 //
 //~ bool has_free_variable<>
-//    - bool has_free_static_variable<>
+//     - bool has_free_static_variable<>
 //
 //~ bool has_free_function<>
-//    - bool has_free_static_function<>
+//     - bool has_free_static_function<>
 //
 //
 //
@@ -98,14 +101,21 @@
 //
 
 //----------------------------------------------------------------------------//
+// °                             === NOTES ===                              ° //
+//----------------------------------------------------------------------------//
 
+//  - checking for const/volatile by adding const/volatile in front of
+//    return type of function or type of variable
 //
-//  TODO: FINAL CLASS, TEMPLATE CLASS
 //
 
 //----------------------------------------------------------------------------//
 
-// TODO: VIRTUAL; OVERRIDE; FINAL
+// ? TODO: ABSTRACT CLASS, INTERFACE CLASS
+
+//----------------------------------------------------------------------------//
+
+// TODO:  FINAL
 
 //----------------------------------------------------------------------------//
 
@@ -202,6 +212,31 @@ struct unspecified_return_t {};
 
 template <LiteralString ClassName>
 concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
+
+//----------------------------------------------------------------------------//
+//*                        === has_final_class<> ===                         *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString ClassName>
+concept has_final_class = [] constexpr -> bool {
+  constexpr auto info = get_class_by_name<ClassName>();
+
+  return info != std::meta::info{} && std::meta::is_final_type(info);
+}();
+
+//----------------------------------------------------------------------------//
+//*                        === class_is_base_of<> ===                        *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString BaseClassName, LiteralString DerivedClassName>
+concept class_is_base_of = [] constexpr -> bool {
+  constexpr auto base = get_class_by_name<BaseClassName>();
+  constexpr auto derived = get_class_by_name<DerivedClassName>();
+
+  if (base == std::meta::info{} || derived == std::meta::info{}) return false;
+
+  return std::meta::is_base_of_type(base, derived);
+}();
 
 //----------------------------------------------------------------------------//
 //~                      === class_has_membervar<> ===                       ~//
@@ -662,6 +697,99 @@ concept class_has_private_static_memberfunc = []() constexpr -> bool {
     if (!std::meta::is_private(member)) continue;
     if (!std::meta::is_static_member(member)) continue;
     if (!std::meta::is_function(member)) continue;
+
+    if (!std::meta::has_identifier(member) ||
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
+      continue;
+
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
+  }
+
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//~                  === class_has_virtual_memberfunc<> ===                  ~//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_virtual_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (const auto& member : members) {
+    if (!std::meta::is_function(member)) continue;
+    if (!std::meta::is_virtual(member)) continue;
+
+    if (!std::meta::has_identifier(member) ||
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
+      continue;
+
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
+  }
+
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//~               === class_has_pure_virtual_memberfunc<> ===                ~//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_pure_virtual_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (const auto& member : members) {
+    if (!std::meta::is_function(member)) continue;
+    if (!std::meta::is_pure_virtual(member)) continue;
+
+    if (!std::meta::has_identifier(member) ||
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
+      continue;
+
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
+  }
+
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//~                 === class_has_override_memberfunc<> ===                  ~//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_override_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (const auto& member : members) {
+    if (!std::meta::is_function(member)) continue;
+    if (!std::meta::is_override(member)) continue;
 
     if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))

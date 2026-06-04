@@ -81,7 +81,7 @@ concept class_has_membervar = []() constexpr -> bool {
   for (const auto& member : members) {
     if (!std::meta::is_nonstatic_data_member(member)) continue;
 
-    if (std::meta::has_identifier(member) &&
+    if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
       continue;
 
@@ -102,7 +102,7 @@ class X {
 };
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
-  bool x = class_has_membervar<"X"_ls, "foo"_ls, double>;
+  bool x = class_has_membervar<"X"_ls, "foo"_ls>;
   std::cout << x << std::endl;
 
   std::cout << std::endl;

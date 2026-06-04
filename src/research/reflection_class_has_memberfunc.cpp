@@ -71,6 +71,7 @@ struct X {
  protected:
   double foo(std::string, int);
   double foos;
+  volatile double goo();
 };
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
@@ -92,5 +93,9 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
                                     int> << std::endl;
   std::cout << class_has_memberfunc<"X"_ls, "foo"_ls> << std::endl;
 
+  std::cout << class_has_memberfunc<"X"_ls, "goo"_ls> << std::endl;
+
+  std::cout
+      << class_has_memberfunc<"X"_ls, "goo"_ls, volatile double> << std::endl;
   return 0;
 }

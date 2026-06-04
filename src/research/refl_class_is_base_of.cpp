@@ -71,21 +71,32 @@ struct unspecified_return_t {};
 template <LiteralString ClassName>
 concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
 
-template <LiteralString ClassName>
-concept has_final_class = [] constexpr -> bool {
-  constexpr auto info = get_class_by_name<ClassName>();
+template <LiteralString BaseClassName, LiteralString DerivedClassName>
+concept class_is_base_of = [] constexpr -> bool {
+  constexpr auto base = get_class_by_name<BaseClassName>();
+  constexpr auto derived = get_class_by_name<DerivedClassName>();
 
-  return info != std::meta::info{} && std::meta::is_final_type(info);
+  if (base == std::meta::info{} || derived == std::meta::info{}) return false;
+
+  return std::meta::is_base_of_type(base, derived);
 }();
 
-class X {};
+namespace goo {
+class X {
+ protected:
+  std::string name;
+
+ public:
+  virtual void speak() { std::cout << "??\n"; }
+};
+}  // namespace goo
 
 namespace foo {
-class XS final : X {};
+class Y : goo::X {};
 }  // namespace foo
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
-  std::cout << has_final_class<"foo::XS"_ls> << std::endl;
+  std::cout << class_is_base_of<"goo::X"_ls, "foo::Y"_ls> << std::endl;
 
   std::cout << std::endl;
 

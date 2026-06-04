@@ -71,23 +71,40 @@ struct unspecified_return_t {};
 template <LiteralString ClassName>
 concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
 
-template <LiteralString ClassName>
-concept has_final_class = [] constexpr -> bool {
-  constexpr auto info = get_class_by_name<ClassName>();
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_pure_virtual_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
 
-  return info != std::meta::info{} && std::meta::is_final_type(info);
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (const auto& member : members) {
+    if (!std::meta::is_function(member)) continue;
+    if (!std::meta::is_pure_virtual(member)) continue;
+
+    if (!std::meta::has_identifier(member) ||
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
+      continue;
+
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
+  }
+
+  return false;
 }();
 
-class X {};
-
-namespace foo {
-class XS final : X {};
-}  // namespace foo
+class X {
+  virtual void foo() = 0;
+};
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
-  std::cout << has_final_class<"foo::XS"_ls> << std::endl;
+  std::cout << class_has_pure_virtual_memberfunc<"X"_ls, "foo"_ls> << std::endl;
 
   std::cout << std::endl;
-
   return 0;
 }

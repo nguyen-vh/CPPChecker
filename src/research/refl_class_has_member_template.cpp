@@ -72,27 +72,23 @@ template <LiteralString ClassName>
 concept has_class = (get_class_by_name<ClassName>() != std::meta::info{});
 
 template <LiteralString Class, LiteralString Memberfunc,
-          typename Returntype = unspecified_return_t, typename... Inputtype>
-concept class_has_final_memberfunc = []() constexpr -> bool {
+          typename Returntype = unspecified_return_t>
+concept class_has_member_template = []() constexpr -> bool {
   if constexpr (!has_class<Class>) return false;
 
   auto members = std::meta::members_of(get_class_by_name<Class>(),
                                        std::meta::access_context::unchecked());
 
   for (const auto& member : members) {
-    if (!std::meta::is_function(member)) continue;
-    if (!std::meta::is_final(member)) continue;
+    if (!std::meta::is_template(member)) continue;
 
     if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
       continue;
 
-    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
-      return true;
-    else if constexpr (sizeof...(Inputtype) != 0) {
-      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
-    } else if (std::meta::return_type_of(member) == ^^Returntype)
-      return true;
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>) return true;
+    // if (std::meta::template_return_type_of(member) == ^^Returntype) return
+    // true;
   }
 
   return false;
@@ -101,24 +97,26 @@ concept class_has_final_memberfunc = []() constexpr -> bool {
 namespace test {
 class X {
  public:
-  virtual void foo();
-  virtual void goo() final;
-};
+  template <typename T>
+  void log(const T& value) {
+    std::cout << "Logging: " << value << std::endl;
+  }
 
-class Y : public X {
- public:
-  void foo() final;
+  void foo();
 };
 
 }  // namespace test
 
 auto main(int /*argc*/, char* /*argv*/[]) -> int {
-  std::cout << class_has_final_memberfunc<"test::Y"_ls, "foo"_ls> << std::endl;
-  std::cout << class_has_final_memberfunc<"test::X"_ls, "goo"_ls> << std::endl;
+  std::cout << class_has_member_template<"test::X"_ls, "log"_ls> << std::endl;
   std::cout
-      << class_has_final_memberfunc<"test::Y"_ls, "foo"_ls, void> << std::endl;
+      << class_has_member_template<"test::X"_ls, "log"_ls, void> << std::endl;
 
   std::cout << std::endl;
-  std::cout << class_has_final_memberfunc<"test::X"_ls, "foo"_ls> << std::endl;
+
+  std::cout << class_has_member_template<"test::X"_ls, "goo"_ls> << std::endl;
+  std::cout << class_has_member_template<"test::X"_ls, "foo"_ls> << std::endl;
+  std::cout
+      << class_has_member_template<"test::X"_ls, "log"_ls, int> << std::endl;
   return 0;
 }

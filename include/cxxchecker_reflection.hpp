@@ -69,6 +69,7 @@
 //~ |      - bool class_has_virtual_memberfunc<>
 //~ |      - bool class_has_pure_virtual_memberfunc<>
 //~ |      - bool class_has_override_memberfunc<>
+//~ |      - bool class_has_final_memberfunc<>
 //
 //
 //~ bool has_free_variable<>
@@ -115,12 +116,6 @@
 
 //----------------------------------------------------------------------------//
 
-// TODO:  FINAL
-
-//----------------------------------------------------------------------------//
-
-// TODO: Use has_template_arguments and template_arguments_of
-
 //! MEMBER FUNCTION TEMPLATES
 
 //! FUNCTION TEMPLATES
@@ -136,6 +131,8 @@
 //! CONSTRUCTION FUNCTION TEMPLATES
 
 //! CONCEPTS
+
+//! ENUMS
 
 //----------------------------------------------------------------------------//
 // °                        === HELPER FUNCTIONS ===                        ° //
@@ -790,6 +787,37 @@ concept class_has_override_memberfunc = []() constexpr -> bool {
   for (const auto& member : members) {
     if (!std::meta::is_function(member)) continue;
     if (!std::meta::is_override(member)) continue;
+
+    if (!std::meta::has_identifier(member) ||
+        (std::meta::identifier_of(member) != std::string_view(Memberfunc)))
+      continue;
+
+    if constexpr (std::is_same_v<Returntype, unspecified_return_t>)
+      return true;
+    else if constexpr (sizeof...(Inputtype) != 0) {
+      if (std::meta::type_of(member) == ^^Returntype(Inputtype...)) return true;
+    } else if (std::meta::return_type_of(member) == ^^Returntype)
+      return true;
+  }
+
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//~                   === class_has_final_memberfunc<> ===                   ~//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, LiteralString Memberfunc,
+          typename Returntype = unspecified_return_t, typename... Inputtype>
+concept class_has_final_memberfunc = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (const auto& member : members) {
+    if (!std::meta::is_function(member)) continue;
+    if (!std::meta::is_final(member)) continue;
 
     if (!std::meta::has_identifier(member) ||
         (std::meta::identifier_of(member) != std::string_view(Memberfunc)))

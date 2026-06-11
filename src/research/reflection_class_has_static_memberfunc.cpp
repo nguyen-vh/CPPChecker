@@ -67,7 +67,7 @@ concept class_has_static_memberfunc = []() constexpr -> bool {
 }();
 
 struct X {
-  static auto foo(std::string, int) -> std::vector<double> {};
+  static auto foo(std::string, int) -> std::vector<double>;
 
   double foos;
 };
@@ -79,6 +79,9 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout
       << class_has_static_memberfunc<"X"_ls, "foo"_ls, std::vector<double>,
                                      std::string, int> << std::endl;
+
+  std::cout << std::endl;
+
   std::cout
       << class_has_static_memberfunc<"X"_ls, "foo"_ls, double> << std::endl;
   std::cout << class_has_static_memberfunc<"X"_ls, "foo"_ls, const double,

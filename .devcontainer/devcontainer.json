@@ -17,8 +17,7 @@
 		"vscode": {
 			"extensions": [
 				"vadimcn.vscode-lldb",
-				"xaver.clang-format",
-				"pnp.polacode"
+				"xaver.clang-format"
 			]
 		}
 	}

@@ -118,5 +118,6 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout << class_has_member_template<"test::X"_ls, "foo"_ls> << std::endl;
   std::cout
       << class_has_member_template<"test::X"_ls, "log"_ls, int> << std::endl;
+
   return 0;
 }

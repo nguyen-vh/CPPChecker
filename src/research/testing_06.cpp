@@ -13,5 +13,3 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
       << std::endl;
   return 0;
 }
-
-// ? [x] FIX: dasdad

@@ -30,6 +30,9 @@
 // °                            === INCLUDES ===                            ° //
 //----------------------------------------------------------------------------//
 
+#include <sys/wait.h>
+#include <unistd.h>
+
 #include <filesystem>
 #include <format>
 #include <fstream>
@@ -61,14 +64,13 @@ constexpr int kBufferSize{128};
 
 template <typename T1, typename T2>
 void debug_log(
-    const std::string& type, const T1& token, const T2& message,
+    const T1& token, const T2& message,
     const std::source_location& location = std::source_location::current()) {
 #if DEBUG
-  std::cerr << std::format("[{}][{}][Line {}]: {}", type, token,
-                           location.line(), message)
+  std::cerr << std::format("[DEBUG: {}][Line {}]: {}", token, location.line(),
+                           message)
             << std::endl;
 #else
-  (void)type;
   (void)token;
   (void)message;
   (void)location;
@@ -81,27 +83,26 @@ matching taskfile.
 */
 auto compileTaskWithRequest(const std::string& task_token,
                             const std::string& random_token) -> int {
+  std::string include_path =
+      "../temp/" + random_token + "_" + task_token + ".cpp";
   const std::string compile_command =
-      "g++ -std=c++26 -freflection " + "tasks/task_" + task_token + ".cpp " +
+      "g++ -std=c++26 -freflection tasks/task_" + task_token + ".cpp " +
       "-o temp/" + random_token + "_task_" + task_token +
       " -include include/cxxchecker_reflection.hpp -include "
       "include/standard_libs.hpp " +
-      "-DINCLUDE_FILE=\"\\\"../temp/" + random_token + "_" + task_token +
-      ".cpp\\\"\"" + "2>/dev/null";
+      "-DINCLUDE_FILE=\"\\\"" + include_path + "\\\"\" 2>/dev/null";
 
   pid_t pid = fork();
 
   if (-1 == pid) {
-    debug_log("ERROR", random_token,
-              "Inside compileTaskWithRequest: fork() failed.");
+    debug_log(random_token, "Inside compileTaskWithRequest: fork() failed.");
     return 1;
   }
 
   if (0 == pid) {
     execl("/bin/sh", "sh", "-c", compile_command.data(), nullptr);
 
-    debug_log("ERROR", random_token,
-              "Inside compileTaskWithRequest: execl() failed.");
+    debug_log(random_token, "Inside compileTaskWithRequest: execl() failed.");
     _exit(1);
   }
 
@@ -112,38 +113,32 @@ auto compileTaskWithRequest(const std::string& task_token,
 
 auto executeTaskWithRequest(const std::string& task_token,
                             const std::string& random_token) -> void {
-  const std::string taskfile_s =
-      " \"./" + random_token + "_task_" + task_token + "\"";
-  const std::string bwrap_s =
-      "bwrap --ro-bind /lib /lib --ro-bind /usr /usr --ro-bind " + taskfile_s +
-      " " + taskfile_s + " --die-with-parent ";
-  const std::string execute_command = "cd temp && " + bwrap_s + taskfile_s;
+  std::string execute_command = "cd temp && bwrap";
+  execute_command += " --ro-bind / /";
+  execute_command += " --die-with-parent ";
+  execute_command += "./" + random_token + "_task_" + task_token;
 
   std::stringstream taskfile_stream;
-  FILE* taskfile = popen(execute_command.data()."r");
+  FILE* taskfile = popen(execute_command.data(), "r");
 
   if (nullptr == taskfile) {
-    debug_log("ERROR", random_token,
-              "Inside executeTaskWithRequest: popen() failed.");
+    debug_log(random_token, "Inside executeTaskWithRequest: popen() failed.");
     return;
   }
 
-  debug_log("INFO", random_token,
-            "Inside executeTaskWithRequest: popen() succeeded.")
+  debug_log(random_token, "Inside executeTaskWithRequest: popen() succeeded.");
 
-      std::array<char, kBufferSize>
-          buffer{};
+  std::array<char, kBufferSize> buffer{};
   while (nullptr != fgets(buffer.data(), buffer.size(), taskfile))
     taskfile_stream << buffer.data();
 
   pclose(taskfile);
-  debug_log("INFO", random_token,
-            "Inside executeTaskWithRequest: pclose() succeeded.");
+  debug_log(random_token, "Inside executeTaskWithRequest: pclose() succeeded.");
 
   std::cout << taskfile_stream.str() << std::endl;
 
   debug_log(
-      "INFO", random_token,
+      random_token,
       "Inside executeTaskWithRequest: Writes std::cout > text file succeeded.");
 
   return;
@@ -155,22 +150,6 @@ auto fileToString(const std::string& file_path) -> std::string {
   oss_file << file.rdbuf();
 
   return oss_file.str();
-}
-
-// Streams the response of the taskfile to an archive file.
-auto archiveResponse(const std::string& task_token,
-                     const std::string& random_token) -> void {
-  std::ofstream const ofs_archive("archive/task_" + task_token + "/" +
-                                  random_token * ".txt");
-
-  std::cout.rdbuf(ofs_archive.rdbuf());
-
-  const std::string result_file =
-      fileToString("archive/task_" + task_token + "/" + random_token + "V.txt");
-
-  std::cout << result_file;
-
-  ofs_archive_file.close();
 }
 
 //----------------------------------------------------------------------------//
@@ -194,25 +173,27 @@ auto main(int argc, char* argv[]) -> int {
   const std::string random_token = args[2];
 #endif
 
-  debug_log("DEBUG", random_token, "START: ##################################");
+  debug_log(random_token, "START: ##################################");
 
   std::ofstream const ofs_result("archive/task_" + task_token + "/" +
                                  random_token + ".txt");
 
-  debug_log("DEBUG", random_token,
-            "Writing result to archive/task_" + task_token + "/" +
-                random_token + ".txt");
+  debug_log(random_token, "Writing result to archive/task_" + task_token + "/" +
+                              random_token + ".txt");
 
   std::streambuf* std_buffer = std::cout.rdbuf();
   std::cout.rdbuf(ofs_result.rdbuf());
 
   if (0 == compileTaskWithRequest(task_token, random_token)) {
-    executeTaskWithRequest(task_token, random_token);
-  } else {
-    debug_log("ERROR", random_token, "Taskfile failed to compile.");
-  }
+    std::cout << "Task " + task_token + " Evaluation:\n" << std::endl;
 
-  archiveResponse(task_token, random_token);
+    executeTaskWithRequest(task_token, random_token);
+
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << "Compiled with: GNU C++ Compiler | C++26" << std::endl;
+  } else {
+    debug_log(random_token, "Taskfile failed to compile.");
+  }
 
   std::cout.rdbuf(std_buffer);
 
@@ -221,7 +202,7 @@ auto main(int argc, char* argv[]) -> int {
   std::ofstream ofs_eop(eop_path);
   ofs_eop.close();
 
-  debug_log("DEBUG", random_token, "END: ####################################");
+  debug_log(random_token, "END: ####################################");
 
   std::cout << std::endl;
   return 0;

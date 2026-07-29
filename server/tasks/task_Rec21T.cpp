@@ -26,7 +26,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-//?  Task creator: < here name >
+//?  Task creator: Hoang Nguyen
 
 //----------------------------------------------------------------------------//
 // °                            === INCLUDES ===                            ° //
@@ -47,16 +47,60 @@ namespace TASK {
 // °                              === TASK ===                              ° //
 //----------------------------------------------------------------------------//
 
-//?  < here text >
+/*
+   Define a struct named “Rectangle” with the elements “m_width” and “m_height”
+   of type float.
+
+   Extend the struct with a member function “getArea” that returns a float value
+   representing the area of the rectangle.
+
+   In the main function, create a rectangle with a width of
+   15.5 and a height of 20, and
+   print “Area: ” along with the area of the rectangle.
+*/
 
 //----------------------------------------------------------------------------//
 // °                              === MAIN ===                              ° //
 //----------------------------------------------------------------------------//
 
-auto main(int /*argc*/, char* /*argv*/[]) -> int { return 0; }
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
+  std::cout << (has_class<"TASK::Rectangle"_ls> ? "Has Rectangle\n"
+                                                : "Missing Rectangle\n");
+  std::cout << (class_has_membervar<"TASK::Rectangle"_ls, "m_width"_ls, float>
+                    ? "Has float m_width\n"
+                    : "Missing float m_width\n");
+  std::cout << (class_has_membervar<"TASK::Rectangle"_ls, "m_height"_ls, float>
+                    ? "Has float m_height\n"
+                    : "Missing float m_height\n");
+  std::cout << (class_has_memberfunc<"TASK::Rectangle"_ls, "getArea"_ls, float>
+                    ? "Has getArea()\n"
+                    : "Missing getArea()\n");
+  std::cout << std::endl;
+  return 0;
+}
 
 //----------------------------------------------------------------------------//
 // °                          === ONE SOLUTION ===                          ° //
 //----------------------------------------------------------------------------//
 
-namespace __solution__ {}
+namespace __solution__ {
+
+#include <iostream>
+
+struct Rectangle {
+  float m_width{};
+  float m_height{};
+
+  Rectangle(float w, float h) : m_width(w), m_height(h) {}
+
+  auto getArea() -> float { return m_width * m_height; }
+};
+
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
+  std::cout << "Area: " << Rectangle(15.5f, 20.0f).getArea() << "\n";
+
+  std::cout << std::endl;
+  return 0;
+}
+
+}  // namespace __solution__

@@ -3,33 +3,33 @@
 default: sbuild
 
 build:
-	docker compose build
+	docker-compose build
 
 sbuild:
-	docker compose up --build
+	docker-compose up --build
 
 up:
-	docker compose up -d
+	docker-compose up -d
 
 down:
-	docker compose down
+	docker-compose down
 
 re:	down build up
 
 logs:
-	docker compose logs
+	docker-compose logs
 
 cd:
-	docker compose exec -it uni_server /bin/sh
+	docker-compose exec -it backend /bin/sh
 
 help:
 	@echo "Available targets: "
-	@echo "  make					- Build and start Docker container"
-	@echo "  make build		- Build Docker image"
+	@echo "  make 	- Build and start Docker container"
+	@echo "  make build   - Build Docker image"
 	@echo "  make sbuild	- Build and start Docker container"
-	@echo "  make up			- Start Docker container"
-	@echo "  make down		- Stop and remove Docker container"
-	@echo "  make re			- make down + make build + make up"
-	@echo "  make logs		- Show Docker container logs"
-	@echo "  make cd			- Change directory to Docker container directory. Use > exit < to get out"
-	@echo "  make help		- Display this help message"
+	@echo "  make up	- Start Docker container"
+	@echo "  make down	- Stop and remove Docker container"
+	@echo "  make re	- make down + make build + make up"
+	@echo "  make logs	- Show Docker container logs"
+	@echo "  make cd 	- Change directory to Docker container directory. Use > exit < to get out"
+	@echo "  make help	- Display this help message"

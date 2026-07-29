@@ -37,6 +37,8 @@
 // °                            === INCLUDES ===                            ° //
 //----------------------------------------------------------------------------//
 
+#include <sys/wait.h>
+
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -50,7 +52,7 @@
 // °                           === CONSTANTS ===                            ° //
 //----------------------------------------------------------------------------//
 
-const int PORT{8008};
+const int PORT{8080};
 const int THREADS{10};
 const int SUCCESS_CODE{200};
 const int FAILED_CODE{400};
@@ -78,8 +80,8 @@ auto randomToken() -> std::string {
   return result;
 }
 
-auto executeTaskEvaluator(const string& task_token, const string& random_token)
-    -> int {
+auto executeTaskEvaluator(const std::string& task_token,
+                          const std::string& random_token) -> int {
   pid_t pid = fork();
 
   if (-1 == pid) {
@@ -95,14 +97,15 @@ auto executeTaskEvaluator(const string& task_token, const string& random_token)
   }
 
   int status{};
-  waitpid(pid, &status);
+  waitpid(pid, &status, 0);
 
   return (WIFEXITED(status) && 0 == WEXITSTATUS(status))
              ? 0
              : (std::cerr << "Error: TaskEvaluator execution failed.\n", 1);
 }
 
-auto cleanupTempFiles() -> void {
+auto cleanupTempFiles(const std::string& task_token,
+                      const std::string& random_token) -> void {
   const std::filesystem::path eop_path =
       "temp/eop_" + task_token + random_token;
 
@@ -136,7 +139,7 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   ([]() { return "Still running strong!"; });
 
   CROW_ROUTE(app, "/<string>")
-      .methods("POST")(
+      .methods("POST"_method)(
           [](const crow::request& request, crow::response& response,
              const std::string& task_token) {
             response.set_header("Content-Type", "text/plain");
@@ -154,6 +157,8 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
               std::ofstream ofs_code_file(code_file);
               ofs_code_file << text_body;
               ofs_code_file.close();
+
+              std::cout << random_token + " Body: \n" + text_body << std::endl;
 
               const std::filesystem::path archive_path =
                   "archive/task_" + task_token + "/";
@@ -183,7 +188,7 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
 
               response.end();
 
-              cleanupTempFiles();
+              cleanupTempFiles(task_token, random_token);
 
             } else {
               response.code = FAILED_CODE;

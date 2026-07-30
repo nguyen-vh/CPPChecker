@@ -83,7 +83,7 @@ Here you will find instructions on how to use the header. For information on the
 
 These are all the templates that have been implemented so far. Using them is as intuitive as you would expect, given their naming conventions.
 
-> [!CAUTION]
+> [!IMPORTANT]
 > Names used inside the templates should be literal strings with suffix _ls, for example ` "foo"_ls `
 
 
@@ -154,10 +154,22 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
 }
 ```
 
+What about classes, functions, etc. inside of a namespace or inside nested namespaces?
+```cpp
+namespace TASK {
+class X {
+  double foo(std::string, int);
+};
+}
+```
 
+Only the first parameter inside out template need to address the namespace structure to make it work.
+```cpp
+std::cout << class_has_memberfunc<"TASK::X"_ls, "foo"_ls> << "\n";
+```
 
-
-
+> [!IMPORTANT]
+> This is how to write the requirement test for the task files as part of the server configuration.
 
 
 <!-- LEGACY -->

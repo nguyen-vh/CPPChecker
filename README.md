@@ -71,7 +71,7 @@ Get the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPCheck
 
 
 > [!NOTE]
-> If you want the server setup refer to the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory.
+> If you want the server setup, refer to the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory.
 
 
 <!-- USAGE -->

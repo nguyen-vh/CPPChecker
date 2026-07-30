@@ -1,6 +1,7 @@
 # CPPChecker
 
 
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -31,8 +32,21 @@
 
 
 
+> [!TIP]
+> Quickstart by copy-paste the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) to your project.
+
+
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+The goal is to create a header-only library for verifying non-functional code requirements. This means checking whether a specific class contains a member function with the exact name "foo". 
+
+The project began with macros and many other workarounds to circumvent the limitations of the C++ era before the introduction of reflections. For more information, see the <a href="#legacy">Legacy</a> section. 
+
+However, with the introduction of GCC16.1 and support for reflections, the project has now been reworked, and the new header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) represents the latest version of the project.
+By leveraging reflections to accomplish the goal in a more elegant way, and adhering to the YAGNI principle, this project aims to provide a simple and efficient solution for verifying non-functional code requirements. The library is designed—like its predecessor—to be easy to use and integrate into existing projects. Including the header file is everything that is needed to begin the compile-time verification mania.
+
+The project itself is a proof of concept designed to demonstrate that verifying non-functional C++ code is possible using only C++ and is easily extensible. For this demonstration, I also wrote a simple server that can accept C++ code and verify it against the requirements set beforehand. The server is written in C++ and is located in the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory; further information can be found in the README there.
 
 
 
@@ -51,11 +65,13 @@
 ### Installation
 
 
+
 <!-- USAGE -->
 ## Usage
 
 
 ### Server
+
 
 
 <!-- LEGACY -->

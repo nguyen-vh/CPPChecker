@@ -67,12 +67,15 @@ The most obvious solution would be a compiler that supports C++26 and later vers
 
 
 ### Installation
+Get the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) and add it to your "include" folder inside your project.
 
+
+> [!NOTE]
+> If you want the server setup refer to the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory.
 
 
 <!-- USAGE -->
 ## Usage
-
 
 
 
@@ -105,10 +108,6 @@ Build
 /* This program is designed to be dependency-free, meaning no third-party libraries are used. To use the code, include "iostream" and "sstream". If there's an error, include "type_traits". You can easily copy and paste the code since the program runs on its own.
 Setup
 
-/*
-
-    For a better comments experience, consider downloading "Better Comments" by Aaron Bond (VS Code)
-    To add more color to the code, you can download "Better C++ Syntax" by Jeff Hykin (VS Code)
 
 Description
 

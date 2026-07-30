@@ -87,7 +87,7 @@ I have an example where I use [Postman](https://www.postman.com/) to send a POST
 
 <!-- LICENSE -->
 ## License
-All written files have the license at the start. For files that uses other projects like RestApi.cpp uses CrowCpp, its License information is included, too.
+All source files include the license information at the beginning. Files that use other projects—such as "RestApi.cpp", which uses CrowCpp—also include the relevant license information.
 
 For the general license, see [LICENSE][license].
 

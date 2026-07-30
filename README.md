@@ -68,6 +68,7 @@ The most obvious solution would be a compiler that supports C++26 and later vers
 
 ### Installation
 Get the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) and add it to your "include" folder inside your project.
+You could also clone the repository and add a reference to the header file "include/cxxchecker_reflection.hpp", but that would just take up valuable storage space—which in todays economy will be huge burden.
 
 
 > [!NOTE]

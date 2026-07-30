@@ -48,15 +48,15 @@ namespace TASK {
 //----------------------------------------------------------------------------//
 
 /*
-   Define a struct named “Rectangle” with the elements “m_width” and “m_height”
-   of type float.
+  Define a struct named "Rectangle" with the elements "m_width" and "m_height"
+  of type float.
 
-   Extend the struct with a member function “getArea” that returns a float value
-   representing the area of the rectangle.
+  Extend the struct with a member function "getArea" that returns a float value
+  representing the area of the rectangle.
 
-   In the main function, create a rectangle with a width of
-   15.5 and a height of 20, and
-   print “Area: ” along with the area of the rectangle.
+  In the main function, create a rectangle with a width of
+  15.5 and a height of 20, and
+  print "Area: " along with the area of the rectangle.
 */
 
 //----------------------------------------------------------------------------//

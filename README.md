@@ -74,6 +74,7 @@ For the general license, see [LICENSE][license].
 <!-- MARKDOWN LINKS & IMAGES -->
 [cpp26-badge]:https://img.shields.io/badge/C++26-00599C?style=for-the-badge&logo=cplusplus
 [cpp-url]:https://isocpp.org/
+[license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md
 
 
 <!-- LEAGCY

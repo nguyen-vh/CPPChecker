@@ -62,8 +62,7 @@ The most obvious solution would be a compiler that supports C++26 and later vers
 
 
 > [!TIP]
-> * To improve your experience with comments, consider downloading "[Better Comments](https://github.com/aaron-bond/better-comments)" by Aaron Bond (VS Code)
-> I use custom colors and symbols, acquire them in my [miscellaneous-cpp](https://github.com/nguyen-vh/miscellaneous-cpp/blob/main/IDE/extensions/better_comments.json) repository.
+> * To improve your experience with comments, consider downloading "[Better Comments](https://github.com/aaron-bond/better-comments)" by Aaron Bond (VS Code). I use custom colors and symbols, acquire them in my [miscellaneous-cpp](https://github.com/nguyen-vh/miscellaneous-cpp/blob/main/IDE/extensions/better_comments.json) repository.
 > * To make the code stand out more clearly with syntax highlighting, you can download "[Better C++ Syntax](https://github.com/jeff-hykin/better-cpp-syntax)" by Jeff Hykin (VS Code)
 
 

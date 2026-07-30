@@ -121,11 +121,6 @@ auto cleanupTempFiles(const std::string& task_token,
       "temp/" + random_token + "_task_" + task_token;
   if (std::filesystem::exists(execution_file))
     std::filesystem::remove(execution_file);
-
-  const std::filesystem::path response_file =
-      "archive/task_" + task_token + "/" + random_token + "V.txt";
-  if (std::filesystem::exists(response_file))
-    std::filesystem::remove(response_file);
 }
 
 //----------------------------------------------------------------------------//

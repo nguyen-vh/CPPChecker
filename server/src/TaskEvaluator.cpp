@@ -117,10 +117,12 @@ auto compileTaskWithRequest(const std::string& task_token,
 
 auto executeTaskWithRequest(const std::string& task_token,
                             const std::string& random_token) -> void {
-  std::string execute_command = "cd temp && bwrap";
-  execute_command += " --ro-bind / /";
-  execute_command += " --die-with-parent ";
-  execute_command += "./" + random_token + "_task_" + task_token;
+  std::string execute_command = "bwrap";
+  execute_command += " --ro-bind /usr /usr --ro-bind /bin /bin";
+  execute_command += " --ro-bind /lib /lib --ro-bind /lib64 /lib64";
+  execute_command += " --bind ./temp /temp --chdir temp";
+  execute_command += " --unshare-net --die-with-parent";
+  execute_command += " ./" + random_token + "_task_" + task_token;
 
   std::stringstream taskfile_stream;
   FILE* taskfile = popen(execute_command.data(), "r");
@@ -205,7 +207,7 @@ auto main(int argc, char* argv[]) -> int {
 
   std::string code_file =
       fileToString("temp/" + random_token + "_" + task_token + ".cpp");
-  std::cout << "Requestbody: \n\n" + code_file;
+  std::cout << "Requestbody: \n\n" << code_file;
 
   std::cout << "--------------------------------- \n";
   std::cout << std::endl;

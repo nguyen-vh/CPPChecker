@@ -77,7 +77,16 @@ You could also clone the repository and add a reference to the header file "incl
 
 <!-- USAGE -->
 ## Usage
-Here will be a explanation on how to use the header. For information on the old header look for the [Legacy](#legacy) section.
+Here you will find instructions on how to use the header. For information on the old header, see the [Legacy](#legacy) section.
+
+![List of Content][cxxchecker_reflections_list_of_content]
+
+These are all the templates that have been implemented so far. Using them is as intuitive as you would expect, given their naming conventions.
+
+> [!CAUTION]
+> Names used inside the templates should be literal string with suffix _ls, for example ` "foo"_ls `.
+
+
 
 
 
@@ -97,6 +106,8 @@ For the general license, see [LICENSE][license].
 <!-- MARKDOWN LINKS & IMAGES -->
 [cpp26-badge]:https://img.shields.io/badge/C++26-00599C?style=for-the-badge&logo=cplusplus
 [cpp-url]:https://isocpp.org/
+[cxxchecker_reflections_list_of_content]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/cxxchecker_reflections_list_of_content.png
+
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md
 
 

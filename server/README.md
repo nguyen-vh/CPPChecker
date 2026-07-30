@@ -20,6 +20,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#limitations">Limitations</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -35,6 +36,7 @@ There are many ways to use the cppchecker header; one of them is to use it as a 
 ### Built With
 * [![C++][cpp26-badge]][cpp-url]
 * [![CrowCpp][crowcpp-badge]][crowcpp-url]
+* [![Bubblewrap][bubblewrap-badge]][bubblewrap-url]
 * [![Docker][docker-badge]][docker-url]
 
 
@@ -85,6 +87,12 @@ I have an example where I use [Postman](https://www.postman.com/) to send a POST
 
 
 
+<!-- LIMITATIONS -->
+## Limitations
+The current version of the project takes 2.4 seconds for the request to reach the server, be compiled, and executed within [Bubblewrap][bubblewrap-url]—to meet high security standards—and for the result to be sent back to the client. This time was measured when the client and server were on the same machine. To achieve this performance, I use precompiled headers and optimization flags during compilation. In my opinion, however, this time should be significantly shorter. If you have any suggestions or ideas for improvements on how to speed up the process, please feel free to contact me.
+
+
+
 <!-- LICENSE -->
 ## License
 All source files include the license information at the beginning. Files that use other projects—such as "RestApi.cpp", which uses CrowCpp—also include the relevant license information.
@@ -98,6 +106,8 @@ For the general license, see [LICENSE][license].
 [cpp-url]:https://isocpp.org/
 [crowcpp-badge]:https://img.shields.io/badge/CrowCpp-0A2B4E?style=for-the-badge&logo=cplusplus
 [crowcpp-url]:https://github.com/crowcpp/crow
+[bubblewrap-badge]:https://img.shields.io/badge/bubblewrap-487CB8?style=for-the-badge&logo=c
+[bubblewrap-url]:https://github.com/containers/bubblewrap
 [docker-badge]:https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]:https://www.docker.com/
 [postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Postman_example.png

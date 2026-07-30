@@ -37,7 +37,7 @@
 ## About The Project
 The goal is to create a header-only library for verifying non-functional code requirements. This means checking whether a specific class contains a member function with the exact name "foo". 
 
-The project began with macros and many other workarounds to circumvent the limitations of the C++ era before the introduction of reflections. For more information, see the <a href="#legacy">Legacy</a> section. 
+The project began with macros and many other workarounds to circumvent the limitations of the C++ era before the introduction of reflections. For more information, see the [Legacy](#legacy) section. 
 
 However, with the introduction of GCC16.1 and support for reflections, the project has now been reworked, and the new header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) represents the latest version of the project.
 By leveraging reflections to accomplish the goal in a more elegant way, this project aims to provide a simple and efficient solution for verifying non-functional code requirements. The library is designed—like its predecessor—to be easy to use and integrate into existing projects. Including the header file is everything that is needed to begin the compile-time verification mania.
@@ -54,7 +54,7 @@ The project itself is a proof of concept designed to demonstrate that verifying 
 <!-- GETTING STARTED -->
 ## Getting Started
 This is a header-only project, so by downloading the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) you are good to go.
-For more detail keep reading below or skip to the <a href="#usage">next section</a>.
+For more detail keep reading below or skip to the [next section](#usage).
 
 
 ### Prerequisites
@@ -77,6 +77,7 @@ You could also clone the repository and add a reference to the header file "incl
 
 <!-- USAGE -->
 ## Usage
+Here will be a explanation on how to use the header. For information on the old header look for the [Legacy](#legacy) section.
 
 
 

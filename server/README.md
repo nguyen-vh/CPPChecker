@@ -1,4 +1,4 @@
-<h3 align="center">REST API for CPPChecker</h3>
+# REST API for CPPChecker
 
 
 

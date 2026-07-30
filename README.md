@@ -84,7 +84,7 @@ Here you will find instructions on how to use the header. For information on the
 These are all the templates that have been implemented so far. Using them is as intuitive as you would expect, given their naming conventions.
 
 > [!CAUTION]
-> Names used inside the templates should be literal string with suffix _ls, for example ` "foo"_ls `.
+> Names used inside the templates should be literal strings with suffix _ls, for example ` "foo"_ls `
 
 
 

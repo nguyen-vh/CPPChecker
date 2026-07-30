@@ -89,7 +89,7 @@ I have an example where I use [Postman](https://www.postman.com/) to send a POST
 
 <!-- LIMITATIONS -->
 ## Limitations
-The current version of the project takes 2.4 seconds for the request to reach the server, be compiled, and executed within [Bubblewrap][bubblewrap-url]—to meet high security standards—and for the result to be sent back to the client. This time was measured when the client and server were on the same machine. To achieve this performance, I use precompiled headers and optimization flags during compilation. In my opinion, however, this time should be significantly shorter. If you have any suggestions or ideas for improvements on how to speed up the process, please feel free to contact me.
+The current version of the project takes 2.4 seconds for the request to reach the server, be compiled, and executed within [Bubblewrap][bubblewrap-url]—to meet high security standards—and for the result to be sent back to the client. This time was measured when the client and server were on the same machine. To achieve this performance, I use precompiled headers and optimization flags during compilation. In my opinion, however, this time should be significantly shorter. If you have any suggestions or ideas for improvements on how to speed up the process, please feel free to start a chat inside the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions).
 
 
 

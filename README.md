@@ -32,6 +32,8 @@
 > Copy-Paste the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) to your project and start to code.
 
 
+> [!CAUTION]
+> The header file [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) is the newest version of this project. The other files inside the "include" folder are legacy or for unit tests.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project

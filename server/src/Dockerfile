@@ -41,6 +41,6 @@ COPY --from=build /app/TaskEvaluator /app/
 COPY --from=build /app/RestApi /app/
 
 ADD /tasks /app/tasks
-ADD /temp /app/temp
+RUN mkdir /app/temp/
 
 CMD [ "./RestApi" ]

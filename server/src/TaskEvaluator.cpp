@@ -31,7 +31,6 @@
 //----------------------------------------------------------------------------//
 
 #include <sys/wait.h>
-#include <unistd.h>
 
 #include <filesystem>
 #include <format>
@@ -90,7 +89,7 @@ auto compileTaskWithRequest(const std::string& task_token,
       "-o temp/" + random_token + "_task_" + task_token +
       " -include include/cxxchecker_reflection.hpp -include "
       "include/standard_libs.hpp " +
-      "-DINCLUDE_FILE=\"\\\"" + include_path + "\\\"\" 2>/dev/null";
+      "-DINCLUDE_FILE=\"\\\"" + include_path + "\\\"\"";
 
   pid_t pid = fork();
 
@@ -106,9 +105,14 @@ auto compileTaskWithRequest(const std::string& task_token,
     _exit(1);
   }
 
-  wait(nullptr);
+  int status{};
+  waitpid(pid, &status, 0);
 
-  return 0;
+  return (WIFEXITED(status) && 0 == WEXITSTATUS(status))
+             ? 0
+             : (debug_log(random_token,
+                          "Error: TaskEvaluator execution failed."),
+                1);
 }
 
 auto executeTaskWithRequest(const std::string& task_token,
@@ -135,7 +139,7 @@ auto executeTaskWithRequest(const std::string& task_token,
   pclose(taskfile);
   debug_log(random_token, "Inside executeTaskWithRequest: pclose() succeeded.");
 
-  std::cout << taskfile_stream.str() << std::endl;
+  std::cout << taskfile_stream.str();
 
   debug_log(
       random_token,
@@ -184,16 +188,27 @@ auto main(int argc, char* argv[]) -> int {
   std::streambuf* std_buffer = std::cout.rdbuf();
   std::cout.rdbuf(ofs_result.rdbuf());
 
-  if (0 == compileTaskWithRequest(task_token, random_token)) {
-    std::cout << "Task " + task_token + " Evaluation:\n" << std::endl;
+  std::cout << "Evaluation of task [ " + task_token + " ]: \n\n";
 
+  if (0 == compileTaskWithRequest(task_token, random_token)) {
     executeTaskWithRequest(task_token, random_token);
 
-    std::cout << "---------------------------------" << std::endl;
-    std::cout << "Compiled with: GNU C++ Compiler | C++26" << std::endl;
   } else {
+    std::cout << "Program did not compile. \n\n";
     debug_log(random_token, "Taskfile failed to compile.");
   }
+
+  std::cout << "--------------------------------- \n";
+  std::cout << "Archive Token: " << random_token << "\n";
+  std::cout << "Compiled with: GNU C++ Compiler | C++26 \n";
+  std::cout << "--------------------------------- \n";
+
+  std::string code_file =
+      fileToString("temp/" + random_token + "_" + task_token + ".cpp");
+  std::cout << "Requestbody: \n\n" + code_file;
+
+  std::cout << "--------------------------------- \n";
+  std::cout << std::endl;
 
   std::cout.rdbuf(std_buffer);
 

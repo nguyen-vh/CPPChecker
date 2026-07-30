@@ -52,7 +52,7 @@
 // °                           === CONSTANTS ===                            ° //
 //----------------------------------------------------------------------------//
 
-const int PORT{8080};
+const int PORT{8008};
 const int THREADS{10};
 const int SUCCESS_CODE{200};
 const int FAILED_CODE{400};
@@ -157,8 +157,6 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
               std::ofstream ofs_code_file(code_file);
               ofs_code_file << text_body;
               ofs_code_file.close();
-
-              std::cout << random_token + " Body: \n" + text_body << std::endl;
 
               const std::filesystem::path archive_path =
                   "archive/task_" + task_token + "/";

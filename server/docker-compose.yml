@@ -17,13 +17,12 @@ services:
     privileged: true
     volumes:
       - ./archive:/app/archive
-      - ./temp:/app/temp
     ports:
-      - "8080:8080"
+      - "8008:8008"
     restart: unless-stopped
     healthcheck:
       disable: false
-      test: ["CMD", "curl", "-f", "http://localhost:8080/healthcheck"]
+      test: ["CMD", "curl", "-f", "http://localhost:8008/healthcheck"]
       interval: 60s
       timeout: 10s
       retries: 3

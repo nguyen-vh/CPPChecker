@@ -34,7 +34,7 @@
 
 > [!TIP]
 > ### QUICKSTART
-> Quickstart by copy-paste the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) to your project.
+> Copy-Paste the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) to your project and start to code.
 
 
 

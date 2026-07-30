@@ -174,6 +174,9 @@ std::cout << class_has_memberfunc<"TASK::X"_ls, "foo"_ls> << "\n";
 > This is how to write the requirement test for the task files as part of the server configuration.
 
 
+The remaining templates follow the same pattern. If you are unsure about any specific templates, please check the header file for more information or mention it in the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions), as I will update the documentation accordingly. If you have any questions, feel free to ask.
+
+
 <!-- LEGACY -->
 ## Legacy
 

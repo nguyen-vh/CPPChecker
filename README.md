@@ -19,12 +19,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#usage">Usage</a>
-      <ul>
-        <li><a href="#server">Server</a></li>
-      </ul>
-    </li>
+    <li><a href="#usage">Usage</a></li>
     <li><a href="#legacy">Legacy</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -58,9 +53,18 @@ The project itself is a proof of concept designed to demonstrate that verifying 
 
 <!-- GETTING STARTED -->
 ## Getting Started
+This is a header-only project, so by downloading the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) you are good to go.
+For more detail keep reading below or skip to the <a href="#usage">next section</a>.
 
 
 ### Prerequisites
+The most obvious solution would be a compiler that supports C++26 and later versions. One option would be GCC 16.1, though it is not yet officially included in the Alpine image or in Homebrew for macOS users. To install GCC 16.1, you can use this [link](https://gcc.gnu.org/gcc-16/) for more information. The other option is to run a container with GCC 16.1 installed. This could be, for example, [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) with GCC 16.1 installed. This project also includes devcontainer configuration in the root directory to help you get started.
+
+
+> [!TIP]
+> To improve your experience with comments, consider downloading "[Better Comments](https://github.com/aaron-bond/better-comments)" by Aaron Bond (VS Code)
+> I use custom colors and symbols, acquire them in my [miscellaneous-cpp](https://github.com/nguyen-vh/miscellaneous-cpp/blob/main/IDE/extensions/better_comments.json) repository.
+> To make the code stand out more clearly with syntax highlighting, you can download "[Better C++ Syntax](https://github.com/jeff-hykin/better-cpp-syntax)" by Jeff Hykin (VS Code)
 
 
 ### Installation
@@ -70,8 +74,6 @@ The project itself is a proof of concept designed to demonstrate that verifying 
 <!-- USAGE -->
 ## Usage
 
-
-### Server
 
 
 

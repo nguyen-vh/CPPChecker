@@ -87,6 +87,76 @@ These are all the templates that have been implemented so far. Using them is as 
 > Names used inside the templates should be literal strings with suffix _ls, for example ` "foo"_ls `
 
 
+Let us take a look at the `class_has_memberfunc<>` template. If we examine this example in detail, it will be easier to understand how to use the other templates, since they all work according to the same principle.
+
+The general schema for the templates are as follows:
+```cpp
+class_has_memberfunc<"class"_ls, "function"_ls, returntype, inputtype1, inputtype2, ... >
+```
+
+Given we have a `class X` with a member function `foo(std::string, int)`:
+```cpp
+class X {
+  double foo(std::string, int);
+};
+```
+What shenanigans could I do while only using the `class_has_memberfunc<>` template?
+
+1. Classic, I could check whether the `class X` has a member function `foo`:
+    ```cpp
+    std::cout << class_has_memberfunc<"X"_ls, "foo"_ls> << "\n";
+    ```
+    - What would happen if `class X` did not exist? It would return `false`.
+    - What would happen if function `foo` did not exist? It would return `false`.
+
+2. I could check whether the function has exactly the returntype `double`:
+    ```cpp
+    std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double> << "\n";
+    ```
+    - What would happen if it has a different returntype? It would return `false`.
+
+3. I could check whether it has exactly two parameters `std::string` and `int`:
+    ```cpp
+    std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double, std::string, int> << "\n";
+    ```
+    - What would happen if I only check for one parameter? It would return `false`.
+    - What would happen if I check for more than 2 parameters? It would return `false`.
+    - What would happen if I change the order of parameters? It would return `false`.
+    - Is there a limit on how many parameters I can check for? No.
+
+Here are all the answers from above:
+```cpp
+#include <iostream>
+#include <string>
+#include "cxxchecker_reflections.hpp"
+
+class X {
+  double foo(std::string, int);
+};
+
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
+  // 1.
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls> << "\n"; // true
+  std::cout << class_has_memberfunc<"Y"_ls, "foo"_ls> << "\n"; // false
+  std::cout << class_has_memberfunc<"X"_ls, "goo"_ls> << "\n"; // false
+
+  // 2.
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double> << "\n"; // true
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, float> << "\n"; // false
+
+  // 3.
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double, std::string, int> << "\n"; // true
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double, std::string> << "\n"; // false
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double, std::string, int, int> << "\n"; // false
+  std::cout << class_has_memberfunc<"X"_ls, "foo"_ls, double, int, std::string> << "\n"; // false
+  
+  return 0;
+}
+```
+
+
+
+
 
 
 
@@ -111,7 +181,7 @@ For the general license, see [LICENSE][license].
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md
 
 
-<!-- LEAGCY
+<!-- LEGACY
 
 TO-DO LIST
 

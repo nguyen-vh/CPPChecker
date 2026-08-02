@@ -43,7 +43,7 @@
 #include <exception>
 // #include <execution>
 #include <filesystem>
-// #include <format>
+#include <format>
 // #include <forward_list>
 #include <fstream>
 #include <functional>
@@ -60,13 +60,13 @@
 #include <list>
 // #include <locale>
 #include <map>
-// #include <memory>
+#include <memory>
 // #include <memory_resource>
 // #include <mutex>
 #include <new>
 #include <numbers>
 #include <numeric>
-// #include <optional>
+#include <optional>
 #include <ostream>
 #include <queue>
 #include <random>

@@ -21,6 +21,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#legacy">Legacy</a></li>
+    <li><a href="#thesis">Thesis</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -41,7 +42,7 @@ The goal is to create a header-only library for verifying non-functional code re
 
 The project began with macros and many other workarounds to circumvent the limitations of the C++ era before the introduction of reflections. For more information, see the [Legacy](#legacy) section. 
 
-However, with the introduction of GCC16.1 and support for reflections, the project has now been reworked, and the new header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) represents the latest version of the project.
+However, with the introduction of GCC 16.1 and support for reflections, the project has now been reworked, and the new header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) represents the latest version of the project.
 By leveraging reflections to accomplish the goal in a more elegant way, this project aims to provide a simple and efficient solution for verifying non-functional code requirements. The library is designed—like its predecessor—to be easy to use and integrate into existing projects. Including the header file is everything that is needed to begin the compile-time verification mania.
 
 The project itself is a proof of concept designed to demonstrate that verifying non-functional C++ code is possible using only C++ and is easily extensible. For this demonstration, I also wrote a simple server that can accept C++ code and verify it against the requirements set beforehand. The server is written in C++ and is located in the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory; further information can be found in the README there.
@@ -179,6 +180,11 @@ The remaining templates follow the same pattern. If you are unsure about any spe
 
 <!-- LEGACY -->
 ## Legacy
+
+
+
+<!-- THESIS -->
+## Thesis
 
 
 

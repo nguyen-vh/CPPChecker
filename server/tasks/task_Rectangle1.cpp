@@ -67,15 +67,16 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
   std::cout << (has_class<"TASK::Rectangle"_ls> ? "Has Rectangle\n"
                                                 : "Missing Rectangle\n");
   std::cout << (class_has_membervar<"TASK::Rectangle"_ls, "m_width"_ls, float>
-                    ? "Has float m_width\n"
-                    : "Missing float m_width\n");
+                    ? "Has Rectangle member float m_width\n"
+                    : "Missing Rectangle member float m_width\n");
   std::cout << (class_has_membervar<"TASK::Rectangle"_ls, "m_height"_ls, float>
-                    ? "Has float m_height\n"
-                    : "Missing float m_height\n");
+                    ? "Has Rectangle member float m_height\n"
+                    : "Missing Rectangle member float m_height\n");
+
   std::cout << (class_has_memberfunc<"TASK::Rectangle"_ls, "getArea"_ls, float>
-                    ? "Has getArea()\n"
-                    : "Missing getArea()\n");
-  std::cout << std::endl;
+                    ? "Has Rectangle member float getArea()\n"
+                    : "Missing Rectangle member float getArea()\n");
+
   return 0;
 }
 

@@ -56,7 +56,8 @@ namespace TASK {
 
   Create a class "SpaceProbe" with private members "m_name" (string),
   "m_distance" (double in km) and a constructor to initialize both.
-  Add a method "getSignalDelay()" that uses the free function
+
+  Add private method "getSignalDelay()" that uses the free function above.
   Add a method "sendMessage()" that prints:
   "Sending to [name]..."
   "Signal arrives in XX.XX seconds"
@@ -68,7 +69,35 @@ namespace TASK {
 // °                              === MAIN ===                              ° //
 //----------------------------------------------------------------------------//
 
-auto main(int /*argc*/, char* /*argv*/[]) -> int { return 0; }
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
+  std::cout << (has_free_variable<"TASK::LIGHT_SPEED"_ls, const double>
+                    ? "Has global double LIGHT_SPEED\n"
+                    : "Missing global double LIGHT_SPEED\n");
+
+  std::cout << (has_free_function<"TASK::calculateDelay"_ls, double, double>
+                    ? "Has global double calculateDelay()\n"
+                    : "Missing global double calculateDelay()\n");
+
+  std::cout << (has_class<"TASK::SpaceProbe"_ls> ? "Has SpaceProbe\n"
+                                                 : "Missing SpaceProbe\n");
+  std::cout << (class_has_membervar<"TASK::SpaceProbe"_ls, "m_distance">
+                    ? "Has SpaceProbe member double m_distance\n"
+                    : "Missing SpaceProbe member double m_distance\n");
+  std::cout
+      << (class_has_membervar<"TASK::SpaceProbe"_ls, "m_name"_ls, std::string>
+              ? "Has SpaceProbe member string m_name\n"
+              : "Missing SpaceProbe member string m_name\n");
+
+  std::cout << (class_has_private_memberfunc<"TASK::SpaceProbe"_ls,
+                                             "getSignalDelay"_ls>
+                    ? "Has SpaceProbe private member getSignalDelay()\n"
+                    : "Missing SpaceProbe private member getSignalDelay()\n");
+  std::cout << (class_has_memberfunc<"TASK::SpaceProbe"_ls, "sendMessage"_ls>
+                    ? "Has SpaceProbe member sendMessage()\n"
+                    : "Missing SpaceProbe member sendMessage()\n");
+
+  return 0;
+}
 
 //----------------------------------------------------------------------------//
 // °                          === ONE SOLUTION ===                          ° //
@@ -86,14 +115,14 @@ auto calculateDelay(double distance) -> double {
 
 class SpaceProbe {
  private:
-  std::string m_name;
-  double m_distance;
+  std::string m_name{};
+  double m_distance{};
+
+  auto getSignalDelay() const -> double { return calculateDelay(m_distance); }
 
  public:
   SpaceProbe(std::string name, double distance)
       : m_name(name), m_distance(distance) {}
-
-  auto getSignalDelay() const -> double { return calculateDelay(m_distance); }
 
   auto sendMessage() const -> void {
     std::cout << "Sending to " << m_name << "..." << "\n";

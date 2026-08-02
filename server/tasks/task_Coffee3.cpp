@@ -53,7 +53,7 @@ namespace TASK {
   - Constructor to initialize all values
   - Member function "sell(int quantity)" that:
     - Reduces stock by quantity
-    - Returns the total price (price * quantity)
+    - Returns the total price (price * quantity) in double
   - Virtual function "getDescription()" that returns a string
   - Virtual function "getSpecialInstruction()" that returns a string (default:
   "Standard brew")
@@ -82,7 +82,60 @@ namespace TASK {
 // °                              === MAIN ===                              ° //
 //----------------------------------------------------------------------------//
 
-auto main(int /*argc*/, char* /*argv*/[]) -> int { return 0; }
+auto main(int /*argc*/, char* /*argv*/[]) -> int {
+  std::cout << (has_class<"TASK::Coffee"_ls> ? "Has Coffee\n"
+                                             : "Missing Coffee\n");
+  std::cout << (class_has_private_membervar<"TASK::Coffee"_ls, "m_name"_ls,
+                                            std::string>
+                    ? "Has Coffee private member string m_name\n"
+                    : "Missing Coffee private member string m_name\n");
+  std::cout
+      << (class_has_private_membervar<"TASK::Coffee"_ls, "m_price"_ls, double>
+              ? "Has Coffee private member double m_price\n"
+              : "Missing Coffee private member double m_price\n");
+  std::cout
+      << (class_has_private_membervar<"TASK::Coffee"_ls, "m_stock"_ls, int>
+              ? "Has Coffee private member int m_stock\n"
+              : "Missing Coffee private member int m_stock\n");
+  std::cout << (class_has_memberfunc<"TASK::Coffee"_ls, "sell"_ls, double, int>
+                    ? "Has Coffee member double sell()\n"
+                    : "Missing Coffee member double sell()\n");
+  std::cout
+      << (class_has_virtual_memberfunc<"TASK::Coffee"_ls, "getDescription"_ls>
+              ? "Has Coffee virtual member getDescription()\n"
+              : "Missing Coffee virtual member getDescription()\n");
+  std::cout
+      << (class_has_virtual_memberfunc<"TASK::Coffee"_ls,
+                                       "getSpecialInstruction"_ls>
+              ? "Has Coffee virtual member getSpecialInstruction()\n"
+              : "Missing Coffee virtual member getSpecialInstruction()\n");
+
+  std::cout << (class_is_base_of<"TASK::Coffee"_ls, "TASK::Espresso"_ls>
+                    ? "Has Espresso derive from Coffee\n"
+                    : "Missing Espresso derive from Coffee\n");
+  std::cout << (class_has_override_memberfunc<"TASK::Espresso"_ls,
+                                              "getDescription"_ls>
+                    ? "Has Espresso override getDescription()\n"
+                    : "Missing Espresso override getDescription()\n");
+  std::cout << (class_has_override_memberfunc<"TASK::Espresso"_ls,
+                                              "getSpecialInstruction"_ls>
+                    ? "Has Espresso override getSpecialInstruction()\n"
+                    : "Missing Espresso override getSpecialInstruction()\n");
+
+  std::cout << (class_is_base_of<"TASK::Coffee"_ls, "TASK::Cappuccino"_ls>
+                    ? "Has Cappuccino derive from Coffee\n"
+                    : "Missing Cappuccino derive from Coffee\n");
+  std::cout << (class_has_override_memberfunc<"TASK::Cappuccino"_ls,
+                                              "getDescription"_ls>
+                    ? "Has Cappuccino override getDescription()\n"
+                    : "Missing Cappuccino override getDescription()\n");
+  std::cout << (class_has_override_memberfunc<"TASK::Cappuccino"_ls,
+                                              "getSpecialInstruction"_ls>
+                    ? "Has Cappuccino override getSpecialInstruction()\n"
+                    : "Missing Cappuccino override getSpecialInstruction()\n");
+
+  return 0;
+}
 
 //----------------------------------------------------------------------------//
 // °                          === ONE SOLUTION ===                          ° //
@@ -95,9 +148,9 @@ namespace __solution__ {
 
 class Coffee {
  private:
-  std::string m_name;
-  double m_price;
-  int m_stock;
+  std::string m_name{};
+  double m_price{};
+  int m_stock{};
 
  public:
   Coffee(std::string name, double price, int stock)

@@ -165,7 +165,7 @@ class X {
 }
 ```
 
-Only the first parameter inside out template need to address the namespace structure to make it work.
+Only the first parameter of the template must take the namespace structure into account for it to work.
 ```cpp
 std::cout << class_has_memberfunc<"TASK::X"_ls, "foo"_ls> << "\n";
 ```

@@ -81,7 +81,7 @@ In the task file, you technically only need to write code in the main function w
 > For information on how to use CPPChecker, see the other [README](https://github.com/nguyen-vh/CPPChecker/blob/main/README.md) file or the [wiki](https://github.com/nguyen-vh/CPPChecker/wiki), if it has already been set up.
 
 Once the server is running and you have created your task, using it is very simple: Send your code corresponding to your task to the server by specifying its IP address (if the server is on the same computer as the sending computer, use "localhost", "0.0.0.0", or "127.0.0.1"), the port (the default is 8008), and the <task_token> as the route.
-I have an example where I use [Postman](https://www.postman.com/) to send a POST request with my code to my server. The URL here is localhost:8008/Rec21T. Make also sure that the Content-Type is text/plain.
+I have an example where I use [Postman](https://www.postman.com/) to send a POST request with my code to my server. The URL here is localhost:8008/Rectangle1. Make also sure that the Content-Type is text/plain.
 
 ![Postman example][postman-example]
 
@@ -110,5 +110,5 @@ For the general license, see [LICENSE][license].
 [bubblewrap-url]:https://github.com/containers/bubblewrap
 [docker-badge]:https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]:https://www.docker.com/
-[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Postman_example.png
+[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/postman_example.png
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md

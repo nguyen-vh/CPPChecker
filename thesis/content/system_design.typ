@@ -5,6 +5,10 @@
   This chapter follows the System Design Document Template in @bruegge2004object. You describe in this chapter how you map the concepts of the application domain to the solution domain. Some sections are optional, if they do not apply to your problem. Cite @bruegge2004object several times in this chapter.
 ]
 
+#align(center)[
+  --TEMPLATE--
+]
+
 == Overview
 #TODO[
   Provide a brief overview of the software architecture and references to other chapters (e.g. requirements), references to existing systems, constraints impacting the software architecture..

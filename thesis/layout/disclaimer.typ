@@ -21,9 +21,11 @@
   set par(leading: 1em)
 
   // --- Disclaimer ---
-  v(75%)
+  v(65%)
   text(
-    "I confirm that this " + degree + "’s thesis is my own work and I have documented all sources and material used.",
+    "I confirm that this "
+      + degree
+      + "’s thesis is my own work and I have documented all sources and material used and have relied exclusively on the cited sources and materials; in particular, direct or indirect quotations are identified as such. I am aware that a violation of these provisions may result in the revocation of my academic degree, even retroactively. Furthermore, I certify that the electronic version matches the printed copies.",
   )
 
   v(15mm)

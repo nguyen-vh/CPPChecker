@@ -5,6 +5,10 @@
   Introduce the topic of your thesis, e.g. with a little historical overview.
 ]
 
+#align(center)[
+  --TEMPLATE--
+]
+
 == Problem
 #TODO[
   Describe the problem that you like to address in your thesis to show the importance of your work. Focus on the negative symptoms of the currently available solution.

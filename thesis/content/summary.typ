@@ -5,6 +5,10 @@
   This chapter includes the status of your thesis, a conclusion and an outlook about future work.
 ]
 
+#align(center)[
+  --TEMPLATE--
+]
+
 == Status
 #TODO[
   Describe honestly the achieved goals (e.g. the well implemented and tested use cases) and the open goals here. if you only have achieved goals, you did something wrong in your analysis.

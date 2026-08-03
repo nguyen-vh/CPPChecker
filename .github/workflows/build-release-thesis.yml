@@ -1,0 +1,67 @@
+name: Build and release thesis
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "thesis/**"
+
+permissions:
+  contents: write
+
+jobs:
+  build_release_thesis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: "0"
+          lfs: true
+
+      - name: Cache Fonts
+        id: cache-fonts
+        uses: actions/cache@v5
+        with:
+          path: ~/.local/share/fonts
+          key: newcomputermodern-fonts-${{ runner.os }}
+          restore-keys: |
+            newcomputermodern-fonts-
+
+      - name: Install Fonts (if not cached)
+        if: steps.cache-fonts.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.local/share/fonts
+          wget -O /tmp/newcomputermodern.zip "https://fontesk.com/download/39191"
+          unzip /tmp/newcomputermodern.zip -d /tmp/
+          cp -r /tmp/*.otf ~/.local/share/fonts/
+          fc-cache -f -v  # Refresh font cache
+
+      - name: Create initial tag
+        run: |
+          if [ -z "$(git tag -l 'v*')" ]; then
+            git tag v0.0.0
+          fi
+
+      - name: Bump version and push tag
+        id: bump
+        uses: anothrNick/github-tag-action@1.75.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: "patch"
+
+      - uses: typst-community/setup-typst@v4
+      - run: typst compile thesis/thesis.typ thesis.pdf
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump.outputs.new_tag }}
+          name: Version ${{ steps.bump.outputs.new_tag }}
+          draft: false
+          prerelease: false
+          files: |
+            thesis.pdf

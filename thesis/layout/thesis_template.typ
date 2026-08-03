@@ -159,6 +159,10 @@
   }
   body
 
+  // Bibliography.
+  pagebreak()
+  bibliography("/thesis.yml")
+
   // List of figures.
   pagebreak()
   heading(numbering: none)[List of Figures]
@@ -193,7 +197,4 @@
   pagebreak()
   heading(numbering: none)[Appendix]
   include "/layout/appendix.typ"
-
-  pagebreak()
-  bibliography("/thesis.yml")
 }

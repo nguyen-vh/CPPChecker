@@ -2,7 +2,7 @@
 #let titleEnglish = "Automated Verification of Non-Functional Code Requirements"
 #let titleGerman = "Automatisierte Verifizierung von nicht-funktionalen Code-Anforderungen"
 #let degree = "Bachelor"
-#let program = "Informatik, Bachelor of Science"
+#let program = "Computer Science"
 #let examiner = "Prof. Dr. Ulrich Eisenecker"
 #let supervisors = ()
 #let author = "Hoang Viet Nguyen"

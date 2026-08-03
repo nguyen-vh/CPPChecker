@@ -23,15 +23,17 @@
   // --- Disclaimer ---
   v(65%)
   text(
-    "I confirm that this "
+    "I hereby confirm that the content of this "
       + degree
-      + "’s thesis is my own work and I have documented all sources and material used and have relied exclusively on the cited sources and materials; in particular, direct or indirect quotations are identified as such. I am aware that a violation of these provisions may result in the revocation of my academic degree, even retroactively. Furthermore, I certify that the electronic version matches the printed copies.",
+      + "'s thesis is my own work. I have documented all sources and materials used, relying exclusively on the cited sources. In particular, direct and indirect quotations are identified as such. I am aware that a violation of these provisions may result in the revocation of my academic degree, even retroactively. Furthermore, I certify that the electronic version is consistent with the printed copies.
+
+      ",
   )
 
   v(15mm)
   grid(
     columns: 2,
-    gutter: 1fr,
+    gutter: 2fr,
     "Leipzig, " + submissionDate.display("[day].[month].[year]"), author,
   )
 }

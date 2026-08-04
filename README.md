@@ -30,22 +30,22 @@
 
 > [!TIP]
 > ### QUICKSTART
-> Copy-Paste the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) to your project and start to code.
+> Copy and paste the header, [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp), into your project, and start coding.
 
 
 > [!CAUTION]
-> The header file [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) is the newest version of this project. The other files inside the "include" folder are legacy or for unit tests.
+> The header file [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) is the newest version of this project. The other files in the "include" folder are either legacy files or for unit tests.
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-The goal is to create a header-only library for verifying non-functional code requirements. This means checking whether a specific class contains a member function with the exact name "foo". 
+The goal is to create a header-only library for verifying non-functional code requirements. This means, for example, checking if a specific class has a member function with the exact name "foo." 
 
-The project began with macros and many other workarounds to circumvent the limitations of the C++ era before the introduction of reflections. For more information, see the [Legacy](#legacy) section. 
+The project started with macros and other methods to get around the limitations of the C++ era before reflections were introduced. For more information, see the [Legacy](#legacy) section. 
 
 However, with the introduction of GCC 16.1 and support for reflections, the project has now been reworked, and the new header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) represents the latest version of the project.
-By leveraging reflections to accomplish the goal in a more elegant way, this project aims to provide a simple and efficient solution for verifying non-functional code requirements. The library is designed—like its predecessor—to be easy to use and integrate into existing projects. Including the header file is everything that is needed to begin the compile-time verification mania.
+By leveraging reflections to accomplish the goal in a more elegant way, this project aims to provide a simple and efficient solution for checking non-functional code requirements. The library is designed to be easy to use and integrate into existing projects, just like its predecessor. Including the header file is all you need to start verifying the code at compile time.
 
-The project itself is a proof of concept designed to demonstrate that verifying non-functional C++ code is possible using only C++ and is easily extensible. For this demonstration, I also wrote a simple server that can accept C++ code and verify it against the requirements set beforehand. The server is written in C++ and is located in the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory; further information can be found in the README there.
+The project is a proof of concept. It shows that verifying non-functional C++ code is possible using only C++. It is also easily extensible. For this demonstration, I also wrote a simple server that can accept C++ code and verify it against the requirements set beforehand. The server is also written in C++ and is located in the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory. You can find more information in the README there.
 
 
 

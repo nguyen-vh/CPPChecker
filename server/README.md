@@ -110,5 +110,5 @@ For the general license, see [LICENSE][license].
 [bubblewrap-url]:https://github.com/containers/bubblewrap
 [docker-badge]:https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]:https://www.docker.com/
-[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/postman_example.png
+[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Postman_example.png
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md

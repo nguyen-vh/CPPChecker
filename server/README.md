@@ -29,7 +29,7 @@
 
 <!-- ABOUT THE SERVER -->
 ## About The Server
-There are many ways to use the cppchecker header; one of them is to use it as a tool for checking previously created tasks. A REST server can then be used to send code with the attached task token to receive an evaluation of the request. This server is intended to help me illustrate the use of cppchecker in a real-world scenario.
+You can use the cppchecker header in many ways. One way is to use it to check tasks that you have already created. You can then use a REST server to send code with the attached task token to receive an evaluation of the request. This server is intended to help me show how to use cppchecker in a real-world scenario.
 
 
 
@@ -43,11 +43,11 @@ There are many ways to use the cppchecker header; one of them is to use it as a 
 
 <!-- GETTING STARTED -->
 ## Getting Started
-In this section, I will explain the steps you can take to get the server up and running.
+In this section, I will explain how to set up the server.
 
 
 ### Prerequisites
-The only requirement for running the server is that Docker Compose is installed on your computer.
+The only thing you need to run the server is Docker Compose, which you can install on your computer.
 On a desktop computer, simply installing [Docker Desktop](https://www.docker.com/products/docker-desktop/) is sufficient.
 
 If you are using a minimal image like Alpine, running this command will install Docker Compose.
@@ -67,21 +67,21 @@ There are two easy ways to install the program on Windows:
    git clone https://github.com/nguyen-vh/CPPChecker.git
    ```
 2. In the terminal, navigate to the "server" folder
-3. If "make" is installed: run the ` make ` command; otherwise, run ` docker-compose up --build ` command to build the server
+3. If you have installed "make", run the ` make ` command. If not, run the ` docker-compose up --build ` command to build the server
 
 
 
 <!-- USAGE -->
 ## Usage
-How can you use it now? In the "tasks" folder, you will find a template and some examples. You can clone the template and start writing your own task, but be sure to follow this naming convention for the task files: task_<task_token>.cpp
+How can you use it now? In the "tasks" folder, you will find a template and some examples. You can make a copy of the template and start writing your own task, but make sure you follow this naming rule for the task files: task_<task_token>.cpp
 
 In the task file, you technically only need to write code in the main function with CPPChecker to verify your requirements, but I recommend adding instructions and a solution as well.
 
 > [!NOTE]  
-> For information on how to use CPPChecker, see the other [README](https://github.com/nguyen-vh/CPPChecker/blob/main/README.md) file or the [wiki](https://github.com/nguyen-vh/CPPChecker/wiki), if it has already been set up.
+> To find out how to use CPPChecker, look at the other [README](https://github.com/nguyen-vh/CPPChecker/blob/main/README.md) file or the [wiki](https://github.com/nguyen-vh/CPPChecker/wiki), if it has already been set up.
 
-Once the server is running and you have created your task, using it is very simple: Send your code corresponding to your task to the server by specifying its IP address (if the server is on the same computer as the sending computer, use "localhost", "0.0.0.0", or "127.0.0.1"), the port (the default is 8008), and the <task_token> as the route.
-I have an example where I use [Postman](https://www.postman.com/) to send a POST request with my code to my server. The URL here is localhost:8008/Rectangle1. Make also sure that the Content-Type is text/plain.
+Once the server is running and you have created your task, using it is very simple: Send your code to the server. You can find the IP address of the server (if the server is on the same computer as the sending computer, use "localhost", "0.0.0.0", or "127.0.0.1"), the port (the default is 8008), and the <task_token> as the route.
+I have an example of [Postman](https://www.postman.com/) to send a POST request with my code to my server. The URL here is localhost:8008/Rectangle1. Make sure that the 'Content-Type' is set to 'text/plain'.
 
 ![Postman example][postman-example]
 
@@ -89,13 +89,13 @@ I have an example where I use [Postman](https://www.postman.com/) to send a POST
 
 <!-- LIMITATIONS -->
 ## Limitations
-The current version of the project takes 2.4 seconds for the request to reach the server, be compiled, and executed within [Bubblewrap][bubblewrap-url]—to meet high security standards—and for the result to be sent back to the client. This time was measured when the client and server were on the same machine. To achieve this performance, I use precompiled headers and optimization flags during compilation. In my opinion, however, this time should be significantly shorter. If you have any suggestions or ideas for improvements on how to speed up the process, please feel free to start a chat inside the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions).
+The current version of the project takes 2.4 seconds for the request to reach the server, be compiled, and executed within [Bubblewrap][bubblewrap-url]—to meet high security standards—and for the result to be sent back to the client. This time was measured when the client and server were on the same machine. I get this performance by using precompiled headers and optimization flags when I compile. But I think this time should be a lot shorter. If you have any ideas on how to make the process faster, please start a chat in the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions) section.
 
 
 
 <!-- LICENSE -->
 ## License
-All source files include the license information at the beginning. Files that use other projects—such as "RestApi.cpp", which uses CrowCpp—also include the relevant license information.
+All source files include the license information at the beginning. Files that use other projects, such as "RestApi.cpp", which uses CrowCpp, also include the relevant license information.
 
 For the general license, see [LICENSE][license].
 

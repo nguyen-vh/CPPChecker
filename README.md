@@ -56,26 +56,26 @@ The project is a proof of concept. It shows that verifying non-functional C++ co
 
 <!-- GETTING STARTED -->
 ## Getting Started
-This is a header-only project, so by downloading the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) you are good to go.
-For more detail keep reading below or skip to the [next section](#usage).
+This is a header-only project, so by downloading the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp), you are good to go.
+Keep reading below for more information. Or go to the [next section](#usage).
 
 
 ### Prerequisites
-The most obvious solution would be a compiler that supports C++26 and later versions. One option would be GCC 16.1, though it is not yet officially included in the Alpine image or in Homebrew for macOS users. To install GCC 16.1, you can use this [link](https://gcc.gnu.org/gcc-16/) for more information. The other option is to run a container with GCC 16.1 installed. This could be, for example, [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) with GCC 16.1 installed. This project also includes devcontainer configuration in the root directory to help you get started.
+The best solution would be a compiler that supports C++26 and later versions. One option is GCC 16.1, but it is not yet officially included in the Alpine image or in Homebrew for macOS users. To install GCC 16.1, go to this [link](https://gcc.gnu.org/gcc-16/)  to find out more. Another option is to run a container with GCC 16.1 already installed. This could be, for example, [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) with GCC 16.1 installed. This project also includes devcontainer configuration in the root directory to help you get started.
 
 
 > [!TIP]
-> * [Better Comments](https://github.com/aaron-bond/better-comments) by Aaron Bond (VS Code) to improve your experience with comments. I use custom colors and symbols, acquire them in my [miscellaneous-cpp](https://github.com/nguyen-vh/miscellaneous-cpp/blob/main/IDE/extensions/better_comments.json) repository.
-> * [Better C++ Syntax](https://github.com/jeff-hykin/better-cpp-syntax) by Jeff Hykin (VS Code) to make the code stand out more clearly with syntax highlighting.
+> * [Better Comments](https://github.com/aaron-bond/better-comments) by Aaron Bond (VS Code) to improve your experience with comments. I use custom colors and symbols, acquiring them in my [miscellaneous-cpp](https://github.com/nguyen-vh/miscellaneous-cpp/blob/main/IDE/extensions/better_comments.json) repository.
+> * [Better C++ Syntax](https://github.com/jeff-hykin/better-cpp-syntax) by Jeff Hykin (VS Code) to make your code stand out more clearly by highlighting the syntax.
 
 
 ### Installation
 Get the header [cxxchecker_reflection.hpp](https://github.com/nguyen-vh/CPPChecker/blob/main/include/cxxchecker_reflection.hpp) and add it to your "include" folder inside your project.
-You could also clone the repository and add a reference to the header file "include/cxxchecker_reflection.hpp", but that would just take up valuable storage space—which in todays economy will be huge burden.
+You could also clone the repository and add a reference to the header file "include/cxxchecker_reflection.hpp", but that would just take up valuable storage space, which in today's economy would be a huge burden.
 
 
 > [!NOTE]
-> If you want the server setup, refer to the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory.
+> If you want to set up the server, check out the [server](https://github.com/nguyen-vh/CPPChecker/tree/main/server) directory.
 
 
 <!-- USAGE -->
@@ -175,8 +175,7 @@ std::cout << class_has_memberfunc<"TASK::X"_ls, "foo"_ls> << "\n";
 > This is how to write the requirement test for the task files as part of the server configuration.
 
 
-The remaining templates follow the same pattern. If you are unsure about any specific templates, please check the header file for more information or mention it in the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions), as I will update the documentation accordingly. If you have any questions, feel free to ask.
-
+The other templates are similar. If you have any questions about the templates, please check the header file for more information or mention it in the [discussions](https://github.com/nguyen-vh/CPPChecker/discussions), as I will update the documentation. If you have any questions, please ask.
 
 <!-- LEGACY -->
 ## Legacy
@@ -190,7 +189,7 @@ The remaining templates follow the same pattern. If you are unsure about any spe
 
 <!-- LICENSE -->
 ## License
-All source files include the license information at the beginning. Files that use other projects—such as "server/RestApi.cpp", which uses CrowCpp—also include the relevant license information.
+All source files include the license information at the beginning. Files that use other projects, such as "server/RestApi.cpp", which uses CrowCpp, also include the relevant license information.
 
 For the general license, see [LICENSE][license].
 

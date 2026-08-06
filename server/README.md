@@ -90,9 +90,9 @@ In the task file, you technically only need to write code in the main function w
 
 
 ### Webpage
-Once the server is up and running, you can go to your browser and type in the server's IP address. If it's running on your computer, go to [localhost:5173] (http://localhost:5173/).
+Once the server is up and running, you can go to your browser and type in the server's IP address. If it's running on your computer, go to [localhost:5173](http://localhost:5173/).
 
-The webpage should show a list of tasks. In this case, it should show the example tasks that I created. If you want to add more of your own custom tasks to the webpage, edit [App.vue] (https://github.com/nguyen-vh/CPPChecker/tree/main/server/src/frontend/src/App.vue). The structure of the webpage should be straightforward.
+The webpage should show a list of tasks. In this case, it should show the example tasks that I created. If you want to add more of your own custom tasks to the webpage, edit [App.vue](https://github.com/nguyen-vh/CPPChecker/tree/main/server/src/frontend/src/App.vue). The structure of the webpage should be straightforward.
 
 ![Webpage example][webpage-example]
 
@@ -131,6 +131,6 @@ For the general license, see [LICENSE][license].
 [vue-badge]:https://img.shields.io/badge/Vue-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white
 [vue-url]:https://vuejs.org/guide/typescript/overview.html
 
-[webpage-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Webpage_example.png
-[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Postman_example.png
+[webpage-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/webpage-example.png
+[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/postman-example.png
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md

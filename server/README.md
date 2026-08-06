@@ -1,4 +1,4 @@
-# REST API for CPPChecker
+# REST API and Webpage for CPPChecker
 
 
 
@@ -19,7 +19,12 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#usage">Usage</a>
+    <ul>
+        <li><a href="#webpage">Webpage</a></li>
+        <li><a href="#without-webpage">Without Webpage</a></li>
+      </ul>
+    </li>
     <li><a href="#limitations">Limitations</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -38,6 +43,7 @@ You can use the cppchecker header in many ways. One way is to use it to check ta
 * [![CrowCpp][crowcpp-badge]][crowcpp-url]
 * [![Bubblewrap][bubblewrap-badge]][bubblewrap-url]
 * [![Docker][docker-badge]][docker-url]
+* [![Vue][vue-badge]][vue-url]
 
 
 
@@ -70,6 +76,8 @@ There are two easy ways to install the program on Windows:
 3. If you have installed "make", run the ` make ` command. If not, run the ` docker-compose up --build ` command to build the server
 
 
+> [!TIP]  
+> If you only want the REST API without frontend, run ` make back `.
 
 <!-- USAGE -->
 ## Usage
@@ -80,7 +88,17 @@ In the task file, you technically only need to write code in the main function w
 > [!NOTE]  
 > To find out how to use CPPChecker, look at the other [README](https://github.com/nguyen-vh/CPPChecker/blob/main/README.md) file or the [wiki](https://github.com/nguyen-vh/CPPChecker/wiki), if it has already been set up.
 
-Once the server is running and you have created your task, using it is very simple: Send your code to the server. You can find the IP address of the server (if the server is on the same computer as the sending computer, use "localhost", "0.0.0.0", or "127.0.0.1"), the port (the default is 8008), and the <task_token> as the route.
+
+### Webpage
+Once the server is up and running, you can go to your browser and type in the server's IP address. If it's running on your computer, go to [http://localhost:5173/] (http://localhost:5173/).
+
+The webpage should show a list of tasks. In this case, it should show the example tasks that I created. If you want to add more of your own custom tasks to the webpage, edit [server/src/frontend/src/App.vue] (https://github.com/nguyen-vh/CPPChecker/tree/main/server/src/frontend/src/App.vue). The structure of the webpage should be straightforward.
+
+![Webpage example][webpage-example]
+
+
+### Without Webpage
+Once the server is running, you can also just use the backend without the frontend webpage. Send your code to the server. You can find the IP address of the server (if the server is on the same computer as the sending computer, use "localhost", "0.0.0.0", or "127.0.0.1"), the port (the default is 8008), and the <task_token> as the route.
 I have an example of [Postman](https://www.postman.com/) to send a POST request with my code to my server. The URL here is localhost:8008/Rectangle1. Make sure that the 'Content-Type' is set to 'text/plain'.
 
 ![Postman example][postman-example]
@@ -110,5 +128,9 @@ For the general license, see [LICENSE][license].
 [bubblewrap-url]:https://github.com/containers/bubblewrap
 [docker-badge]:https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]:https://www.docker.com/
-[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/Postman_example.png
+[vue-badge]:https://img.shields.io/badge/Vue-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white
+[vue-url]:https://vuejs.org/guide/typescript/overview.html
+
+[webpage-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/webpage_example.png
+[postman-example]:https://github.com/nguyen-vh/CPPChecker/blob/main/src/common/images/postman_example.png
 [license]:https://github.com/nguyen-vh/CPPChecker/blob/main/LICENSE.md

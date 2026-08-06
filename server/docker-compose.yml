@@ -29,5 +29,19 @@ services:
     networks:
       - cxxchecker-data
 
+  frontend:
+    container_name: vue
+    build:
+      context: .
+      dockerfile: src/frontend/Dockerfile
+    restart: unless-stopped
+    networks:
+      - cxxchecker-data
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend:
+        condition: service_started
+
 networks:
   cxxchecker-data:

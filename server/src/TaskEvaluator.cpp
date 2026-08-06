@@ -209,7 +209,7 @@ auto main(int argc, char* argv[]) -> int {
       fileToString("temp/" + random_token + "_" + task_token + ".cpp");
   std::cout << "Requestbody: \n\n" << code_file;
 
-  std::cout << "--------------------------------- \n";
+  std::cout << "\n--------------------------------- \n";
   std::cout << std::endl;
 
   std::cout.rdbuf(std_buffer);

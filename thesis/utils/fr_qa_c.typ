@@ -11,20 +11,19 @@
     #figure(
       {
         set text(
-          font: "New Computer Modern", 
-          size: 12pt, 
-          lang: "en"
+          font: "New Computer Modern",
+          size: 12pt,
+          lang: "en",
         )
         grid(
           columns: (auto, 1fr),
           column-gutter: 3mm,
           align: (right, left),
-          "FR" + context fr_counter.display(),
-          strong(headline) + ": " + description
+          "FR" + context fr_counter.display(), strong(headline) + ": " + description,
         )
       },
       kind: "FR",
-      supplement: "FR"
+      supplement: "FR",
     )
     #label(key)
   ]
@@ -39,20 +38,19 @@
     #figure(
       {
         set text(
-          font: "New Computer Modern", 
-          size: 12pt, 
-          lang: "en"
+          font: "New Computer Modern",
+          size: 12pt,
+          lang: "en",
         )
         grid(
           columns: (auto, 1fr),
           column-gutter: 3mm,
           align: (right, left),
-          "QA" + context qa_counter.display(),
-          strong(headline) + ": " + description
+          "QA" + context qa_counter.display(), strong(headline) + ": " + description,
         )
       },
       kind: "QA",
-      supplement: "QA"
+      supplement: "QA",
     )
     #label(key)
   ]
@@ -67,21 +65,21 @@
     #figure(
       {
         set text(
-          font: "New Computer Modern", 
-          size: 12pt, 
-          lang: "en"
+          font: "New Computer Modern",
+          size: 12pt,
+          lang: "en",
         )
         grid(
           columns: (auto, 1fr),
           column-gutter: 3mm,
           align: (right, left),
-          "C" + context const_counter.display(),
-          strong(headline) + ": " + description
+          "C" + context const_counter.display(), strong(headline) + ": " + description,
         )
       },
       kind: "C",
-      supplement: "C"
+      supplement: "C",
     )
     #label(key)
   ]
 ]
+

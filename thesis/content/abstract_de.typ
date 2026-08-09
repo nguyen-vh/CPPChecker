@@ -1,6 +1,1 @@
-Programmieraufgaben sind eine pädagogische Strategie, die den Lernenden das Erlernen des Programmierens und die Entwicklung anspruchsvoller Software erleichtert. Diese Aufgaben sehen häufig Vorgaben für die nicht-funktionalen Aspekte des Codes vor und bieten den Lernenden dadurch die Möglichkeit, diese auf kreative Weise zu lösen. Folglich ist eine umfassende Bewertung der Aufgabe unerlässlich, um konstruktives Feedback geben zu können. Die Programmiersprache C++ bietet vielfältige Methoden zur Problemlösung. Die Verwendung einer Vorlage zur Berücksichtigung dieser Variationen stellt keinen pragmatischen Ansatz dar. Eine manuelle Überprüfung jedes einzelnen Codeabschnitts ist aufgrund des damit verbundenen Zeitaufwands ebenfalls unpraktikabel.
-Diese Arbeit untersucht die verfügbaren Methoden eingehend und lotet die Grenzen der Verifikation nicht-funktionaler Quellcodes sowie deren Automatisierung aus. Die vorliegende Studie hat sich für die Verwendung der Programmiersprache C++ entschieden.
 
-Das Kernziel dieser Arbeit ist die Entwicklung einer „Header-Only“-Bibliothek in C++, die als Framework für die Verifikation nicht-funktionaler Anforderungen an C++-Code dient. Darüber hinaus wird eine pragmatische Implementierung in Form eines Servers vorgestellt, um die Automatisierung zu fördern.
-
-Fortsetzung folgt...

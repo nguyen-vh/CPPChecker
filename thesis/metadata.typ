@@ -8,5 +8,5 @@
 #let author = "Hoang Viet Nguyen"
 #let startDate = datetime(day: 20, month: 4, year: 2026)
 #let submissionDate = datetime(day: 28, month: 9, year: 2026)
-#let presentationDate = datetime(day: 1, month: 1, year: 2000) // ? To be known
+#let presentationDate = datetime(day: 28, month: 9, year: 2026)
 #let feedbacklogSubmissionDate = datetime.today()

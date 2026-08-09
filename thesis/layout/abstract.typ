@@ -10,21 +10,21 @@
   )
 
   set text(
-    font: fonts.body, 
-    size: 12pt, 
-    lang: lang
+    font: fonts.body,
+    size: 12pt,
+    lang: lang,
   )
 
   set par(
     leading: 1em,
-    justify: true
+    justify: true,
   )
 
   // --- Abstract ---
   v(1fr)
   align(center, text(font: fonts.body, 1em, weight: "semibold", title.at(lang)))
-  
+
   body
-  
+
   v(1fr)
 }

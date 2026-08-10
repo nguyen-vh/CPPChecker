@@ -21,10 +21,10 @@
   abbreviations_list: abbreviations,
 )
 
-#include "/content/introduction.typ"
-#include "/content/background.typ"
-#include "/content/related_work.typ"
-#include "/content/requirements.typ"
-#include "/content/system_design.typ"
-#include "/content/evaluation.typ"
-#include "/content/summary.typ"
+#include "/content/1_introduction.typ"
+#include "/content/2_background.typ"
+#include "/content/3_existing_solutions.typ"
+#include "/content/4_requirements.typ"
+#include "/content/5_implementation.typ"
+#include "/content/6_evaluation.typ"
+#include "/content/7_summary.typ"

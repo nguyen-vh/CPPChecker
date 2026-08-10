@@ -1,3 +1,5 @@
+#import "/utils/custom.typ": secth
+
 /*
 Note:
 1. *paragraph:* What is the motivation of your thesis? Why is it interesting from a scientific point of view? Which main problem do you like to solve?
@@ -13,12 +15,7 @@ The core objective of this thesis is to develop a "header-only" library in C++ t
 
 *Rework this later*
 
-#let section-header(content) = [
-  \
 
-  *#content*
-  \
-]
 
-#section-header[KEYWORDS]
+#secth[KEYWORDS]
 Non-Functional Requirements, Computer Science Education, Automatic Assessment

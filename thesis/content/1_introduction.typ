@@ -1,24 +1,6 @@
 #import "/utils/todo.typ": TODO
+#import "/utils/custom.typ": box, secth
 
-#let box(content) = {
-  align(center, block(
-    width: 80%,
-    inset: 10pt,
-    stroke: 1pt + rgb(0, 100, 200),
-    fill: rgb(240, 248, 255),
-    radius: 8pt,
-  )[
-    #set align(left)
-    #content
-  ])
-}
-
-#let section-header(content) = [
-  #set text(size: 1.1em)
-  \
-  *#content*
-  \
-]
 
 = Introduction
 
@@ -33,7 +15,7 @@ In the process of creating task assignments, two aspects must be evaluated: the 
 When evaluating the task for functionality, unit testing and testing of the output are commonly used. Non-functional requirements, however, present a distinct set of challenges. The ambiguity inherent in their description, coupled with the interpretive discretion afforded to the evaluator, renders them more challenging to evaluate.
 
 
-*(call 4 types and specialize in one)*
+*(Is this not functional rather than non-functional?)*
 
 
 
@@ -43,7 +25,7 @@ The issue at hand manifests when the task entails meticulous adherence to instru
 
 == Motivation
 
-A variety of approaches exist for verifying these requirements. These include the manual verification of answers and the use of other programming languages for the parsing of source code. However, from an objective perspective, these solutions appear to lack the elegance and simplicity that could be achieved. Despite the fact that the present study will concentrate on a limited segment of non-functional requirements, specifically the verification of code, efforts will be made to ensure maximum ease of use and fast expandability. This approach is intended to minimize the time required for manual code checking and the development of numerous edgecases for the parser approach.
+A variety of approaches exist for verifying these requirements. These include the manual verification of answers and the use of other programming languages for the parsing of source code. However, from an objective perspective, these solutions appear to lack the elegance and simplicity that could be achieved. Despite the fact that the present study will concentrate on a limited segment of non-functional requirements, specifically the verification of code, efforts will be made to ensure maximum ease of use and fast expandability. This approach is intended to minimize the time required for manual code checking and the development of numerous edge cases for the parser approach.
 
 
 
@@ -56,13 +38,16 @@ The main research objective of this thesis is to answer the central question bel
 
 #box[*RQ 1:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
 
-The present question is addressed through a meticulous examination of the most recent language standards and implementing those. The methodology will include the header file implementation, but additionally also involve a server to prove the viability of automation the process. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
+The question is addressed through a meticulous examination of existing approaches and the most recent language standards, implementing both to compare them. The methodology will include the header file implementation, but additionally also involve a server to prove the viability of automating the process of validating code. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
 
+\
+*(Move to requirements)*
+\
 
 In consideration of the aforementioned research question, it is imperative that several goals be established for the implemented system. The research goals are as follows:
 
 
-#section-header[Research Goal 1: Header File]
+#secth[Research Goal 1: Header File]
 
 #box[*RG 1.1:* The implementation of the verification component should be a "header-only" library to ensure maximum portability and reusability.]
 
@@ -74,7 +59,7 @@ The primary concern should be the solution to the aforementioned problem state. 
 Upon observing the prevalence of methodologies that employ parsing or tokenizing the entirety of the source code, it becomes evident that such approaches are not optimal. Consequently, an alternative approach will be pursued.
 
 
-#section-header[Research Goal 2: API Server]
+#secth[Research Goal 2: API Server]
 
 #box[*RG 2.1:* The server is required to utilize the aforementioned header exclusively for the purpose of verifying the code that has been transmitted.]
 

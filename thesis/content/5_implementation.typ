@@ -1,28 +1,24 @@
 #import "/utils/todo.typ": TODO
 
 = Implementation
-#TODO[
-  This chapter follows the System Design Document Template in @bruegge2004object. You describe in this chapter how you map the concepts of the application domain to the solution domain. Some sections are optional, if they do not apply to your problem. Cite @bruegge2004object several times in this chapter.
-]
 
-#align(center)[
-  --TEMPLATE--
-]
+This chapter delineates the design and implementation of the proposed system, which is derived from the requirements identified in Chapter 4. The implementation has been meticulously tailored to a real case usage in programming courses by Prof. Eisenecker, ensuring its relevance and applicability to real-world scenarios.
 
-== Overview
-#TODO[
-  Provide a brief overview of the software architecture and references to other chapters (e.g. requirements), references to existing systems, constraints impacting the software architecture..
-]
+
 
 == Design Goals
-#TODO[
-  Derive design goals from your quality attributes and constraints, prioritize them (as they might conflict with each other) and describe the rationale of your prioritization. Any trade-offs between design goals (e.g., build vs. buy, memory space vs. response time), and the rationale behind the specific solution should be described in this section
-]
+
+For the proposed system, the implementation and execution of all the quality attributes mentioned in Chapter 4 is desired. For QA1, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to QA3, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the C1 option is subject to constraints. The C2 option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ].
+
+
 
 == Subsystem Decomposition
 #TODO[
   Describe the architecture of your system by decomposing it into subsystems and the services provided by each subsystem. Use UML class diagrams including packages / components for each subsystem.
 ]
+
+
+
 
 == Hardware Software Mapping
 #TODO[

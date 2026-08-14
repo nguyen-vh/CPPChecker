@@ -58,32 +58,3 @@ The utilization of a single header file approach is of paramount importance, as 
 \
 #C("Technology")[ The system's construction will be predominantly utilizing the C++ programming language. ]
 \
-
-
-
-== System Models
-#TODO[
-  This section includes important system models for the requirements.
-]
-
-=== Use Case Model
-#TODO[
-  This subsection should contain a UML Use Case Diagram including roles and their use cases. You can use colors to indicate priorities. Think about splitting the diagram into multiple ones if you have more than 10 use cases. *Important:* Make sure to describe the most important use cases using the use case table template (./tex/use-case-table.tex). Also describe the rationale of the use case model, i.e. why you modeled it like you show it in the diagram.
-
-]
-
-=== Analysis Object Model
-#TODO[
-  This subsection should contain a UML Class Diagram showing the most important objects, attributes, methods and relations of your application domain including taxonomies using specification inheritance (see @bruegge2004object). Do not insert objects, attributes or methods of the solution domain. *Important:* Make sure to describe the analysis object model thoroughly in the text so that readers are able to understand the diagram. Also write about the rationale how and why you modeled the concepts like this.
-
-]
-
-=== Dynamic Model
-#TODO[
-  This subsection should contain dynamic UML diagrams. These can be a UML state diagrams, UML communication diagrams or UML activity diagrams.*Important:* Make sure to describe the diagram and its rationale in the text. *Do not use UML sequence diagrams.*
-]
-
-=== User Interface
-#TODO[
-  Show mockups of the user interface of the software you develop and their connections / transitions. You can also create a storyboard. *Important:* Describe the mockups and their rationale in the text.
-]

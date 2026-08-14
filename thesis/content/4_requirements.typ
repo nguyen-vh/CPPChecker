@@ -1,19 +1,19 @@
 #import "/utils/todo.typ": TODO
 #import "/utils/fr_qa_c.typ": C, FR, QA
 
-= Requirements
+= Requirements <requirements>
 
-In order to establish the requirements for this project, this chapter will build upon the foundations laid in Chapter 2 and the current approaches reviewed in Chapter 3. The identification of functional and qualitative requirements, in addition to constraints imposed by the limited time available, will serve as the underlying foundation for the design of this project. These elements will be further elaborated in the subsequent chapters.
+In order to establish the requirements for this project, this chapter will build upon the foundations laid in @background and the current approaches reviewed in @existing_solutions. The identification of functional and qualitative requirements, in addition to constraints imposed by the limited time available, will serve as the underlying foundation for the design of this project. These elements will be further elaborated in the subsequent chapters.
 
 
 
-== Proposed Design
+== Proposed Design <proposed_design>
 
 The system will be demonstrated through a webpage that displays C++ coding tasks and a field in which the solution to the given task can be entered and transmitted to the server. The server will be divided into two parts. The initial component will be a Representational State Transfer (REST) application programming interface (API) server that will be tasked with the reception of the code solution and the subsequent transmission of an evaluation of the code. The subsequent step involves the utilization of the header file, the received code, and the task file to assess the code. The evaluation of the sent code will be archived.
 
 
 
-=== Functional Requirements
+=== Functional Requirements <fr>
 
 #FR(
   "Web application",
@@ -32,7 +32,7 @@ The utilization of a single header file approach is of paramount importance, as 
 \
 #FR(
   "Archive",
-)[ The system must possess the capacity to archive verification results, thereby enabling straightforward retrieval and analysis of past verification processes for the purpose of future development and problem identification. This feature is also crucial for the evaluation in Chapter 6. ]
+)[ The system must possess the capacity to archive verification results, thereby enabling straightforward retrieval and analysis of past verification processes for the purpose of future development and problem identification. This feature is also crucial for the evaluation in @evaluation. ]
 \
 #FR(
   "Containerization",
@@ -40,9 +40,9 @@ The utilization of a single header file approach is of paramount importance, as 
 \
 
 
-=== Quality Attributes
+=== Quality Attributes <qa>
 
-#QA("Security")[ The sent code should not pose a threat to the server or modify already archived files. ]
+#QA("Security")[ The sent code should not pose a threat to the server or modify already archived files. ] <qa1>
 \
 #QA(
   "Performance",
@@ -52,7 +52,7 @@ The utilization of a single header file approach is of paramount importance, as 
   The development of an informative user manual concerning the task creation process would be a crucial step in enhancing the functionality and usability of the system. ]
 \
 
-=== Constraints
+=== Constraints <c>
 
 #C("Compilable code")[ The system shall exclusively process code that is eligible for compilation without errors. ]
 \

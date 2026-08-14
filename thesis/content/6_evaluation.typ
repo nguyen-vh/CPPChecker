@@ -1,6 +1,6 @@
 #import "/utils/todo.typ": TODO
 
-= Evaluation
+= Evaluation <evaluation>
 #TODO[
   If you did an evaluation / case study, describe it here.
 ]

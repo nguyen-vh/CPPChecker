@@ -2,20 +2,20 @@
 #import "/utils/custom.typ": box, secth
 
 
-= Introduction
+= Introduction <intro>
 
 Programming is widely regarded as an essential skill in the fields of computer science and engineering, as asserted by #cite(<hofbauer2022teaching>, form: "prose"). The acquisition of proficiency in programming can be accomplished within a relatively brief period. However, attaining excellence in this field necessitates a more extensive and sustained investment of time and effort. Consequently, it becomes imperative to initiate the instruction of these critical traits at an early stage.
-One method for enhancing students' competencies involves the implementation of challenging and engaging coding assignments. The overarching objective of these assignments can be distilled into two key aspects. Assignments have been meticulously designed to enhance students' comprehension of course concepts, with a focus on conceptual understanding. Furthermore, these assignments are instrumental in promoting adherence to established programming practices *(find in bpp/app book)*. This adherence is imperative for cultivating a robust foundation in the field and preparing students for potential professional work environments.
+One method for enhancing students' competencies involves the implementation of challenging and engaging coding assignments. The overarching objective of these assignments can be distilled into two key aspects. Assignments have been meticulously designed to enhance students' comprehension of course concepts, with a focus on conceptual understanding. Furthermore, these assignments are instrumental in promoting adherence to established programming practices *[NOTE: find in bpp/app book]*. This adherence is imperative for cultivating a robust foundation in the field and preparing students for potential professional work environments.
 
 
 
-== Problem
+== Problem <problem>
 
 In the process of creating task assignments, two aspects must be evaluated: the functional aspect, which refers to the intended functionality of the code, and the non-functional requirements of the code, which encompass the non-functional attributes of the code that are not directly related to its functionality. Non-functional requirements (NFRs) are distinguished from functional requirements by the manner in which the system is expected to execute its functions @eckhardt2016are.
 When evaluating the task for functionality, unit testing and testing of the output are commonly used. Non-functional requirements, however, present a distinct set of challenges. The ambiguity inherent in their description, coupled with the interpretive discretion afforded to the evaluator, renders them more challenging to evaluate.
 
 
-*(Is this not functional rather than non-functional?)*
+*[NOTE: Is this not functional rather than non-functional?]*
 
 
 
@@ -23,13 +23,13 @@ The issue at hand manifests when the task entails meticulous adherence to instru
 
 
 
-== Motivation
+== Motivation <motivation>
 
 A variety of approaches exist for verifying these requirements. These include the manual verification of answers and the use of other programming languages for the parsing of source code. However, from an objective perspective, these solutions appear to lack the elegance and simplicity that could be achieved. Despite the fact that the present study will concentrate on a limited segment of non-functional requirements, specifically the verification of code, efforts will be made to ensure maximum ease of use and fast expandability. This approach is intended to minimize the time required for manual code checking and the development of numerous edge cases for the parser approach.
 
 
 
-== Objectives
+== Objectives <objective>
 #TODO[
   Describe the research goals and/or research questions and how you address them by summarizing what you want to achieve in your thesis, e.g. developing a system and then evaluating it.
 ]
@@ -41,7 +41,7 @@ The main research objective of this thesis is to answer the central question bel
 The question is addressed through a meticulous examination of existing approaches and the most recent language standards, implementing both to compare them. The methodology will include the header file implementation, but additionally also involve a server to prove the viability of automating the process of validating code. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
 
 \
-*(Move to requirements)*
+*[NOTE: Move to requirements]*
 \
 
 In consideration of the aforementioned research question, it is imperative that several goals be established for the implemented system. The research goals are as follows:

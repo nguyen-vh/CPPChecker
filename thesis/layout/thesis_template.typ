@@ -195,6 +195,6 @@
 
   // Appendix.
   pagebreak()
-  heading(numbering: none)[Appendix]
-  include "/layout/appendix.typ"
+  heading(numbering: none)[Appendix A]
+  include "/content/appendix_a.typ"
 }

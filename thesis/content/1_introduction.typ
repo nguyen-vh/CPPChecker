@@ -38,7 +38,11 @@ The main research objective of this thesis is to answer the central question bel
 
 #box[*RQ 1:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
 
-The question is addressed through a meticulous examination of existing approaches and the most recent language standards, implementing both to compare them. The methodology will include the header file implementation, but additionally also involve a server to prove the viability of automating the process of validating code. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
+The question is addressed through a meticulous examination of existing approaches and the most recent language standards, implementing both to compare them.
+
+*[NOTE: Do I have space to compare both?]*
+
+The methodology will include the header file implementation, but additionally also involve a server to prove the viability of automating the process of validating code. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
 
 \
 *[NOTE: Move to requirements]*

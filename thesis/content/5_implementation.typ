@@ -2,7 +2,7 @@
 
 = Implementation <implementation>
 
-This chapter delineates the design and implementation of the proposed system, which is derived from the requirements identified in @requirements. The implementation has been meticulously tailored to a real case usage in programming courses by Prof. Eisenecker, ensuring its relevance and applicability to real-world scenarios.
+This chapter delineates the design and implementation of the header file and the proposed system, which is derived from the requirements identified in @requirements. The implementation has been meticulously tailored to a real case usage in programming courses by Prof. Eisenecker, ensuring its relevance and applicability to real-world scenarios.
 
 
 
@@ -35,18 +35,54 @@ The system under review is composed of three parts, in addition to the header fi
 \
 
 
-
-
-
-
-
-== Global Software Control
-#TODO[
-  Optional section describing the control flow of the system, in particular, whether a monolithic, event-driven control flow or concurrent processes have been selected, how requests are initiated and specific synchronization issues
-]
-
 == Boundry Conditions
 #TODO[
   Optional section describing the use cases how to start up the separate components of the system, how to shut them down, and what to do if a component or the system fails.
 ]
 
+== Implementation of CPPChecker
+
+The header file that incorporates the templates utilized for the purpose of verifying the task requirements is designated as _CPPChecker_. This section will provide a more thorough examination of the header's functionalities, the process, and the rationale behind its implementation.
+
+\
+*[NOTE: Add Macro to Existing Solutions as a backstory if space left?]*
+\
+
+=== String Literal Template Declarations
+
+The file utilizes the latest feature of C++26, reflections, to search for the task requirements.
+The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes String Literal templates to pass the function name that has been searched for during compile time to the reflections. According to #cite(<gabe2011stackoverflow>, form: "prose"), "A string is a sequence of characters. A literal is data that's typed in as part of the program."
+
+The initial approach was adopted and subsequently modified to align with the specified solution space. In their code, they sought a particular named function within a class. In the context of my own application, I am unaware of the existence of the class in question. Consequently, the class name has been modified to be passed as a String Literal.
+
+\
+*[NOTE: Add Pre-Solution here]*
+\
+
+
+*[NOTE: Add more here]*
+
+
+The proposed solution also incorporates verifications for the input and return types of the function. This approach signifies a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type. Consequently, the following was incorporated into "Figure 3".
+
+\
+*[NOTE: Add Pre-Solution here]*
+\
+
+In contrast to the automatic detection of nested namespaces in Oersted's code, the present code did not exhibit such an ability. The solution that was implemented involved the incorporation of a loop that traversed all namespaces within the literal string to identify the class.
+
+\
+*[NOTE: Add Pre-Solution here]*
+\
+
+
+
+
+
+
+
+
+
+
+
+== Implementation of REST API Server

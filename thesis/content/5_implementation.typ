@@ -53,32 +53,42 @@ The header file that incorporates the templates utilized for the purpose of veri
 The file utilizes the latest feature of C++26, reflections, to search for the task requirements.
 The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes String Literal templates to pass the function name that has been searched for during compile time to the reflections. According to #cite(<gabe2011stackoverflow>, form: "prose"), "A string is a sequence of characters. A literal is data that's typed in as part of the program."
 
+\
+*[NOTE: Add StringLiteral template here ( Completely took from oersted )]*
+\
+
+
+=== Class Template Declarations
+
 The initial approach was adopted and subsequently modified to align with the specified solution space. In their code, they sought a particular named function within a class. In the context of my own application, I am unaware of the existence of the class in question. Consequently, the class name has been modified to be passed as a String Literal.
+In addition, it was logical to disassociate the class lookup from their consolidated lookup solution. This approach was taken to avoid redundancy when new templates that require the class are introduced in the future.
 
 \
-*[NOTE: Add Pre-Solution here]*
-\
-
-
-*[NOTE: Add more here]*
-
-
-The proposed solution also incorporates verifications for the input and return types of the function. This approach signifies a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type. Consequently, the following was incorporated into "Figure 3".
-
-\
-*[NOTE: Add Pre-Solution here]*
+*[NOTE: Add Pre-Solution of first own class solution here]*
 \
 
 In contrast to the automatic detection of nested namespaces in Oersted's code, the present code did not exhibit such an ability. The solution that was implemented involved the incorporation of a loop that traversed all namespaces within the literal string to identify the class.
 
 \
-*[NOTE: Add Pre-Solution here]*
+*[NOTE: Add Final class solution here]*
+\
+
+As demonstrated in the code above, the final class templates can be utilized to verify the name of a class during compile time through the use of reflection. It is evident that the code can be utilized independently in scenarios where the verification of a class is undertaken. Moreover, its integration is imperative for the amalgamation of class functions and the execution of class-wide lookups.
+
+==== Class Member Function Template Declarations
+
+The proposed solution also incorporates verifications for the input and return types of the function. This approach signifies a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type. Consequently, the following was incorporated into "Figure 3".
+
+\
+*[NOTE: Add Final class function solution here]*
 \
 
 
 
 
 
+
+==== Class Member Variable Template Declarations
 
 
 

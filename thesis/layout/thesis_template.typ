@@ -197,4 +197,8 @@
   pagebreak()
   heading(numbering: none)[Appendix A]
   include "/content/appendix_a.typ"
+
+  pagebreak()
+  heading(numbering: none)[Appendix B]
+  include "/content/appendix_b.typ"
 }

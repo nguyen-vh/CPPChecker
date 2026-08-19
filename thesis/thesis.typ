@@ -23,7 +23,7 @@
 
 #include "/content/1_introduction.typ"
 #include "/content/2_background.typ"
-#include "/content/3_existing_solutions.typ"
+#include "/content/3_related_work.typ"
 #include "/content/4_requirements.typ"
 #include "/content/5_implementation.typ"
 #include "/content/6_evaluation.typ"

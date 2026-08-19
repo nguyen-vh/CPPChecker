@@ -2,60 +2,53 @@
 
 = Implementation <implementation>
 
-This chapter delineates the design and implementation of the header file and the proposed system, which is derived from the requirements identified in @requirements. The implementation has been meticulously tailored to a real case usage in programming courses by Prof. Eisenecker, ensuring its relevance and applicability to real-world scenarios.
+This chapter delineates the design and implementation of the header file and the proposed system, which is derived from the requirements identified in @requirements. The implementation has been meticulously tailored to a real case usage in programming courses by #cite(<eisenecker2024advanced>, form: "prose"), ensuring its relevance and applicability to real-world scenarios.
 
-
-
-== Design Goals <design_goals>
-
-For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA1_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA3_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C1_ option is subject to constraints. The _C2_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR6_.
-
-*[NOTE: Should FR6 be a QA?]*
-
-
-== Subsystem Decomposition <subsystem_decomposition>
-#TODO[
-  Describe the architecture of your system by decomposing it into subsystems and the services provided by each subsystem. Use UML class diagrams including packages / components for each subsystem.
-]
-\
-*[NOTE: UML class diagrams including packages / components for each subsystem]*
-\
-
-The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file utilizes the header file to verify the code and generate the evaluation for the transmitted code. The frontend and backend components will be deployed within containers managed by Docker Compose.
-
-*[NOTE: Show/point clear parts using future UML]*
-
-
-== Persistent Data Management
-#TODO[
-  Optional section that describes how data is saved over the lifetime of the system and which data. Usually this is either done by saving data in structured files or in databases. If this is applicable for the thesis, describe the approach for persisting data here and show a UML class diagram how the entity objects are mapped to persistent storage. It contains a rationale of the selected storage scheme, file system or database, a description of the selected database and database administration issues.
-]
-\
-*[NOTE: UML class diagram how the entity objects are mapped to persistent storage]*
-\
-
-
-== Boundry Conditions
-#TODO[
-  Optional section describing the use cases how to start up the separate components of the system, how to shut them down, and what to do if a component or the system fails.
-]
 
 == Implementation of CPPChecker
 
 The header file that incorporates the templates utilized for the purpose of verifying the task requirements is designated as _CPPChecker_. This section will provide a more thorough examination of the header's functionalities, the process, and the rationale behind its implementation.
 
-\
-*[NOTE: Add Macro to Existing Solutions as a backstory if space left?]*
-\
+=== Prior Reflections Introduction
+
+Before the commencement of this thesis, an effort was made to address the challenge. At that time, the C++ language did not yet support reflection, so an alternative approach had to be adopted. The approach employed utilized SFINAE (Substitution Failure Is Not An Error) with conventional C++17 syntax, subsequently adapting to the more recent C++20 Concepts. The underlying rationale for this approach is to employ an overload of the template, thereby facilitating the deduced type. In the event of a failure, the specialization is discarded, a process that circumvents the occurrence of a compile error@cpprefernce2026sfinae.
+
+To complement that approach, it was necessary to have a set of fallback classes to which the compiler could refer in the event that a particular class was not found. Furthermore, an approach delineated in a blog post series by #cite(<chen2019namespaces>, form: "prose") was implemented. In this series, Chen placed namespaces in a way that necessitated a specific sequence for checking within those namespaces. Consequently, these namespaces offer an optimal location for the placement of fallback classes.
+
+The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ Macros was employed to automate the generation of the majority of boiler code during the compile phase.
+
+Precisely one month after the commencement of my thesis, GCC (GNU Compiler Collection) unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ Reflection support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix B will address the macro approach.
+
+
+*[NOTE: Dont forget the appendix B]*
+
 
 === String Literal Template Declarations
 
-The file utilizes the latest feature of C++26, reflections, to search for the task requirements.
+The file utilizes the latest feature of C++26 Reflections, to search for the task requirements.
 The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes String Literal templates to pass the function name that has been searched for during compile time to the reflections. According to #cite(<gabe2011stackoverflow>, form: "prose"), "A string is a sequence of characters. A literal is data that's typed in as part of the program."
 
 \
 *[NOTE: Add StringLiteral template here ( Completely took from oersted )]*
 \
+
+
+
+
+*  START HERE AGAIN  *
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 === Class Template Declarations
@@ -92,6 +85,41 @@ The proposed solution also incorporates verifications for the input and return t
 
 
 
+
+
+== Design Goals <design_goals>
+
+For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA1_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA3_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C1_ option is subject to constraints. The _C2_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR6_.
+
+*[NOTE: Should FR6 be a QA?]*
+
+
+== Subsystem Decomposition <subsystem_decomposition>
+#TODO[
+  Describe the architecture of your system by decomposing it into subsystems and the services provided by each subsystem. Use UML class diagrams including packages / components for each subsystem.
+]
+\
+*[NOTE: UML class diagrams including packages / components for each subsystem]*
+\
+
+The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file utilizes the header file to verify the code and generate the evaluation for the transmitted code. The frontend and backend components will be deployed within containers managed by Docker Compose.
+
+*[NOTE: Show/point clear parts using future UML]*
+
+
+== Persistent Data Management
+#TODO[
+  Optional section that describes how data is saved over the lifetime of the system and which data. Usually this is either done by saving data in structured files or in databases. If this is applicable for the thesis, describe the approach for persisting data here and show a UML class diagram how the entity objects are mapped to persistent storage. It contains a rationale of the selected storage scheme, file system or database, a description of the selected database and database administration issues.
+]
+\
+*[NOTE: UML class diagram how the entity objects are mapped to persistent storage]*
+\
+
+
+== Boundry Conditions
+#TODO[
+  Optional section describing the use cases how to start up the separate components of the system, how to shut them down, and what to do if a component or the system fails.
+]
 
 
 

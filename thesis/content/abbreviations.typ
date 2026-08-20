@@ -6,4 +6,5 @@
   (abb: "SFINAE", desc: "Substitution Failure Is Not An Error"),
   (abb: "GCC", desc: "GNU Compiler Collection"),
   (abb: "GNU", desc: "Recursive acronym for \"GNU's Not Unix!\""),
+  (abb: "TD", desc: "Template Declarations"),
 )

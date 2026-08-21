@@ -1,10 +1,12 @@
 #let abbreviations = (
-  (abb: "NFR", desc: "Non-functional requirements"),
+  (abb: "NFR", desc: "Non-Functional Requirements"),
+  (abb: "AI", desc: "Artificial Intelligence, especially LLM"),
+  (abb: "LLM", desc: "Large Language Model"),
   (abb: "REST", desc: "Representational State Transfer"),
   (abb: "API", desc: "Application Programming Interface"),
   (abb: "UI", desc: "User Interface"),
   (abb: "SFINAE", desc: "Substitution Failure Is Not An Error"),
   (abb: "GCC", desc: "GNU Compiler Collection"),
-  (abb: "GNU", desc: "Recursive acronym for \"GNU's Not Unix!\""),
+  (abb: "GNU", desc: "Recursive Acronym for \"GNU's Not Unix!\""),
   (abb: "TD", desc: "Template Declarations"),
 )

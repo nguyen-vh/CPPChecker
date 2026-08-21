@@ -50,6 +50,7 @@ The implementation of this functionality was enabled by the application of _temp
   caption: [Template to verify the existence and type of a function within a given class],
 ) <fig:Template_class_has_memberfunc>
 \
+
 In the @fig:Template_class_has_memberfunc line two, the default argument is designated as _unspecified_return_t_, which is defined as an empty struct. The final argument constitutes a template parameter pack, defined as "a template parameter that accepts zero or more template arguments" @cppreference2026pack.
 
 In the 16th line of the template, a comparison is made between the instantiated template parameter, designated here as _Returntype_, and the custom _unspecified_return_t_. In the event that the two parameters are found to be congruent, it can be deduced that no return type has been specified, and the template will solely examine the presence of the function. In the event that the return type is found to be incompatible, a designated type has been allocated. As indicated on line 18, the templates have been programmed to verify if the pack contains more than zero arguments. In the absence of zero arguments in the _Inputtype_, it can be deduced that no input arguments were provided. These cases involve a simple verification process that includes the function's existence and the appropriateness of the return type. In the event that input arguments are provided, the entirety of the function is subject to review.
@@ -75,6 +76,7 @@ Before addressing the main subject, it is imperative to clarify the terminology.
 5) member templates".
 
 \
+
 An examination of  @fig:Template_class_has_membervar reveals that the utilization of _std::meta::is_variable()_ on lines 10 and 11 is insufficient. This is due to the fact that _std::meta::is_variable()_ exclusively applies to _static data members_, while _std::meta::is_nonstatic_data_member()_ is necessary for _non-static data members_.
 In fact, the _std::meta::is_static_data_member()_ function is not a viable option, documented in the papers by #cite(<isocpp2025reflections>, form: "prose"), as _std::meta::is_variable()_ performs the same task.
 
@@ -84,6 +86,7 @@ In fact, the _std::meta::is_static_data_member()_ function is not a viable optio
   caption: [Template to verify the existence and type of a variable within a given class],
 ) <fig:Template_class_has_membervar>
 \
+
 The remainder of the template definition is essentially analogous to that of the Class Member Function TD in @class_member_function, with the exception of the _pack_ element at the end of the template _parameter-list_.
 
 
@@ -108,15 +111,13 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 ==== ? Free Variable ?
 
-\
-*_HERE TO CONTINUE_*
-\
 
 == Implementation of REST API Server
 
 === Design Goals <design_goals>
 
-For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA5_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA3_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C1_ option is subject to constraints. The _C2_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR6_.
+For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA5_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA6_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C2_ option is subject to constraints. The _C3_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR7_.
+The round-trip time (RTT) will be measured for _QA4_. In the event that the requirement is not met, modifications will be made.
 
 
 === Subsystem Decomposition <subsystem_decomposition>
@@ -125,6 +126,12 @@ For the proposed system, the implementation and execution of all the quality att
 ]
 \
 *[NOTE: UML class diagrams including packages / components for each subsystem]*
+\
+
+
+\
+*_TO CONTINUE HERE ... _*
+\
 \
 
 The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file utilizes the header file to verify the code and generate the evaluation for the transmitted code. The frontend and backend components will be deployed within containers managed by Docker Compose.

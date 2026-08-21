@@ -9,4 +9,5 @@
   (abb: "GCC", desc: "GNU Compiler Collection"),
   (abb: "GNU", desc: "Recursive Acronym for \"GNU's Not Unix!\""),
   (abb: "TD", desc: "Template Declarations"),
+  (abb: "RTT", desc: "Round-Trip Time"),
 )

@@ -33,7 +33,7 @@ A variety of approaches exist for verifying these requirements. These include th
 
 The central research objective of this thesis is to address the following question:
 
-#box[*RQ 1:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
+#box[*RQ:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
 
 The inquiry is addressed through the formulation of code capable of verifying the aforementioned nonfunctional requirements.
 

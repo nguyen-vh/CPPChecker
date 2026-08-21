@@ -79,7 +79,9 @@ concept class_has_membervar = []() constexpr -> bool {
                                        std::meta::access_context::unchecked());
 
   for (const auto& member : members) {
-    if (!std::meta::is_nonstatic_data_member(member)) continue;
+    if (!std::meta::is_nonstatic_data_member(member) &&
+        !std::meta::is_variable(member))
+      continue;
 
     if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))

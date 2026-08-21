@@ -57,9 +57,14 @@ In the 16th line of the template, a comparison is made between the instantiated 
 
 
 
-===== Specialized Class Member Function TD
+==== Class Data Member TD
 
-It should be noted that _CPPChecker_ also contains more specialized versions of the _class_has_memberfunc_ template. That being the verification of a member function located within the scope of public, protected, or private _access specifiers_, or its _static_ version.
+
+
+
+==== Specialized Class Member TD
+
+It should be noted that _CPPChecker_ also contains more specialized iterations of the aforementioned templates. This process involves verifying, for instance, a member function that falls within the scope of public, protected, or private _access specifiers_, or its static version.
 
 \
 #figure(
@@ -68,18 +73,11 @@ It should be noted that _CPPChecker_ also contains more specialized versions of 
 ) <fig:Template_class_has_public_memberfunc>
 \
 
-As illustrated in @fig:Template_class_has_public_memberfunc, the template declaration exhibits a high degree of similarity with the template depicted in @fig:Template_class_has_memberfunc. The sole discrepancy manifests within the _for loop_, specifically in lines 10 and 11. In this instance, the members inside the class are matched for being _public_ and after for being _static_. As demonstrated in the foregoing example, the specialization of these templates is a relatively uncomplicated process. It is imperative to acknowledge the significance of the order in this context. For instance, the utilization of _std::meta::type_of()_ in the absence of _std::meta::has_identifier()_ can, under certain circumstances, result in the compiler emitting an error. This assertion has been previously documented by #cite(<oersted2026stackoverflow>, form: "prose"). Therefore, it is recommended to prioritize the validation of more general checks before addressing those that are more specialized.
+As illustrated in @fig:Template_class_has_public_memberfunc, the template declaration exhibits a high degree of similarity with the template depicted in @fig:Template_class_has_memberfunc. The sole discrepancy manifests within the _for loop_, specifically in lines 10 and 11. In this instance, the members inside the class are matched for being _public_ and after for being _static_. As demonstrated in the foregoing example, the specialization of these templates is a relatively uncomplicated process. It is imperative to acknowledge the significance of the order in this context. For instance, the utilization of _std::meta::type_of()_ in the absence of _std::meta::has_identifier()_ can, under certain circumstances, result in the compiler emitting an error. This assertion has been previously documented by #cite(<oersted2026stackoverflow>, form: "prose"). Therefore, it is recommended to prioritize the validation of more general checks before addressing those that are more specialized. A comprehensive list of all available templates can be found in @fig:List_of_Templates.
 
-
-
-==== Class Member Variable TD
 \
 * _HIER WEITER_ *
 \
-
-
-
-
 
 
 == Implementation of REST API Server

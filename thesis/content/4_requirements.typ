@@ -14,7 +14,7 @@ In order to establish the requirements for this project, this chapter will build
 #FR(
   "Basic functionality",
 )[ The header file contains the functionality of verification for specified requirements. ]
-A comprehensive inspection of non-functional requirements of classes, functions, variables, and the most prevalent implementations within classes is imperative.
+A comprehensive inspection of NFRs of classes, functions, variables, and the most prevalent implementations within classes is imperative.
 
 \
 #FR("Header-only")[ The verification logic and templates should be consolidated into a single C++ header file. ]
@@ -100,4 +100,4 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
 
 == Proposed System Design<proposed_design>
 
-The system will be demonstrated through a webpage that displays C++ coding tasks and a field in which the solution to the given task can be entered and transmitted to the server. The server will be divided into two parts. The initial component will be a Representational State Transfer (REST) application programming interface (API) server that will be tasked with the reception of the code solution and the subsequent transmission of an evaluation of the code. The subsequent step involves the utilization of the header file, the received code, and the task file to assess the code. The evaluation of the sent code will be archived.
+The system will be demonstrated through a webpage that displays C++ coding tasks and a field in which the solution to the given task can be entered and transmitted to the server. The server will be divided into two parts. The initial component will be a REST API server that will be tasked with the reception of the code solution and the subsequent transmission of an evaluation of the code. The subsequent step involves the utilization of the header file, the received code, and the task file to assess the code. The evaluation of the sent code will be archived.

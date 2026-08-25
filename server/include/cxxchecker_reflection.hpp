@@ -112,7 +112,7 @@
 
 //----------------------------------------------------------------------------//
 
-// ? TODO: ABSTRACT CLASS, INTERFACE CLASS
+// ? TODO: NAMESPACES, ABSTRACT CLASS, INTERFACE CLASS
 
 //----------------------------------------------------------------------------//
 
@@ -248,7 +248,9 @@ concept class_has_membervar = []() constexpr -> bool {
                                        std::meta::access_context::unchecked());
 
   for (const auto& member : members) {
-    if (!std::meta::is_nonstatic_data_member(member)) continue;
+    if (!std::meta::is_nonstatic_data_member(member) &&
+        !std::meta::is_variable(member))
+      continue;
 
     if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
@@ -277,7 +279,9 @@ concept class_has_public_membervar = []() constexpr -> bool {
 
   for (const auto& member : members) {
     if (!std::meta::is_public(member)) continue;
-    if (!std::meta::is_nonstatic_data_member(member)) continue;
+    if (!std::meta::is_nonstatic_data_member(member) &&
+        !std::meta::is_variable(member))
+      continue;
 
     if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
@@ -306,7 +310,9 @@ concept class_has_protected_membervar = []() constexpr -> bool {
 
   for (const auto& member : members) {
     if (!std::meta::is_protected(member)) continue;
-    if (!std::meta::is_nonstatic_data_member(member)) continue;
+    if (!std::meta::is_nonstatic_data_member(member) &&
+        !std::meta::is_variable(member))
+      continue;
 
     if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))
@@ -335,7 +341,9 @@ concept class_has_private_membervar = []() constexpr -> bool {
 
   for (const auto& member : members) {
     if (!std::meta::is_private(member)) continue;
-    if (!std::meta::is_nonstatic_data_member(member)) continue;
+    if (!std::meta::is_nonstatic_data_member(member) &&
+        !std::meta::is_variable(member))
+      continue;
 
     if (!std::meta::has_identifier(member) ||
         std::meta::identifier_of(member) != std::string_view(Membervar))

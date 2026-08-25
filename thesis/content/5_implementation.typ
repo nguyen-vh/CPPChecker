@@ -25,6 +25,8 @@ Precisely one month after the commencement of this thesis, GCC (GNU Compiler Col
 === Template Declarations
 ==== String Literal TD
 
+*[NOTE: Chinese Characters are not shown when downloading the Pdf]*
+
 The file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
 The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes _String Literal_ templates to pass the function name that has been searched for during compile time to the reflections. According to #cite(<gabe2011stackoverflow>, form: "prose"), "A string is a sequence of characters. A literal is data that's typed in as part of the program." In the header file, their _String Literal_ templates were utilized without modification.
 
@@ -128,27 +130,22 @@ The RTT (Round-Trip Time) will be measured for _QA4_. In the event that the requ
 *[NOTE: UML class diagrams including packages / components for each subsystem]*
 \
 
+The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file employs the header file to verify the code and generate the evaluation for the transmitted code.
+
+The task file in @fig:Template_Taskfile exemplifies a template for creating the task files. As illustrated in lines 40 to 42, a macro definition is identified within a specified namespace. The macro's objective is to streamline the process of compiling the task file with code files that have been assigned distinct names. These code files are transmitted to the backend by the user. During the compilation process, it is possible to incorporate the compiler flag "-DINCLUDE_FILE=" alongside the name of the ".cpp" file corresponding to the code that has been sent. This approach eliminates the necessity to parse the code within the task file and subsequently replace it with the subsequent code, thereby enabling the execution of these processes in parallel. The complete code solution, inclusive of its main function, is incorporated herein. The presence of two main functions in the global space can result in a state of disarray for the compiler. Consequently, it is located within a designated namespace. A thorough evaluation of the advantages and disadvantages will be conducted in the subsequent section. The frontend and backend components will be deployed within containers managed by Docker Compose.
 
 \
-*_TO CONTINUE HERE ... _*
-\
-\
-
-The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file utilizes the header file to verify the code and generate the evaluation for the transmitted code. The frontend and backend components will be deployed within containers managed by Docker Compose.
-
-*[NOTE: Show/point clear parts using future UML]*
-
-
-=== Persistent Data Management
-#TODO[
-  Optional section that describes how data is saved over the lifetime of the system and which data. Usually this is either done by saving data in structured files or in databases. If this is applicable for the thesis, describe the approach for persisting data here and show a UML class diagram how the entity objects are mapped to persistent storage. It contains a rationale of the selected storage scheme, file system or database, a description of the selected database and database administration issues.
-]
-\
-*[NOTE: UML class diagram how the entity objects are mapped to persistent storage]*
+#figure(
+  image("../figures/Template_Taskfile.png"),
+  caption: [Template to create the task files.],
+) <fig:Template_Taskfile>
 \
 
-
-=== Boundry Conditions
+#pagebreak()
+=== Boundary Conditions
 #TODO[
   Optional section describing the use cases how to start up the separate components of the system, how to shut them down, and what to do if a component or the system fails.
 ]
+
+The utilization and expansion of the system have been thoroughly documented in the READMEs located within the GitHub repository#footnote[ https://github.com/nguyen-vh/CPPChecker/tree/main/server ]. A preliminary evaluation indicates that the "Make"#footnote[ https://en.wikipedia.org/wiki/Make_(software) ] program has been installed on the system. Subsequently, the utilization of the "make" function will initiate the process of spinning up the Docker containers. In contrast, the "make backend" function does not result in the deployment of the frontend container. The implementation of the "make down" function will result in the cessation of all container operations.
+

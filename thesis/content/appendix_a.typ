@@ -14,6 +14,7 @@
   image("../figures/Template_has_class.png"),
   caption: [Template to verify the existence of a given class],
 ) <fig:Template_has_class>
+\
 
 #figure(
   image("../figures/List_of_Templates.png"),

@@ -1,4 +1,11 @@
 #import "/utils/todo.typ": TODO
 
-
 = Related Work<related_work>
+
+== Google Test, Catch2, and Related Frameworks
+
+In the domain of software development, the two most prevalent testing frameworks in the C++ programming language are Google Test#footnote[ https://github.com/google/googletest ] (GTest) and Catch2#footnote[ https://github.com/catchorg/Catch2 ]. Google Test necessitates discrete compilation, a process that can influence the time required for setup. Conversely, Catch2 v2 is a lightweight, header-only testing framework that prioritizes simplicity @catch2 @pamela2025ut. Catch2 has also released version 3, which functions as a conventional library, incorporating multiple headers and a distinct implementation. For the example, Catch2 v2 will be utilized due to its status as a single-header library and its close alignment with the solution space. However, it should be noted that the presented example is applicable across the related frameworks. It is evident that these frameworks present substantial evidence in support of their advanced capabilities in the domain of unit testing (UT). However, when confronted with the problem delineated in @problem, it becomes apparent that a workaround is necessary.
+
+In @fig:catch2_hasClass, a code example is presented that utilizes the Catch2 v2 single-header file to illustrate a UT example. The code functions properly without errors. However, it is imperative to consider the implications of alternative class designations or the absence of the class. As demonstrated by the @fig:catch2_noClass example, the UT does not indicate a failure. Instead, the compiler refuses to compile. In the GTest framework, the macro _GTEST_SKIP()_ has been implemented to bypass assertions. In a similar vein, the macro _SKIP()_ has been incorporated into Catch2 v3. It should be noted that these skips are only applicable to runtime assertions, which, in turn, will not resolve the compile-time issue @googletest2026.
+
+This thesis will propose the construction of a header library, which has the capacity to address the identified compile-time issues and can be utilized in conjunction with existing testing frameworks.

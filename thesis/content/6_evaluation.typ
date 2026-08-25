@@ -5,10 +5,10 @@
   If you did an evaluation / case study, describe it here.
 ]
 
-#align(center)[
-  --TEMPLATE--
-]
-
+\
+*_TO CONTINUE HERE ... _*
+\
+\
 == Design
 #TODO[
   Describe the design / methodology of the evaluation and why you did it like that. e.g. what kind of evaluation have you done (e.g. questionnaire, personal interviews, simulation, quantitative analysis of metrics), what kind of participants, what kind of questions, what was the procedure?

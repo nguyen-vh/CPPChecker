@@ -195,10 +195,14 @@
 
   // Appendix.
   pagebreak()
-  heading(numbering: none)[Appendix A]
+  heading(numbering: none)[Appendix A: ]
   include "/content/appendix_a.typ"
 
   pagebreak()
-  heading(numbering: none)[Appendix B]
+  heading(numbering: none)[Appendix B: ]
   include "/content/appendix_b.typ"
+
+  pagebreak()
+  heading(numbering: none)[Appendix C: ]
+  include "/content/appendix_c.typ"
 }

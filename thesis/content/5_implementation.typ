@@ -17,10 +17,10 @@ To complement that approach, it was necessary to have a set of fallback classes 
 
 The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ _Macros_ was employed to automate the generation of the majority of boiler code during the compile phase.
 
-Precisely one month after the commencement of this thesis, GCC (GNU Compiler Collection) unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix B will address the macro approach.
+Precisely one month after the commencement of this thesis, GCC (GNU Compiler Collection) unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix C will address the macro approach.
 
 
-*[NOTE: Dont forget the appendix B]*
+*[NOTE: Dont forget the appendix C]*
 
 === Template Declarations
 ==== String Literal TD

@@ -25,9 +25,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.local/share/fonts
-          key: fonts-with-CJK2-${{ runner.os }}
+          key: fonts-with-CJK-${{ runner.os }}
           restore-keys: |
-            fonts-with-CJK2-
+            fonts-with-CJK-
 
       - name: Install Fonts (if not cached)
         if: steps.cache-fonts.outputs.cache-hit != 'true'

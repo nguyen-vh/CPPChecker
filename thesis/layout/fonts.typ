@@ -1,4 +1,4 @@
 #let fonts = (
-  body: ("Noto Sans CJK SC", "New Computer Modern"),
-  sans: ("Noto Sans CJK SC", "New Computer Modern Sans"),
+  body: ("New Computer Modern", "Noto Sans CJK SC"),
+  sans: ("New Computer Modern Sans", "Noto Sans CJK SC"),
 )

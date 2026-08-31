@@ -5,6 +5,7 @@
   (abb: "REST", desc: "Representational State Transfer"),
   (abb: "API", desc: "Application Programming Interface"),
   (abb: "UI", desc: "User Interface"),
+  (abb: "UT", desc: "Unit Testing"),
   (abb: "TMP", desc: "Template Metaprogramming"),
   (abb: "GTest", desc: "Google Test"),
   (abb: "SFINAE", desc: "Substitution Failure Is Not An Error"),

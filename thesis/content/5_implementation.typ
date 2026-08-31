@@ -19,13 +19,13 @@ The objective was to implement standard template calls for the type and name ver
 
 Precisely one month after the commencement of this thesis, GCC (GNU Compiler Collection) unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix C will address the macro approach.
 
-
 *[NOTE: Dont forget the appendix C]*
 
-=== Template Declarations
-==== String Literal TD
 
-*[NOTE: Chinese Characters are not shown when downloading the Pdf]*
+
+=== Template Declarations
+
+==== String Literal TD
 
 The file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
 The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes _String Literal_ templates to pass the function name that has been searched for during compile time to the reflections. According to #cite(<gabe2011stackoverflow>, form: "prose"), "A string is a sequence of characters. A literal is data that's typed in as part of the program." In the header file, their _String Literal_ templates were utilized without modification.
@@ -108,10 +108,12 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 
 
-
 ==== ? Free Function ?
 
+
+
 ==== ? Free Variable ?
+
 
 
 == Implementation of REST API Server
@@ -120,6 +122,7 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA5_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA6_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C2_ option is subject to constraints. The _C3_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR7_.
 The RTT (Round-Trip Time) will be measured for _QA4_. In the event that the requirement is not met, modifications will be made.
+
 
 
 === Subsystem Decomposition <subsystem_decomposition>
@@ -140,6 +143,9 @@ The task file in @fig:Template_Taskfile exemplifies a template for creating the 
   caption: [Template to create the task files.],
 ) <fig:Template_Taskfile>
 \
+
+
+
 
 #pagebreak()
 === Boundary Conditions

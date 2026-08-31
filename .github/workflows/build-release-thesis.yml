@@ -25,18 +25,24 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.local/share/fonts
-          key: newcomputermodern-fonts-${{ runner.os }}
+          key: fonts-with-CJK-${{ runner.os }}
           restore-keys: |
-            newcomputermodern-fonts-
+            fonts-with-CJK-
 
       - name: Install Fonts (if not cached)
         if: steps.cache-fonts.outputs.cache-hit != 'true'
         run: |
           mkdir -p ~/.local/share/fonts
+
           wget -O /tmp/newcomputermodern.zip "https://fontesk.com/download/39191"
-          unzip /tmp/newcomputermodern.zip -d /tmp/
-          cp -r /tmp/*.otf ~/.local/share/fonts/
-          fc-cache -f -v  # Refresh font cache
+          unzip -o /tmp/newcomputermodern.zip -d /tmp/newcomputermodern/
+          cp /tmp/newcomputermodern/*.otf ~/.local/share/fonts/
+
+          wget -O /tmp/NotoSansCJKsc-Regular.otf "https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf"
+          cp /tmp/NotoSansCJKsc-Regular.otf ~/.local/share/fonts/
+
+          # Refresh font cache
+          fc-cache -f -v
 
       - name: Create initial tag
         run: |
@@ -53,7 +59,9 @@ jobs:
           DEFAULT_BUMP: "patch"
 
       - uses: typst-community/setup-typst@v4
-      - run: typst compile thesis/thesis.typ thesis.pdf
+
+      - name: Compile Thesis
+        run: typst compile thesis/thesis.typ thesis.pdf
 
       - name: Create Release
         id: create_release

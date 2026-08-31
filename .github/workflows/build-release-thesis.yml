@@ -38,8 +38,8 @@ jobs:
           unzip -o /tmp/newcomputermodern.zip -d /tmp/newcomputermodern/
           cp /tmp/newcomputermodern/*.otf ~/.local/share/fonts/
 
-          wget -O /tmp/NotoSansCJKsc-Regular.otf "https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf"
-          cp /tmp/NotoSansCJKsc-Regular.otf ~/.local/share/fonts/
+          wget -O /tmp/NotoSansCJKsc-Thin.otf "https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Thin.otf"
+          cp /tmp/NotoSansCJKsc-Thin.otf ~/.local/share/fonts/
 
           # Refresh font cache
           fc-cache -f -v

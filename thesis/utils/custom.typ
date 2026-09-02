@@ -1,6 +1,6 @@
 #let box(content) = {
   align(center, block(
-    width: 80%,
+    width: 85%,
     inset: 10pt,
     stroke: 1pt + rgb(0, 100, 200),
     fill: rgb(240, 248, 255),

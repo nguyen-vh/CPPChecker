@@ -41,6 +41,35 @@ namespace TASK {
 #include INCLUDE_FILE
 #endif
 
+const double LIGHT_SPEED{299792458.0};  // m/s
+
+double calculateDelay(const double& distanceKM) {
+  return (distanceKM * 1'000) / LIGHT_SPEED;
+}
+
+class SpaceProbe {
+ public:
+  SpaceProbe(std::string name, double distanceKM)
+      : m_name{name}, m_distance{distanceKM} {}
+
+  void sendMessage() const {
+    std::cout << "Sending to " << m_name << "..." << std::endl;
+    std::cout << "Signal arrives in " << std::fixed << std::setprecision(2)
+              << getSignalDelay() << " seconds" << std::endl;
+  }
+
+ private:
+  std::string m_name;
+  double m_distance;
+
+  double getSignalDelay() const { return calculateDelay(m_distance); }
+};
+
+int main() {
+  SpaceProbe pluto{"Pluto", 7'500'000'000.};
+  pluto.sendMessage();
+}
+
 }  // namespace TASK
 
 //----------------------------------------------------------------------------//
@@ -74,9 +103,11 @@ auto main(int /*argc*/, char* /*argv*/[]) -> int {
                     ? "Has global double LIGHT_SPEED\n"
                     : "Missing global double LIGHT_SPEED\n");
 
-  std::cout << (has_free_function<"TASK::calculateDelay"_ls, double, double>
-                    ? "Has global double calculateDelay()\n"
-                    : "Missing global double calculateDelay()\n");
+  std::cout
+      << ((has_free_function<"TASK::calculateDelay"_ls, double, double> ||
+           has_free_function<"TASK::calculateDelay"_ls, double, const double&>)
+              ? "Has global double calculateDelay()\n"
+              : "Missing global double calculateDelay()\n");
 
   std::cout << (has_class<"TASK::SpaceProbe"_ls> ? "Has SpaceProbe\n"
                                                  : "Missing SpaceProbe\n");

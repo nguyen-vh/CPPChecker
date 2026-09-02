@@ -10,35 +10,40 @@ One method for enhancing students' competencies involves the implementation of c
 
 
 == Problem<problem>
-The non-functional problem in this thesis is the nomenclature of classes, functions, variables, and other elements. It is imperative to note that the necessity of an exact name for a class does not constitute a prerequisite for the program to function. During the process of compilation, the compiler will generate encoded strings referred to as "decorated names" for linking @microsoft2025decorated. The class name assigned to the class is not relevant to the compiler.
-Consequently, it can be deduced that the problem space falls within the non-functional category.
+The present thesis focuses on a particular type of non-functional requirement, termed "code nomenclature." The nomenclature of classes, functions, and variables is structurally imperative yet functionally inconsequential. It has been demonstrated that a class designated "Rectangle" exhibits equivalent functionality to one designated "ClassA," unless the program employs either reflection or serialization. It has been determined that nomenclature does not affect a program's computations, outputs, or interactions. Consequently, it cannot be regarded as a functional property. Instead, it is a structural and qualitative attribute, thus classifying it as an NFR. The latter pertains to the manner in which a system executes its functions, rather than the nature of its actions @eckhardt2016are.
 
-In the process of creating task assignments, two aspects must be evaluated. The first aspect is the functional aspect, which refers to the intended functionality of the code. The second aspect is the non-functional requirements of the code, which encompass the non-functional attributes of the code that are not directly related to its functionality. Non-functional requirements (NFRs) are distinguished from functional requirements by the manner in which the system is expected to execute its functions @eckhardt2016are.
-When evaluating the task for functionality, unit testing and testing of the output are commonly used. NFRs, however, present a distinct set of challenges. The ambiguity inherent in their description, coupled with the interpretive discretion afforded to the evaluator, renders them more challenging to evaluate.
+In this thesis, the term "non-functional code requirements" is employed to denote constraints on the structural and organizational aspects of source code, including naming conventions, class/function signatures, type declarations, and visibility modifiers.
+This distinction is practically relevant in programming assignments. The requirement for specific naming conventions extends beyond the scope of functional correctness. Instead, it functions as an educational instrument, cultivating the development of professional software engineering practices. The aforementioned conventions are designed to promote the creation of readable, maintainable, and structurally sound code. It is evident that these objectives are independent of runtime behavior and, as such, are valuable learning objectives in their own right @microsoft2025decorated.
 
-The issue at hand manifests when the task entails meticulous adherence to instructions, entailing the predetermination of names for classes, functions, variables, and other such components. This pedagogical strategy is designed to encourage adherence to proper naming conventions and to provide students with a robust foundation for their functional code part. In the context of C++, it is challenging to test for NFRs, such as the name of a class.
+The evaluation of such requirements poses a significant challenge, a well-documented difficulty experienced by NFRs @eckhardt2016are. The verification of functional correctness can be efficiently accomplished through the implementation of unit tests. The employment of static analysis tools, including linters and convention checkers, has been demonstrated to promote adherence to syntactic naming patterns. However, these tools rarely verify the semantic appropriateness of a name in relation to the element's role. This discrepancy is of consequence for automated pedagogical assessment. The objective of this thesis is to design, implement, and evaluate an automated system that verifies non-functional code requirements. In greater detail, the system will verify the presence, naming, signature, and return types of the classes and functions in question.
+
+The approach undertaken in this thesis utilizes the C++ language itself as the verification mechanism. Metaprogramming has the capacity to express structural requirements in the form of compile-time constraints. When a student's code is compiled against a header containing these constraints, the compiler becomes the verifier, emitting errors or warnings for violations. This process functions exclusively within the standard C++ toolchain, thereby eliminating the necessity for external parsers or analysis tools. However, the efficacy of this technique in articulating intricate or nuanced requirements remains a subject of debate. This question is the fundamental premise of this thesis.
 
 
 
 == Motivation<motivation>
 
-A variety of approaches exist for verifying these requirements. These include the manual verification of answers and the use of other programming languages for the parsing of source code. However, from an objective perspective, these solutions appear to lack the elegance and simplicity that could be achieved. Despite the fact that the present study will concentrate on a limited segment of NFRs, specifically the verification of code, efforts will be made to ensure maximum ease of use and fast expandability. This approach is intended to minimize the time required for manual code checking and the development of numerous edge cases for the parser approach.
+The prevailing methodologies employed for the evaluation of non-functional code requirements have proven to be inadequate. The manual review process conducted by instructors is both time-consuming and subjective, thereby hindering the provision of timely feedback to students, particularly in large-scale courses. While static analysis tools (linters) can enforce basic syntactic rules, they fundamentally lack the capability to assess the semantic appropriateness of an identifier. To illustrate, a linter can enforce the "camelCase" convention but lacks the capacity to discern if a function is named "processData."
+
+The impetus for this thesis stems from the necessity for an automated, scalable, and consistent method for evaluating the structural and semantic aspects of code. The objective of this study is to establish a connection between rudimentary syntactic verification and the substantial expense associated with manual review. The proposed system is designed to be readily accessible, capable of straightforward augmentation, and compatible with prevailing educational workflows.
 
 
 
 == Objectives<objectives>
-#TODO[
-  Describe the research goals and/or research questions and how you address them by summarizing what you want to achieve in your thesis, e.g. developing a system and then evaluating it.
-]
 
-The central research objective of this thesis is to address the following question:
+The central research objective of this thesis is to design, implement, and evaluate a header-based framework written in C++ that leverages metaprogramming to verify non-functional structural requirements in source code. The specific aims of this research are as follows:
 
-#box[*RQ:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
+1. Develop a reusable C++ header containing template definitions capable of enforcing requirements at compile time.
 
-The inquiry is addressed through the formulation of code capable of verifying the aforementioned NFRs.
+2. Evaluate the expressiveness of this approach by determining which requirements can and cannot be effectively verified.
+
+3. Demonstrate the practical viability of the framework by integrating it into a larger system, which should comprise a Representational State Transfer (REST) Application Programming Interface (API) and a Web User Interface UI. This integration will automate the verification workflow.
+
+#box[*RQ:* What are the capabilities and limitations of using C++ metaprogramming to verify non-functional requirements in source code?]
+
 
 
 == Methodology<methodology>
 
-The methodology will entail the utilization of header files as the fundamental framework for this research study. Furthermore, the proposed approach will incorporate the integration of a server that is equipped with a Representational State Transfer (REST) Application Programming Interface (API) and a Web User Interface (UI). This integration will serve to substantiate the practicability of automating the validation process of code and usability in a tangible setting. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
+The methodology will entail the utilization of header files as the fundamental framework for this research study. In addition, the proposed approach will entail the incorporation of a server that is equipped with a REST API and a Web UI. This integration will serve to substantiate the practicability of automating the validation process of code and usability in a tangible setting. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
 

@@ -37,9 +37,9 @@ The central research objective of this thesis is to design, implement, and evalu
 
 2. Evaluate the expressiveness of this approach by determining which requirements can and cannot be effectively verified.
 
-3. Demonstrate the practical viability of the framework by integrating it into a larger system, which should comprise a Representational State Transfer (REST) Application Programming Interface (API) and a Web User Interface UI. This integration will automate the verification workflow.
+3. Demonstrate the practical viability of the framework by integrating it into a larger system, which should comprise a Representational State Transfer (REST) Application Programming Interface (API) and a Web User Interface (UI). This integration will automate the verification workflow.
 
-#box[*RQ:* What are the capabilities and limitations of using C++ metaprogramming to verify non-functional requirements in source code?]
+#box[*RQ:* What are the limitations of automated non-functional source code verification within the C++ programming language?]
 
 
 

@@ -20,9 +20,6 @@ A comprehensive inspection of NFRs of classes, functions, variables, and the mos
 #FR("Header-only")[ The verification logic and templates should be consolidated into a single C++ header file. ]
 The utilization of a single header file approach is of paramount importance, as header-only files exhibit a more simplified distribution process in comparison to that of compiled libraries. This approach is particularly well-suited for code that is predominantly template-heavy @codefinity2026header. The incorporation of simplified distribution and inclusion into existing projects ensures the practical application of the concept beyond the confines of the problem space.
 
-\
-#FR("Compile-Save")[ The header is expected to function without generating errors under all conditions. ]
-
 === Quality Attributes<h_qa>
 
 #QA(
@@ -42,7 +39,7 @@ The utilization of a single header file approach is of paramount importance, as 
 
 #C(
   "Pure C++",
-)[ The sole constraint imposed pertains to the utilization of pure C++ language. The utilization of any alternative programming language is strictly prohibited. ]
+)[ The sole constraint imposed pertains to the utilization of pure C++ language. The employment of any alternative programming language must be avoided. ]
 
 
 == System Requirements
@@ -80,7 +77,7 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
 
 #QA(
   "Performance",
-)[ It is imperative that the system respond within a reasonable timeframe, estimated to be approximately 10 seconds. In the event that the response time exceeds 30 seconds, it is reasonable to conclude that the system's viability is diminishing. ]
+)[ It is imperative that the system responds within a reasonable timeframe, estimated to be approximately 10 seconds. In the event that the response time exceeds 30 seconds, it is reasonable to conclude that the system's viability is diminishing. ]
 
 \
 #QA("Security")[ The sent code should not pose a threat to the server or modify already archived files. ]

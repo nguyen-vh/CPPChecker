@@ -116,7 +116,7 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 
 
-== Implementation of REST API Server
+== Implementation of REST API Server <implementation_rest>
 
 === Design Goals <design_goals>
 

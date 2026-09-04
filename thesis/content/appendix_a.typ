@@ -20,3 +20,24 @@
   image("../figures/List_of_Templates.png"),
   caption: [Content list of available templates],
 ) <fig:List_of_Templates>
+\
+
+#figure(
+  image("../figures/Taskfile_Rectangle.png"),
+  caption: [Task 1 (Rectangle) for the evaluation ],
+) <fig:Taskfile_Rectangle>
+
+#figure(
+  image("../figures/Taskfile_Space.png"),
+  caption: [Task 2 (Space) for the evaluation],
+) <fig:Taskfile_Space>
+
+#figure(
+  image("../figures/Taskfile_Coffee.png"),
+  caption: [Task 3 (Coffee) for the evaluation],
+) <fig:Taskfile_Coffee>
+
+#figure(
+  image("../figures/Eval_alias.png"),
+  caption: [Evaluation: Alias used for return type],
+) <fig:Eval_Alias>

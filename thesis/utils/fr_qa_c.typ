@@ -6,7 +6,7 @@
   #fr_counter.step()
   #context [
     #set align(left)
-    #let key = "fr-" + str(fr_counter.get().first()) + "-" + lower(headline.replace(" ", "-"))
+    #let key = "fr-" + lower(headline.replace(" ", "-"))
     // Have to use figures because we cannot directly use labels on grids
     #figure(
       {
@@ -29,11 +29,14 @@
   ]
 ]
 
-#let QA(headline, description) = [
+#let QA(headline, description, ckey: none) = [
   #qa_counter.step()
   #context [
     #set align(left)
-    #let key = "qa-" + str(qa_counter.get().first()) + "-" + lower(headline.replace(" ", "-"))
+    #let key = ckey
+    #if ckey == none {
+      key = "qa-" + lower(headline.replace(" ", "-"))
+    }
     // Have to use figures because we cannot directly use labels on grids
     #figure(
       {
@@ -56,11 +59,12 @@
   ]
 ]
 
+
 #let C(headline, description) = [
   #const_counter.step()
   #context [
     #set align(left)
-    #let key = "c-" + str(const_counter.get().first()) + "-" + lower(headline.replace(" ", "-"))
+    #let key = "c-" + lower(headline.replace(" ", "-"))
     // Have to use figures because we cannot directly use labels on grids
     #figure(
       {

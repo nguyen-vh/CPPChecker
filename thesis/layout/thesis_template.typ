@@ -161,21 +161,30 @@
 
   // Bibliography.
   pagebreak()
-  bibliography("/thesis.bib")
+  bibliography("/thesis.bib", style: "ieee.csl")
 
   // List of figures.
   pagebreak()
-  heading(numbering: none)[List of Figures]
   show outline: it => {
     // Show only the short caption here
     in-outline.update(true)
     it
     in-outline.update(false)
   }
-  outline(
-    title: "",
-    target: figure.where(kind: image),
-  )
+
+  {
+    show heading: it => {
+      it
+      v(1.5em)
+    }
+    show outline: set heading(outlined: true)
+    outline(
+      title: {
+        text(font: fonts.body, size: 1em, weight: 700, "List of Figures")
+      },
+      target: figure.where(kind: image),
+    )
+  }
 
   // List of tables.
   context [
@@ -206,3 +215,4 @@
   heading(numbering: none)[Appendix C: ]
   include "/content/appendix_c.typ"
 }
+

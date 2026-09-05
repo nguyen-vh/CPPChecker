@@ -100,7 +100,7 @@ It should be noted that _CPPChecker_ also contains more specialized iterations o
 \
 #figure(
   image("../figures/Template_class_has_public_memberfunc.png"),
-  caption: [Template to verify the existence and type of a static function within a given class in its public access specifier],
+  caption: [Template to verify the existence and type of static function within a given class in its public access specifier],
 ) <fig:Template_class_has_public_memberfunc>
 \
 
@@ -120,8 +120,8 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 === Design Goals <design_goals>
 
-For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For _QA5_, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to _QA6_, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the _C2_ option is subject to constraints. The _C3_ option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet _FR6_.
-The RTT (Round-Trip Time) will be measured for _QA4_. In the event that the requirement is not met, modifications will be made.
+For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For @qa-security, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to @qa-documentation2, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the @c-compilable-code option is subject to constraints. The @c-technology option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet @fr-containerization.
+The RTT (Round-Trip Time) will be measured for @qa-performance. In the event that the requirement is not met, modifications will be made.
 
 
 
@@ -135,7 +135,7 @@ The RTT (Round-Trip Time) will be measured for _QA4_. In the event that the requ
 
 The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file employs the header file to verify the code and generate the evaluation for the transmitted code.
 
-The task file in @fig:Template_Taskfile exemplifies a template for creating the task files. As illustrated in lines 40 to 42, a macro definition is identified within a specified namespace. The macro's objective is to streamline the process of compiling the task file with code files that have been assigned distinct names. These code files are transmitted to the backend by the user. During the compilation process, it is possible to incorporate the compiler flag "-DINCLUDE_FILE=" alongside the name of the ".cpp" file corresponding to the code that has been sent. This approach eliminates the necessity to parse the code within the task file and subsequently replace it with the subsequent code, thereby enabling the execution of these processes in parallel. The complete code solution, inclusive of its main function, is incorporated herein. The presence of two main functions in the global space can result in a state of disarray for the compiler. Consequently, it is located within a designated namespace. A thorough evaluation of the advantages and disadvantages will be conducted in the subsequent section. The frontend and backend components will be deployed within containers managed by Docker Compose.
+The task file in @fig:Template_Taskfile exemplifies a template for creating the task files. As illustrated in lines 40 to 42, a macro definition is identified within a specified namespace. The macro's objective is to streamline the process of compiling the task file with code files that have been assigned distinct names. These code files are transmitted to the backend by the user. During the compilation process, it is possible to incorporate the compiler flag _-DINCLUDE_FILE=_ alongside the name of the ".cpp" file corresponding to the code that has been sent. This approach eliminates the necessity to parse the code within the task file and subsequently replace it with the subsequent code, thereby enabling the execution of these processes in parallel. The complete code solution, inclusive of its main function, is incorporated herein. The presence of two main functions in the global space can result in a state of disarray for the compiler. Consequently, it is located within a designated namespace. A thorough evaluation of the advantages and disadvantages will be conducted in the subsequent section. The frontend and backend components will be deployed within containers managed by Docker Compose.
 
 \
 #figure(
@@ -143,7 +143,6 @@ The task file in @fig:Template_Taskfile exemplifies a template for creating the 
   caption: [Template to create the task files.],
 ) <fig:Template_Taskfile>
 \
-
 
 
 

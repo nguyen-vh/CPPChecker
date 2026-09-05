@@ -125,18 +125,20 @@ The RTT (Round-Trip Time) will be measured for @qa-performance. In the event tha
 
 
 
+#figure(
+  image("../figures/Systemcomponent_diagram.png"),
+  caption: [Components of the system],
+) <fig:Systemcomponent_diagram>
+\
+
 === Subsystem Decomposition <subsystem_decomposition>
-#TODO[
-  Describe the architecture of your system by decomposing it into subsystems and the services provided by each subsystem. Use UML class diagrams including packages / components for each subsystem.
-]
-\
-*[NOTE: UML class diagrams including packages / components for each subsystem]*
-\
 
-The system under review is composed of three parts, in addition to the header file, for the purpose of checking the code. The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user. The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, sending the evaluation back, archiving the evaluation, and executing the third component. The third component, which is written in C++ with Bubblewrap, compiles the task file. This file employs the header file to verify the code and generate the evaluation for the transmitted code.
+The system under review, depicted in @fig:Systemcomponent_diagram, consists of five components, in addition to the header file, for the purpose of code verification.
+The frontend part, which was developed using Vue.js, facilitates user interaction with the application. This process entails the transmission of user input, which is subsequently processed and displayed alongside the task and evaluation of the code that has been submitted by the user.
+The second component is the REST API server, which is written in C++ with CrowCpp. The server's primary functions include receiving code, saving it as a ".cpp" file and compiling it, sending the evaluation back, archiving the evaluation, and executing the third component. It is pertinent to state that the evaluation is limited to the code that is compilable.
+The third component, designated "Code Evaluator" within the @fig:Systemcomponent_diagram, is written in C++ with Bubblewrap and is responsible for compiling the fourth component, the task file. It should be noted that there may be multiple task files dependent on the requested evaluation. This file employs the header file to verify the code and generate the evaluation for the transmitted code, saving it inside the fifth component, the archive folder.
 
-The task file in @fig:Template_Taskfile exemplifies a template for creating the task files. As illustrated in lines 40 to 42, a macro definition is identified within a specified namespace. The macro's objective is to streamline the process of compiling the task file with code files that have been assigned distinct names. These code files are transmitted to the backend by the user. During the compilation process, it is possible to incorporate the compiler flag _-DINCLUDE_FILE=_ alongside the name of the ".cpp" file corresponding to the code that has been sent. This approach eliminates the necessity to parse the code within the task file and subsequently replace it with the subsequent code, thereby enabling the execution of these processes in parallel. The complete code solution, inclusive of its main function, is incorporated herein. The presence of two main functions in the global space can result in a state of disarray for the compiler. Consequently, it is located within a designated namespace. A thorough evaluation of the advantages and disadvantages will be conducted in the subsequent section. The frontend and backend components will be deployed within containers managed by Docker Compose.
-
+The task file in @fig:Template_Taskfile exemplifies a template for creating the task files. As illustrated in lines 40 to 42, a macro definition is identified within a specified namespace. The macro's objective is to streamline the process of compiling the task file with code files that have been assigned distinct names. These code files are transmitted to the backend by the user. During the compilation process, it is possible to incorporate the compiler flag _-DINCLUDE_FILE=_ alongside the name of the ".cpp" file corresponding to the code that has been sent. This approach eliminates the necessity to parse the code within the task file and subsequently replace it with the subsequent code, thereby enabling the execution of these processes in parallel. The complete code solution, inclusive of its main function, is incorporated herein. The presence of two main functions in the global space can result in a state of disarray for the compiler. Consequently, it is located within a designated namespace. A comprehensive evaluation of the merits and drawbacks will be conducted in the subsequent section. The frontend and backend components are divided into discrete containers, with management of these containers being facilitated by Docker Compose.
 \
 #figure(
   image("../figures/Template_Taskfile.png"),

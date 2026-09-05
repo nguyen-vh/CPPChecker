@@ -41,3 +41,8 @@
   image("../figures/Eval_alias.png"),
   caption: [Evaluation: Alias used for return type],
 ) <fig:Eval_Alias>
+
+#figure(
+  image("../figures/Eval_rectangle_alias_check.png"),
+  caption: [Evaluation: Using an alias inside the type check for the member function],
+) <fig:Eval_Alias_Check>

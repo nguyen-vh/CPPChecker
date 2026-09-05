@@ -1,18 +1,19 @@
 #import "/utils/todo.typ": TODO
 
 = Summary<summary>
-#TODO[
-  This chapter includes the status of your thesis, a conclusion and an outlook about future work.
-]
 
-#align(center)[
-  --TEMPLATE--
-]
+The final chapter is designed to offer a comprehensive resolution to this thesis, presenting a summary of the achieved goals, the conclusions derived, and the potential future directions for research.
+
+
 
 == Status
 #TODO[
   Describe honestly the achieved goals (e.g. the well implemented and tested use cases) and the open goals here. if you only have achieved goals, you did something wrong in your analysis.
 ]
+
+
+
+
 
 === Realized Goals
 #TODO[
@@ -33,3 +34,8 @@
 #TODO[
   Tell us the next steps (that you would do if you have more time). Be creative, visionary and open-minded here.
 ]
+
+\
+*_CONTINUE HERE . . . _*
+\
+\

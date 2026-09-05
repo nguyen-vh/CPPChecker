@@ -329,7 +329,7 @@
                     <if variable="URL">
                         <group>
                             <text value=". &#xA;"/>
-                            <group delimiter=": ">
+                            <group delimiter=" at ">
                                 <text term="available at"
                                       text-case="capitalize-first"/>
                                 <text variable="URL"/>

@@ -108,14 +108,6 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 
 
-==== ? Free Function ?
-
-
-
-==== ? Free Variable ?
-
-
-
 == Implementation of REST API Server <implementation_rest>
 
 === Design Goals <design_goals>

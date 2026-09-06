@@ -2,11 +2,14 @@
 #let qa_counter = counter("qa")
 #let const_counter = counter("const")
 
-#let FR(headline, description) = [
+#let FR(headline, description, ckey: none) = [
   #fr_counter.step()
   #context [
     #set align(left)
-    #let key = "fr-" + lower(headline.replace(" ", "-"))
+    #let key = ckey
+    #if ckey == none {
+      key = "fr-" + lower(headline.replace(" ", "-"))
+    }
     // Have to use figures because we cannot directly use labels on grids
     #figure(
       {
@@ -60,11 +63,14 @@
 ]
 
 
-#let C(headline, description) = [
+#let C(headline, description, ckey: none) = [
   #const_counter.step()
   #context [
     #set align(left)
-    #let key = "c-" + lower(headline.replace(" ", "-"))
+    #let key = ckey
+    #if ckey == none {
+      key = "c-" + lower(headline.replace(" ", "-"))
+    }
     // Have to use figures because we cannot directly use labels on grids
     #figure(
       {

@@ -42,7 +42,7 @@ The utilization of a single header file approach is of paramount importance, as 
 )[ The sole constraint imposed pertains to the utilization of pure C++ language. The employment of any alternative programming language must be avoided. ]
 
 
-== System Requirements
+== System Requirements<system_requirements>
 
 Despite the fact that the system plays a secondary role in this thesis, it is still necessary to demonstrate the viability of the header file implementation and to evaluate the research in a straightforward and realistic manner.
 
@@ -51,6 +51,7 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
 
 #FR(
   "Basic functionality",
+  ckey: "fr-basic-functionality2",
 )[ The system possesses the functionality to execute the intended verification process for the specified requirement. ]
 
 \

@@ -3,7 +3,7 @@
 
 = Requirements<requirements>
 
-In order to establish the requirements for this project, this chapter will build upon the foundations laid in @background and the current approaches reviewed in @related_work. The identification of functional and qualitative requirements, in addition to constraints imposed by the limited time available, will serve as the underlying foundation for the design of this project. These elements will be further elaborated in the subsequent chapters.
+In order to establish the requirements for this project, this chapter builds upon the foundations laid in @background and the current approaches reviewed in @related_work. The identification of functional and qualitative requirements, in addition to constraints imposed by the limited time available, serves as the underlying foundation for the design of this project. These elements are elaborated on further in the subsequent chapters.
 
 
 

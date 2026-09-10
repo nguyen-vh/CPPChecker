@@ -2,12 +2,8 @@
 
 
 = Background<background>
-#TODO[
-  Describe each proven technology / concept shortly that is important to understand your thesis. Point out why it is interesting for your thesis. Make sure to incorporate references to important literature here.
-]
 
-
-This chapter introduces the fundamental concepts that will be elaborated upon in subsequent chapters. The succeeding paragraphs help understand the problem space and the design of the solution. First, it will provide an overview of the fundamentals of unit testing. Subsequently, the concept of metaprogramming will be delineated. Following this, a concise exposure on header-only libraries will be presented.
+This chapter introduces the fundamental concepts that are further explored in the following chapters. The following paragraphs help to clarify the problem space and the design of the solution. First, an overview of the fundamentals of unit testing is provided. Next, the concept of metaprogramming is explained.
 
 
 

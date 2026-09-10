@@ -6,8 +6,8 @@
 In order to establish the requirements for this project, this chapter will build upon the foundations laid in @background and the current approaches reviewed in @related_work. The identification of functional and qualitative requirements, in addition to constraints imposed by the limited time available, will serve as the underlying foundation for the design of this project. These elements will be further elaborated in the subsequent chapters.
 
 
-== Header File Requirements
 
+== Header File Requirements
 
 === Functional Requirements<h_fr>
 
@@ -19,6 +19,8 @@ A comprehensive inspection of NFRs of classes, functions, variables, and the mos
 \
 #FR("Header-only")[ The verification logic and templates should be consolidated into a single C++ header file. ]
 The utilization of a single header file approach is of paramount importance, as header-only files exhibit a more simplified distribution process in comparison to that of compiled libraries. This approach is particularly well-suited for code that is predominantly template-heavy @codefinity2026header. The incorporation of simplified distribution and inclusion into existing projects ensures the practical application of the concept beyond the confines of the problem space.
+
+
 
 === Quality Attributes<h_qa>
 
@@ -35,6 +37,8 @@ The utilization of a single header file approach is of paramount importance, as 
   "Documentation",
 )[ The code should be written in a manner that is readily comprehensible without the need for extensive documentation. In the event that documentation is deemed necessary, it must be clear and concise. ]
 
+
+
 === Constraints<h_c>
 
 #C(
@@ -42,9 +46,11 @@ The utilization of a single header file approach is of paramount importance, as 
 )[ The sole constraint imposed pertains to the utilization of pure C++ language. The employment of any alternative programming language must be avoided. ]
 
 
+
 == System Requirements<system_requirements>
 
 Despite the fact that the system plays a secondary role in this thesis, it is still necessary to demonstrate the viability of the header file implementation and to evaluate the research in a straightforward and realistic manner.
+
 
 
 === Functional Requirements<s_fr>
@@ -74,6 +80,8 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
   "Archive",
 )[ The system must possess the capacity to archive verification results, thereby enabling straightforward retrieval and analysis of past verification processes for the purpose of future development and problem identification. This feature is also crucial for the evaluation in @evaluation. ]
 
+
+
 === Quality Attributes<s_qa>
 
 #QA(
@@ -88,12 +96,14 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
   The development of an informative user manual concerning the task creation process would be a crucial step in enhancing the functionality and usability of the system. ]
 
 
+
 === Constraints<s_c>
 
 #C("Compilable code")[ The system shall exclusively process code that is eligible for compilation without errors. ]
 
 \
 #C("Technology")[ The system's construction will be predominantly utilizing the C++ programming language. ]
+
 
 
 == Proposed System Design<proposed_design>

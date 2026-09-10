@@ -37,7 +37,6 @@ With regard to the initial two observations, it is conceivable that the _\<meta>
 
 
 
-
 == Limitations
 
 The evaluation approach that has been employed is to replicate the actual case scenario. However, in the absence of temporal constraints, a comprehensive UT would have identified the bugs irrespective of the initial conditions. Consequently, the probability of a bias in testing specific edge cases is high, and it is improbable that all anomalous behaviors have been identified.

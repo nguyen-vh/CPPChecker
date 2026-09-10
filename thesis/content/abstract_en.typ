@@ -1,21 +1,12 @@
 #import "/utils/custom.typ": secth
 
-/*
-Note:
-1. *paragraph:* What is the motivation of your thesis? Why is it interesting from a scientific point of view? Which main problem do you like to solve?
-2. *paragraph:* What is the purpose of the document? What is the main content, the main contribution?
-3. *paragraph:* What is your methodology? How do you proceed?
-*/
+Programming assignments teach students to code and develop sophisticated software @hofbauer2022teaching. These assignments often impose constraints on the non-functional aspects of the code, giving students the opportunity to solve them in a creative manner. A comprehensive evaluation of the assignment is essential for constructive feedback. However, C++ offers multiple valid problem-solving methods, and a single template does not provide a pragmatic approach for automated assessment. Manual review of each piece of code is time-consuming, particularly for large courses.
 
-Programming assignments are a pedagogical strategy that facilitates students' learning of programming and development of sophisticated software @hofbauer2022teaching. These assignments frequently impose constraints on the non-functional aspects of the code, thereby providing students with the opportunity to solve them in a creative manner. Consequently, a comprehensive evaluation of the assignment is imperative to facilitate the provision of constructive feedback. The C++ programming language offers multiple methods for problem-solving. The utilization of a template to accommodate these variations does not constitute a pragmatic approach. A manual review of each individual piece of code is also impractical due to the time required.
+This thesis thoroughly examines the available methods for automated assessment and explores the limits of non-functional source code verification and its automation. The program utilizes the C++ programming language as a verification mechanism, leveraging template metaprogramming to express structural requirements as compile-time constraints. The objective of this research is to develop a "header-only" C++ library for verifying non-functional requirements for C++ code, with a pragmatic implementation of a server stack. The stack comprises a REST API and a Web UI to automate the verification workflow.
 
-This thesis thoroughly examines the available methods and explores the limits of non-functional source code verification and its automation. The present study has opted to utilize the C++ programming language.
-The core objective of this thesis is to develop a "header-only" library in C++ that serves as a library for the verification of non-functional requirements for C++ code. Furthermore, a pragmatic implementation in the form of a server is presented to promote automation.
-
-
-*Rework this later*
+The header library's C++ implementation offers a valid approach to the latest metaprogramming additions. The real-world evaluation indicates the feasibility of fundamental verification. For instance, the reflection library exhibits anomalous behavior during type alias processing and efficiency problems arise during verification of abstract classes. While the proposed framework provides a solid foundation for automated non-functional code verification, further exploration is necessary to address identified limits and expand library expressiveness through additional definitions and unit testing.
 
 
 
 #secth[KEYWORDS]
-Non-Functional Requirements, Computer Science Education, Automatic Assessment, Metaprogramming
+Non-Functional Requirements, Computer Science Education, Automatic Assessment, Metaprogramming, Reflections

@@ -41,35 +41,6 @@ namespace TASK {
 #include INCLUDE_FILE
 #endif
 
-const double LIGHT_SPEED{299792458.0};  // m/s
-
-double calculateDelay(const double& distanceKM) {
-  return (distanceKM * 1'000) / LIGHT_SPEED;
-}
-
-class SpaceProbe {
- public:
-  SpaceProbe(std::string name, double distanceKM)
-      : m_name{name}, m_distance{distanceKM} {}
-
-  void sendMessage() const {
-    std::cout << "Sending to " << m_name << "..." << std::endl;
-    std::cout << "Signal arrives in " << std::fixed << std::setprecision(2)
-              << getSignalDelay() << " seconds" << std::endl;
-  }
-
- private:
-  std::string m_name;
-  double m_distance;
-
-  double getSignalDelay() const { return calculateDelay(m_distance); }
-};
-
-int main() {
-  SpaceProbe pluto{"Pluto", 7'500'000'000.};
-  pluto.sendMessage();
-}
-
 }  // namespace TASK
 
 //----------------------------------------------------------------------------//

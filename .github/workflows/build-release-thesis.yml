@@ -72,4 +72,4 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            thesis.pdf
+            thesis_v${{ steps.bump.outputs.new_tag }}.pdf

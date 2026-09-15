@@ -43,7 +43,7 @@ The utilization of a single header file approach is of paramount importance, as 
 
 #C(
   "Pure C++",
-)[ The sole constraint imposed pertains to the utilization of pure C++ language. The employment of any alternative programming language must be avoided. ]
+)[ The sole constraint imposed pertains to the utilization of pure C++ language. Avoidance of the utilization of any alternative programming language is imperative to ensure fulfillment of @fr-header-only. ]
 
 
 

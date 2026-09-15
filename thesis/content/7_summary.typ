@@ -18,15 +18,15 @@ With respect to the implementation of the server stack, it can be posited that a
 
 === Open Goals
 
-Despite the assertion in Section 7.1.1 that FR1 is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality." In that regard, it would remain one of the open goals of this thesis.
+Despite the assertion in Section 7.1.1 that @fr-basic-functionality is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality." In that regard, it would remain one of the open goals of this thesis.
 
-A review of the header file documentation for QA3 reveals significant shortcomings. The naming scheme should be easily discernible and clearly indicate its functionality. However, for a library, minimal documentation remains a prerequisite. Although not explicitly required, the integration of UT and documentation is inherently linked, and the implementation of UT for the existing TD would have been advantageous.
+A review of the header file documentation for @qa-documentation reveals significant shortcomings. The naming scheme should be easily discernible and clearly indicate its functionality. However, for a library, minimal documentation remains a prerequisite. Although not explicitly required, the integration of UT and documentation is inherently linked, and the implementation of UT for the existing TD would have been advantageous.
 
 
 
 == Conclusion
 
-The utilization of TMP, in conjunction with the latest C++ standard feature, reflections, for the implementation of CPPChecker and the REST API server for the automation component, provides a preliminary indication of the limitations encountered when attempting to automate the verification of non-functional source code with C++. Although the limit has not been reached, it is nevertheless possible to provide an initial response affirming the feasibility of this undertaking. Basic verification, as demonstrated by the evaluations, is indeed attainable. However, it is vital to recognize the necessity for further exploration to investigate unexplored areas.
+The utilization of TMP, in conjunction with the latest C++ standard feature, reflections, for the implementation of CPPChecker and the REST API server for the automation component, provides a preliminary indication of the limitations encountered when attempting to automate the verification of non-functional source code with C++. Although the limit has not been reached, it is nevertheless possible to provide an initial response affirming the feasibility of this undertaking. Basic verification, as demonstrated by the evaluations, is indeed attainable. However, it is vital to recognize the necessity for further research to investigate unexplored areas.
 
 Presently, the header file can be utilized to supplement UT, thereby preventing errors during the compilation process and ensuring the return of a practical boolean value.
 

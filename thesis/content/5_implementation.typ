@@ -9,7 +9,7 @@ This chapter delineates the design and implementation of the header file and the
 
 The header file that incorporates the templates utilized for the purpose of verifying the task requirements is designated as _"CPPChecker"_. This section will provide a more thorough examination of the header's functionalities, the process, and the rationale behind its implementation.
 
-=== Prior Reflections Introduction
+=== Prior Reflections Introduction <prior_reflections>
 
 Before the commencement of this thesis, another effort was made to address the challenge. At that time, the C++ language did not yet support reflection, so an alternative approach had to be adopted. The approach employed utilized SFINAE (Substitution Failure Is Not An Error) with conventional C++17 syntax, subsequently adapting to the more recent C++20 _Concepts_. The underlying rationale for this approach is to employ an overload of the template, thereby facilitating the deduced type. In the event of a failure, the specialization is discarded, a process that circumvents the occurrence of a compile error @cpprefernce2026sfinae.
 
@@ -18,8 +18,6 @@ To complement that approach, it was necessary to have a set of fallback classes 
 The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ _Macros_ was employed to automate the generation of the majority of boiler code during the compile phase.
 
 Precisely one month after the commencement of this thesis, GCC (GNU Compiler Collection) unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix C will address the macro approach.
-
-*[NOTE: Dont forget the appendix C]*
 
 
 

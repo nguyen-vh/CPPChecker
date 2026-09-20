@@ -3,7 +3,7 @@
 #let titleGerman = "Automatisierte Verifizierung von nicht-funktionalen Code-Anforderungen"
 #let degree = "Bachelor"
 #let program = "Computer Science"
-#let examiner = "Prof. Dr. Ulrich Eisenecker"
+#let examiner = "Prof. Dr. Ulrich W. Eisenecker"
 #let supervisors = ()
 #let author = "Hoang Viet Nguyen"
 #let startDate = datetime(day: 20, month: 4, year: 2026)

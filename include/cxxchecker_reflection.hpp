@@ -70,7 +70,16 @@
 //~ |      - bool class_has_pure_virtual_memberfunc<>
 //~ |      - bool class_has_override_memberfunc<>
 //~ |      - bool class_has_final_memberfunc<>
-//
+//  |
+//~ |>  bool class_has_constructor<>
+//  |      - bool class_has_default_constructor<>
+//  |      - bool class_has_destructor<>
+//  |      - bool class_has_copy_constructor<>
+//  |      - bool class_has_move_constructor<>
+//  |      - bool class_has_copy_assignment_operator<>
+//  |      - bool class_has_move_assignment_operator<>
+//  |      - bool class_has_big_three<>
+//  |      - bool class_has_big_five<>
 //
 //~ bool has_free_variable<>
 //     - bool has_free_static_variable<>
@@ -810,6 +819,192 @@ concept class_has_override_memberfunc = []() constexpr -> bool {
 
   return false;
 }();
+
+//----------------------------------------------------------------------------//
+//~                     === class_has_constructor<> ===                      ~//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, typename... Inputtype>
+concept class_has_constructor = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (!std::meta::is_constructor(member) ||
+        !std::meta::is_user_declared(member))
+      continue;
+
+    if constexpr (sizeof...(Inputtype) != 0) {
+      auto params = std::meta::parameters_of(member);
+      if (params.size() != sizeof...(Inputtype)) continue;
+
+      bool match = true;
+      std::size_t i = 0;
+
+      ((match = match && i < params.size() &&
+                std::meta::type_of(params[i]) == ^^Inputtype,
+        ++i),
+       ...);
+
+      if (match) return true;
+    } else {
+      return true;
+    }
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*                 === class_has_default_constructor<> ===                  *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class, typename... Inputtype>
+concept class_has_default_constructor = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (!std::meta::is_default_constructor(member) ||
+        !std::meta::is_user_declared(member))
+      continue;
+
+    if constexpr (sizeof...(Inputtype) != 0) {
+      auto params = std::meta::parameters_of(member);
+      if (params.size() != sizeof...(Inputtype)) continue;
+
+      bool match = true;
+      std::size_t i = 0;
+
+      ((match = match && i < params.size() &&
+                std::meta::type_of(params[i]) == ^^Inputtype,
+        ++i),
+       ...);
+
+      if (match) return true;
+    } else {
+      return true;
+    }
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*                      === class_has_destructor<> ===                      *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_destructor = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (std::meta::is_destructor(member) && std::meta::is_user_declared(member))
+      return true;
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*                   === class_has_copy_constructor<> ===                   *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_copy_constructor = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (std::meta::is_copy_constructor(member) &&
+        std::meta::is_user_declared(member))
+      return true;
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*                   === class_has_move_constructor<> ===                   *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_move_constructor = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (std::meta::is_move_constructor(member) &&
+        std::meta::is_user_declared(member))
+      return true;
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*               === class_has_copy_assignment_operator<> ===               *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_copy_assignment_operator = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (std::meta::is_copy_assignment(member) &&
+        std::meta::is_user_declared(member))
+      return true;
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*               === class_has_move_assignment_operator<> ===               *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_move_assignment_operator = []() constexpr -> bool {
+  if constexpr (!has_class<Class>) return false;
+
+  auto members = std::meta::members_of(get_class_by_name<Class>(),
+                                       std::meta::access_context::unchecked());
+
+  for (auto member : members) {
+    if (std::meta::is_move_assignment(member) &&
+        std::meta::is_user_declared(member))
+      return true;
+  }
+  return false;
+}();
+
+//----------------------------------------------------------------------------//
+//*                      === class_has_big_three<> ===                       *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_big_three =
+    (class_has_destructor<Class> && class_has_copy_constructor<Class> &&
+     class_has_copy_assignment_operator<Class>);
+
+//----------------------------------------------------------------------------//
+//*                       === class_has_big_five<> ===                       *//
+//----------------------------------------------------------------------------//
+
+template <LiteralString Class>
+concept class_has_big_five =
+    (class_has_destructor<Class> && class_has_copy_constructor<Class> &&
+     class_has_copy_assignment_operator<Class> &&
+     class_has_move_constructor<Class> &&
+     class_has_move_assignment_operator<Class>);
 
 //----------------------------------------------------------------------------//
 //~                   === class_has_final_memberfunc<> ===                   ~//

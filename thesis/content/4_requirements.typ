@@ -28,11 +28,12 @@ The utilization of a single header file approach is of paramount importance, as 
   "Idempotency",
 )[ It is imperative that the element in question be idempotent, thereby ensuring that the inclusion of the element, regardless of the number of repetitions, does not result in errors.  ]
 
+\
 #QA(
   "Portability",
 )[ The utilization of standard C++ is imperative, while the employment of compiler-specific syntax is to be avoided. ]
 
-
+\
 #QA(
   "Documentation",
 )[ The code should be written in a manner that is readily comprehensible without the need for extensive documentation. In the event that documentation is deemed necessary, it must be clear and concise. ]

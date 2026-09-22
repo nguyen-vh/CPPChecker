@@ -1,5 +1,7 @@
 *Other Related*
 
+\
+
 #figure(
   image("../figures/catch2_hasClass.png"),
   caption: [Catch2 v2 UT example while the class exists],

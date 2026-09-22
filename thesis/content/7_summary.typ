@@ -18,7 +18,7 @@ With respect to the implementation of the server stack, it can be posited that a
 
 === Open Goals
 
-Despite the assertion in Section 7.1.1 that @fr-basic-functionality is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality." In that regard, it would remain one of the open goals of this thesis.
+Despite the assertion in Section 7.1.1 that @fr-basic-functionality is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality". In that regard, it would remain one of the open goals of this thesis.
 
 A review of the header file documentation for @qa-documentation reveals significant shortcomings. The naming scheme should be easily discernible and clearly indicate its functionality. However, for a library, minimal documentation remains a prerequisite. Although not explicitly required, the integration of UT and documentation is inherently linked, and the implementation of UT for the existing TD would have been advantageous.
 

@@ -35,7 +35,7 @@
     author: author,
   )
 
-  pagebreak()
+  print_page_break(print: is_print, to: "odd")
 
   titlepage(
     title: title,
@@ -49,7 +49,7 @@
     submissionDate: submissionDate,
   )
 
-  print_page_break(print: is_print, to: "even")
+  print_page_break(print: is_print, to: "odd")
 
   disclaimer(
     title: title,
@@ -57,15 +57,17 @@
     author: author,
     submissionDate: submissionDate,
   )
-  transparency_ai_tools_layout(transparency_ai_tools)
 
-  print_page_break(print: is_print)
+  transparency_ai_tools_layout(transparency_ai_tools)
 
   acknowledgement_layout(acknowledgement)
 
-  print_page_break(print: is_print)
+  print_page_break(print: is_print, to: "odd")
 
   abstract(lang: "en")[#abstract_en]
+
+  print_page_break(print: is_print, to: "odd")
+
   abstract(lang: "de")[#abstract_de]
 
   set page(
@@ -142,6 +144,8 @@
   v(2.4fr)
   pagebreak()
 
+  print_page_break(print: is_print, to: "odd")
+
   // Main body. Reset page numbering.
   set page(numbering: "1")
   counter(page).update(1)
@@ -161,10 +165,12 @@
 
   // Bibliography.
   pagebreak()
+  print_page_break(print: is_print, to: "even")
   bibliography("/thesis.bib", style: "ieee.csl")
 
   // List of figures.
   pagebreak()
+  print_page_break(print: is_print, to: "odd")
   show outline: it => {
     // Show only the short caption here
     in-outline.update(true)
@@ -199,20 +205,22 @@
 
   // List of Abbreviations.
   pagebreak()
+  print_page_break(print: is_print, to: "odd")
   heading(numbering: none)[List of Abbreviations]
   abbreviations(abbreviations_list)
 
   // Appendix.
-  pagebreak()
+  print_page_break(print: is_print, to: "odd")
   heading(numbering: none)[Appendix A: ]
   include "/content/appendix_a.typ"
 
-  pagebreak()
+  print_page_break(print: is_print, to: "odd")
   heading(numbering: none)[Appendix B: ]
   include "/content/appendix_b.typ"
 
-  pagebreak()
+  print_page_break(print: is_print, to: "odd")
   heading(numbering: none)[Appendix C: ]
   include "/content/appendix_c.typ"
-}
 
+  print_page_break(print: is_print, to: "odd")
+}

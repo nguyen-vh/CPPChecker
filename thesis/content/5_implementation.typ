@@ -7,7 +7,7 @@ This chapter delineates the design and implementation of the header file and the
 
 == Implementation of CPPChecker
 
-The header file that incorporates the templates utilized for the purpose of verifying the task requirements is designated as "CPPChecker". This section will provide a more thorough examination of the header's functionalities, the process, and the rationale behind its implementation.
+The header file that incorporates the templates utilized for the purpose of verifying the task requirements is designated as "CPPChecker." This section will provide a more thorough examination of the header's functionalities, the process, and the rationale behind its implementation.
 
 === Prior Reflections Introduction <prior_reflections>
 
@@ -15,9 +15,9 @@ Before the commencement of this thesis, another effort was made to address the c
 
 To complement that approach, it was necessary to have a set of fallback classes to which the compiler could refer in the event that a particular class was not found. Furthermore, an approach delineated in a blog post series by #cite(<chen2019namespaces>, form: "prose") was implemented. In this series, Chen placed namespaces in a way that necessitated a specific sequence for checking within those namespaces. Consequently, these namespaces offer an optimal location for the placement of fallback classes.
 
-The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ _Macros_ was employed to automate the generation of the majority of boiler code during the compile phase.
+The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ _Macros_ was employed to automate the generation of the majority of boilerplate code during the compile phase.
 
-Precisely one month after the commencement of this thesis, GCC unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the Appendix C will address the macro approach.
+Precisely one month after the commencement of this thesis, GCC unveiled its latest iteration, GCC 16.1#footnote[ https://gcc.gnu.org/gcc-16/ ], which introduced C++ _Reflections_ support for the first time. The opportunity to revise the solution once more arose, with the objective of aligning it with the most recent C++26 standard. The entire thesis will be devoted to the reflection rewritten version. However, should further interest arise, the #link(<appendix_c>)[Appendix C] will address the macro approach.
 
 
 
@@ -25,24 +25,24 @@ Precisely one month after the commencement of this thesis, GCC unveiled its late
 
 ==== String Literal TD
 
-The file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
-The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and 康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes _String Literal_ templates to pass the function name that has been searched for during compile time to the reflections. According to Stack Overflow user Gabe, "A string is a sequence of characters. A literal is data that's typed in as part of the program" @gabe2011stackoverflow. In the header file, their _String Literal_ templates were utilized without modification.
+The CPPChecker header file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
+The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and #box[康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ]], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes string literal templates to pass the function name that has been searched for during compile time to the reflections. Formally, "a string [...] is a finite sequence of symbols" @sipser2013string. In C++, "literals represent values of various types" @stroustrup2014literal, and a "string literal is a series of characters enclosed in double quotes" @stroustrup2014literal. As literals, string literals "do not change in value" @savitch2016literal. In the header file, their string literal templates were utilized without modification.
 
 
 
 ==== Class TD
 
-The initial approach was adopted and subsequently modified to align with the specified solution space. In their code, they sought a particular named function within a class. In the context of this application, the existence of the class in question is unknown. Consequently, the class name has been modified to be passed as a _String Literal_. In addition, it was logical to disassociate the class lookup from their consolidated lookup solution. This approach was taken to avoid redundancy when new templates that require the class are introduced in the future. In contrast to the automatic detection of nested namespaces in Oersted's code, the present code did not exhibit such an ability. The solution that was implemented involved the incorporation of a loop that traversed all namespaces within the literal string to identify the class is displayed in @fig:Template_get_class_by_name and @fig:Template_has_class.
+The initial approach was adopted and subsequently modified to align with the specified solution space. In their code, they sought a particular named function within a class. In the context of this application, the existence of the class in question is unknown. Consequently, the class name has been modified to be passed as a _String Literal_. In addition, it was logical to disassociate the class lookup from their consolidated lookup solution. This approach was taken to avoid redundancy when new templates that require the class are introduced in the future. In contrast to the automatic detection of nested namespaces in Oersted's code, the present code did not exhibit such an ability. The solution that was implemented incorporated of a loop that traversed all namespaces within the literal string to identify the class displayed in @fig:Template_get_class_by_name and @fig:Template_has_class.
 
-The final class templates can be utilized to verify the name of a class during compile time through the use of reflection. It is evident that the code can be utilized independently in scenarios where the verification of a class is undertaken. Moreover, its integration is imperative for the amalgamation of class functions and the execution of class-wide lookups.
+The final class templates can be utilized to verify the name of a class during compile time through reflection. It is evident that the code can be utilized independently in scenarios where the verification of a class is undertaken. Moreover, its integration is imperative for the amalgamation of class functions and the execution of class-wide lookups.
 
 
 
 ==== Class Member Function TD<class_member_function>
 
-Oersted's solution in @fig:appendix:oersted incorporates verifications for the input and return types of the function. This approach represents a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type or verifying with its input type without the return type.
+Oersted's solution in @fig:appendix:oersted incorporates verifications for the input and return types of the function. This approach represents a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type, or to verify with its input type without the return type.
 
-The implementation of this functionality was enabled by the application of "template default arguments". By default, when the template is instantiated without explicitly specifying trailing parameters, the default argument is used, as established by #cite(<eisenecker2024advanced>, form: "prose").
+The implementation of this functionality was enabled by the application of "template default arguments." By default, when the template is instantiated without explicitly specifying trailing parameters, the default argument is used, as established by #cite(<eisenecker2024advanced>, form: "prose").
 
 \
 #figure(
@@ -51,15 +51,15 @@ The implementation of this functionality was enabled by the application of "temp
 ) <fig:Template_class_has_memberfunc>
 \
 
-In the @fig:Template_class_has_memberfunc line two, the default argument is designated as "_unspecified_return_t_", which is defined as an empty _struct_. The final argument constitutes a template parameter pack, defined as "a template parameter that accepts zero or more template arguments" @cppreference2026pack.
+In line two of @fig:Template_class_has_memberfunc, the default argument is designated as "_unspecified_return_t_," which is defined as an empty _struct_. The final argument constitutes a template parameter pack, defined as "a template parameter that accepts zero or more template arguments" @cppreference2026pack.
 
-In the 16th line of the template, a comparison is made between the instantiated template parameter, designated here as "_Returntype_", and the custom "_unspecified_return_t_". In the event that the two parameters are found to be congruent, it can be deduced that no return type has been specified, and the template will solely examine the presence of the function. In the event that the return type is found to be incompatible, a designated type has been allocated. As indicated on line 18, the templates have been programmed to verify if the pack contains more than zero arguments. In the absence of zero arguments in the "_Inputtype_", it can be deduced that no input arguments were provided. These cases involve a simple verification process that includes the function's existence and the appropriateness of the return type. In the event that input arguments are provided, the entirety of the function is subject to review.
+In the 16th line of the template, a comparison is made between the instantiated template parameter, designated here as "_Returntype_," and the custom "_unspecified_return_t_." In the event that the two parameters are found to be congruent, it can be deduced that no return type has been specified, and the template will solely examine the presence of the function. In the event that the return type is found to be incompatible, a designated type has been allocated. As indicated on line 18, the templates have been programmed to verify if the pack contains more than zero arguments. In the scenario where zero arguments are in the "_Inputtype_," it can be deduced that no input arguments were provided. These cases involve a simple verification process that includes the function's existence and the appropriateness of the return type. In the event that input arguments are provided, the entirety of the function is subject to review.
 
 
 
 ==== Class Member Variable TD
 
-Before addressing the main subject, it is imperative to clarify the terminology. The most precise designation in this context would be "data member" instead of "member variable", as substantiated by #cite(<cppreference2026classes>, form: "prose"), which asserts that "A class can have the following kinds of members:
+Before addressing the main subject, it is imperative to clarify the terminology. The most precise designation in this context would be "data member" instead of "member variable," as substantiated by #cite(<cppreference2026classes>, form: "prose"), which asserts that "a class can have the following kinds of members:
 
 1) data members
 
@@ -73,7 +73,7 @@ Before addressing the main subject, it is imperative to clarify the terminology.
 
 4) enumerators
 
-5) member templates".
+5) member templates."
 
 \
 
@@ -106,11 +106,11 @@ As illustrated in @fig:Template_class_has_public_memberfunc, the template declar
 
 
 
-== Implementation of REST API Server <implementation_rest>
+== Implementation of the REST API Server <implementation_rest>
 
 === Design Goals <design_goals>
 
-For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For @qa-security, the utilization of Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, in the event that the code contains malicious intent. In regard to @qa-documentation2, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the @c-compilable-code option is subject to constraints. The @c-technology option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits a substantial advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet @fr-containerization.
+For the proposed system, the implementation and execution of all the quality attributes mentioned in @requirements is desired. For @qa-security, Bubblewrap#footnote[ https://github.com/containers/bubblewrap ] will be employed to establish isolated environments for each task compile case, to prevent potential malicious code from obtaining access to the entire system. In regard to @qa-documentation2, a GitHub page will be generated, and the procedures for utilizing and expanding the system will be thoroughly documented. However, due to temporal limitations, the @c-compilable-code option is subject to constraints. The @c-technology option involves the utilization of Vue.js#footnote[ https://vuejs.org/ ] as the frontend application framework. This conclusion is substantiated by the observation that Vue.js exhibits an advantage in terms of speed in implementing fundamental functionalities when compared to a pure C++ solution. Consequently, this decision enables the primary focus to be maintained on other aspects of the project. The backend API server will be written in C++, leveraging the CrowCpp framework#footnote[ https://github.com/crowcpp/crow ]. The deployment of the system will be facilitated through the utilization of Docker Compose#footnote[ https://docs.docker.com/compose/ ], accompanied by Dockerfiles for the frontend and backend services, respectively to meet @fr-containerization.
 The Round-Trip Time (RTT) will be measured for @qa-performance. In the event that the requirement is not met, modifications will be made.
 
 

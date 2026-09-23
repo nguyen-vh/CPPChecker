@@ -18,7 +18,7 @@ With respect to the implementation of the server stack, it can be posited that a
 
 === Open Goals
 
-Despite the assertion in Section 7.1.1 that @fr-basic-functionality is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality". In that regard, it would remain one of the open goals of this thesis.
+Despite the assertion in Section 7.1.1 that @fr-basic-functionality is nearing completion, the requirement remains ambiguous, allowing for a considerable degree of flexibility in its implementation. The extent to which the TD expands can vary significantly, contingent upon the scope of one's own definition of "basic functionality." In that regard, it would remain one of the open goals of this thesis.
 
 A review of the header file documentation for @qa-documentation reveals significant shortcomings. The naming scheme should be easily discernible and clearly indicate its functionality. However, for a library, minimal documentation remains a prerequisite. Although not explicitly required, the integration of UT and documentation is inherently linked, and the implementation of UT for the existing TD would have been advantageous.
 
@@ -35,4 +35,4 @@ Presently, the header file can be utilized to supplement UT, thereby preventing 
 == Future Work
 
 If time were not a limiting factor, the implementation of a significantly greater number of TD would result in a greater degree of variability during the source code verification process. In addition, it would be unwise to depend exclusively on independent parties to test the library. Instead, the implementation of an UT process is necessary to proactively identify any anomalous behaviors early on.  In the context of automation, the RTT and load balancing benchmarking for the REST API server is pending, with the objective of demonstrating the impact of the implemented changes and additions through concrete results.
-At a certain stage, the integration into the existing UT, such as GTest, would be implemented to ensure a seamless integration. With respect to automation, in the event that the server's capacity is overwhelmed due to a high volume of concurrent users transmitting their code to the API, a multitude of strategies exist for enhancing the system's swiftness and effectiveness.
+At a certain stage, the integration into the existing UT frameworks, such as GTest, would be implemented to ensure a seamless integration. With respect to automation, in the event that the server's capacity is overwhelmed due to a high volume of concurrent users transmitting their code to the API, a multitude of strategies exist for enhancing the system's swiftness and effectiveness.

@@ -13,6 +13,16 @@ A plethora of evaluation methods exists to ascertain the functionality of the pr
 Unit Testing (UT) involves the evaluation of a unit's functionality in isolation. In many cases, a minimal environment must be prepared for the evaluation of a unit. Such an environment may include variables or more complex data structures. Subsequently, the unit is executed with a specific set of parameters @eisenecker2022basic.
 The employment of UT frameworks facilitates the development of unit tests, which possess the capacity to execute and generate results. The implementation and execution of these tests with each iteration of the code will provide feedback regarding the efficacy of the implemented changes. The objective of the tests is to assess whether the alterations have resulted in any functional alterations or compromises to the behavior of the existing code. As Microsoft asserts, "Unit testing exerts the most significant influence on the quality of code when it constitutes an integral component of the software development workflow" @microsoft2026unittest.
 
+#pagebreak()
+
+
+=== Unit Testing Frameworks
+
+In the domain of software development, the two most prevalent testing frameworks in the C++ programming language are Google Test#footnote[ https://github.com/google/googletest ] (GTest) and Catch2#footnote[ https://github.com/catchorg/Catch2 ]. GTest necessitates discrete compilation, a process that can influence the time required for setup. Conversely, Catch2 v2 is a lightweight, header-only testing framework that prioritizes simplicity @catch2 @pamela2025ut. Catch2 has also released version 3, which functions as a conventional library, incorporating multiple headers and a distinct implementation. For the purposes of this example, Catch2 v2 will be utilized due to its status as a single-header library and its close alignment with the solution space. However, it is imperative to acknowledge the applicability of the presented example across related frameworks. Frameworks such as Catch2 and GTest offer advanced unit testing capabilities, which is why Catch2 can serve as a representative example for the broader set of existing frameworks. Yet, when confronted with the problem delineated in @problem, it becomes apparent that a workaround is necessary.
+
+In @fig:catch2_hasClass, a code example is presented that utilizes the Catch2 v2 single-header file to illustrate a UT example. The code functions properly without errors. However, it is imperative to consider the implications of alternative class designations or the absence of the class. As demonstrated by the @fig:catch2_noClass example, the UT does not indicate a failure. Instead, the compiler refuses to compile. In the GTest framework, the macro _GTEST_SKIP()_ has been implemented to bypass assertions. In a similar vein, the macro _SKIP()_ has been incorporated into Catch2 v3. It should be noted that these skips are only applicable to runtime assertions, which, in turn, will not resolve the compile-time issue @googletest2026.
+
+#pagebreak()
 
 
 == Metaprogramming

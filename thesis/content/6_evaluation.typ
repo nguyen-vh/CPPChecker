@@ -21,7 +21,7 @@ The three objectives delineated in the Introduction are consolidated into a sing
 
 == Results
 
-The aforementioned parties conducted a rigorous testing process, the results of which indicated that the majority of requirements enumerated in the header file were satisfied. The study identified a number of unanticipated outcomes.
+The aforementioned parties conducted a rigorous testing process, the results of which indicated that the majority of requirements enumerated in the header file were satisfied. The thesis identified a number of unanticipated outcomes.
 First, when defining an alias type and subsequently employing that alias type as the return type for a function, the TD is unable to recognize it, as illustrated in @fig:Eval_Alias. The TD has identified the use of the alias for any other purpose.
 The second issue pertains to the "_class_has_pure_virtual_memberfunc<>_" complication, which has already hindered the process of creating and testing the task. While it possesses the capability to discern pure virtual member functions, the TD's subsequent evaluation would be flawed should the quantity of template parameters subjected to inspection increase.
 In Task 3, as indicated in @fig:Taskfile_Coffee, the development of an abstract class was a requirement. However, the TD has not yet been written for it. In the final analysis, certain functions necessitated an input type designated as "_double_." However, it should be noted that the use of "_const double&_" would also be considered valid. It is crucial to highlight that the system did not verify the output of the sent code. Consequently, the necessity to write code inside the main function becomes redundant.

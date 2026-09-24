@@ -13,6 +13,10 @@
 
   (abb: "UT", desc: "Unit Testing"),
 
+  (abb: "RQ", desc: "Research Question"),
+
+  (abb: "DSR", desc: "Design Science Research"),
+
   (abb: "GCC", desc: "GNU Compiler Collection"),
 
   (abb: "GNU", desc: "Recursive Acronym for \"GNU's Not Unix!\""),

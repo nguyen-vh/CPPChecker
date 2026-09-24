@@ -26,7 +26,7 @@ Precisely one month after the commencement of this thesis, GCC unveiled its late
 ==== String Literal TD
 
 The CPPChecker header file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
-The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and #box[康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ]], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes string literal templates to pass the function name that has been searched for during compile time to the reflections. Formally, "a string [...] is a finite sequence of symbols" @sipser2013string. In C++, "literals represent values of various types" @stroustrup2014literal, and a "string literal is a series of characters enclosed in double quotes" @stroustrup2014literal that represent a fixed string value directly in the program's source code @savitch2016literal. In the header file, their string literal templates were utilized without modification.
+The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and #box[康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ]], as documented in @fig:appendix:oersted. The program utilizes string literal templates to pass the function name that has been searched for during compile time to the reflections. Formally, "a string [...] is a finite sequence of symbols" @sipser2013string. In C++, "literals represent values of various types" @stroustrup2014literal, and a "string literal is a series of characters enclosed in double quotes" @stroustrup2014literal that represent a fixed string value directly in the program's source code @savitch2016literal. In the header file, their string literal templates were utilized without modification.
 
 
 
@@ -42,7 +42,7 @@ The final class templates can be utilized to verify the name of a class during c
 
 Oersted's solution in @fig:appendix:oersted incorporates verifications for the input and return types of the function. This approach represents a missed opportunity to leverage the potential of templates and enhance their generic appeal. To illustrate, it would be advantageous for the template to function in scenarios where the primary objective is to ascertain the existence of a specific function, irrespective of its input type, or to verify with its input type without the return type.
 
-The implementation of this functionality was enabled by the application of "template default arguments." By default, when the template is instantiated without explicitly specifying trailing parameters, the default argument is used, as established by #cite(<eisenecker2024advanced>, form: "prose").
+The implementation of this functionality was enabled by the application of template default arguments. By default, when the template is instantiated without explicitly specifying trailing parameters, the default argument is used, as established by #cite(<eisenecker2024advanced>, form: "prose").
 
 \
 #figure(

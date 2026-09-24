@@ -25,7 +25,7 @@ The approach undertaken in this thesis utilizes the C++ language itself as the v
 
 The prevailing methodologies employed for the evaluation of non-functional code requirements have proven to be inadequate. The manual review process conducted by instructors is both time-consuming and subjective, thereby hindering the provision of timely feedback to students, particularly in large-scale courses. While static analysis tools (linters) can enforce basic syntactic rules, they fundamentally lack the capability to assess the semantic appropriateness of an identifier. To illustrate, a linter can enforce the "camelCase" convention but lacks the capacity to discern if a function is named "processData."
 
-The impetus for this thesis stems from the necessity for an automated, scalable, and consistent method for evaluating the structural and semantic aspects of code. The objective of this study is to establish a connection between rudimentary syntactic verification and the substantial expense associated with manual review. The proposed system is designed to be readily accessible, capable of straightforward augmentation, and compatible with prevailing educational workflows.
+The impetus for this thesis stems from the necessity for an automated, scalable, and consistent method for evaluating the structural and semantic aspects of code. The objective of this thesis is to establish a connection between rudimentary syntactic verification and the substantial expense associated with manual review. The proposed system is designed to be readily accessible, capable of straightforward augmentation, and compatible with prevailing educational workflows.
 
 
 
@@ -45,5 +45,18 @@ The central research objective of this thesis is to design, implement, and evalu
 
 == Methodology<methodology>
 
-The methodology will entail the utilization of header files as the fundamental framework for this research study. In addition, the proposed approach will entail the incorporation of a server that is equipped with a REST API and a Web UI. This integration will serve to substantiate the practicability of automating the validation process of code and usability in a tangible setting. To provide a comprehensive answer to the research question, a thorough examination of the entire process will be conducted.
+This thesis follows a Design Science Research (DSR) approach, as outlined by #cite(<brocke2020dsr>, form: "author"), which is situated within a pragmatic research paradigm @brocke2020dsr. DSR is appropriate because the central research question cannot be answered by observation alone. Rather, it requires the construction of an artifact whose behavior under real conditions reveals those strengths and limitations. The artifact is the header-based verification framework, and the knowledge contribution lies in the mapping of which non-functional requirements can and cannot be expressed as compile-time constraints in C++.
 
+The nature of the thesis is exploratory and evaluative. It is exploratory because the expressive boundaries of C++ metaprogramming for this purpose are not yet established in the literature. It is also evaluative because the RQ demands a judgment about the relative merits of the approach. The methodology proceeds in three iterative phases, guided by the DSR Methodology Process Model, initially outlined by #cite(<peffers2007dsrm>, form: "prose").
+
+\
+
+First phase: Design and construction. A reusable C++ header containing template-based compile-time constraints is developed. This artifact encodes non-functional requirements, including the presence, naming, signature, and return types of classes and functions. The design is driven by a catalogue of representative non-functional requirements drawn from the programming-education context described in the #link(<problem>)[Problem section]. The catalogue is extracted from assignments and coding guidelines of the programming lecture by #cite(<eisenecker2022basic>, form: "author"), and covers non-functional requirement that appears in those materials.
+
+\
+
+Second phase: Demonstration. The framework is integrated into a server that exposes a REST API and a Web UI, thereby producing an end-to-end automated verification workflow. This integration serves to demonstrate the approach's viability within a tangible, non-trivial setting and within the standard C++ toolchain, without requiring external parsers or analysis tools.
+
+\
+
+Third phase: Evaluation. The expressiveness of the approach is assessed by applying it to the requirements from phase 1 and recording, for each, whether it can be enforced at compile time, only partially enforced, or not enforced at all. The judgment for each requirement is grounded in the compiler's behavior and the expressibility of the requirement in the C++ type system. This yields a structured account of the strengths and limitations that directly answers the research question. The evaluation is qualitative and boundary-oriented rather than statistical: the aim is to characterize the expressive envelope of the technique, not to measure its performance against a baseline.

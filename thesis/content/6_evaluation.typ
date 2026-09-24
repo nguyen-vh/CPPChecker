@@ -33,14 +33,43 @@ The REST API server and web UI stack functioned without error or unexpected beha
 == Findings <findings>
 
 The last two findings stem from imprecise task file requirements rather than from the checker itself. The abstract class requirement could not be verified, and the input type requirement admitted multiple valid answers. It is evident that the abstract class could have been omitted as a requirement, given the inability to verify its presence and the potential for multiple responses as input type, refer to the expanded version in @fig:Taskfile_Space, specifically lines 78 and 79.
+
 With regard to the initial two observations, it is conceivable that the _\<meta>_ standard library (reflections library) is not functioning as intended. This phenomenon could be attributed to the library being an early release that lacks some reflections features, or the TD for those findings being implemented incorrectly. It is important to note that both of these options are possible. In general, the issue is more likely to occur in the reflections library, as evidenced by the failure of the "_class_has_memberfunc<>_" to function properly when declaring an alias of type float for the evaluation and returning on a simple type check (refer to @fig:Eval_Alias_Check).
+
+When considered as a whole, the observations can be classified into two categories: limitations inherent to the metaprogramming approach, and limitations arising from the requirement specification itself.
+
+\
+
+1. Limitations of the approach
+  - Alias-type detection failure (@fig:Eval_Alias): TD cannot see through "_using_" when the alias is used as a return type for a function, although it detects the alias elsewhere.
+
+  - "_class_has_pure_virtual_memberfunc<>_" scaling issue: Correctness degrades as the number of inspected template parameters grows.
+
+  Both of these findings point to the early-release reflections library as the likely cause, indicating an expressive limit of the technique rather than a bug in the tooling.
+
+\
+
+2. Limitations of the requirement specification
+  - Abstract-class requirement in Task 3 (@fig:Taskfile_Coffee) is unverifiable because no TD was written for it.
+
+  - "_double_" vs. "_const double&_" ambiguity in @fig:Taskfile_Space, which should allow multiple valid answers.
+
+  These are not failures of the underlying approach. Rather, they demonstrate that the precision of compile-time verification is constrained by the specificity of the requirements it encodes.
+
+\
+These findings address the RQ to a limited extent. They identify the points of failure of the approach, but not its full reach.
 
 
 
 == Limitations
 
+The limitations of this evaluation can be categorized into two distinct classes. The initial category comprises limitations pertaining to the evaluation method. The second category comprises limitations pertaining to the system under evaluation. The former are addressed first, as they constitute the foundation of the confidence in the findings. Subsequently, these elements are restated as the expressive boundaries of the approach itself.
+
+
 The evaluation approach that has been employed was to replicate the actual case scenario. However, in the absence of temporal constraints, a comprehensive UT would have identified the bugs irrespective of the initial conditions. Consequently, the probability of a bias in testing specific edge cases is high, and it is improbable that all anomalous behaviors have been identified.
 
-A significant constraint is the omission of an output check. Because all checks run at compile time, output verification was deprioritized. A basic verification of the output would have been the call of the sent code's primary function, while redirecting "_std::cout_," "the standard output stream object in C++" @geeksforge2026cout, to a "_std::string_" and making a comparison of the string with the expected output string.
-The absence of output validation does offer certain advantages. Primarily, the code is checked at compile time rather than runtime, resulting in significantly expedited execution. Moreover, this approach eliminates the potential for malicious code execution, a crucial benefit.
-To broaden the scope, as previously stated in @subsystem_decomposition, the utilization of a namespace is advantageous in circumventing the duplicate main functions. This approach offers significant benefits, primarily the prevention of malicious code execution. To illustrate this point, consider the example of having a function situated in the global scope. The utilization of namespaces enables the global space to be accessed exclusively through the process of exiting the specified namespace. However, this action impedes the ability to compile the code and prevents the initiation of the evaluation process.
+A design decision is the omission of an output check, as this practice places all checks at compile time, making the verification process faster, as well as not allow malicious code execution. The compromise entails the exclusion of functional correctness from the scope of the project, thereby rendering the "_main_" function superfluous.
+
+The boundaries of the approach itself follow from these observations. Firstly, the expressiveness of the technique is currently constrained by the maturity of the reflections library. As reflected entities are represented as "_std::meta::info_" values, any inaccuracy in the manner in which the library projects a source entity into said representation is propagated to each TD that inspects it. This phenomenon impacts the resolution of aliases and the management of an increasing number of inspected template parameters. Whether a fully matured reflections implementation will resolve these cases remains unresolved. Secondly, given that verification operates on the type system, it can establish the presence, naming form, and type of a declaration. However, it is important to note that it is not capable of determining the semantic appropriateness of an identifier. This limit is conceptual in nature and would persist even in the event of a mature reflections implementation. Thirdly, and most fundamentally, the precision of verification is constrained by the precision of the requirement. A requirement that permits multiple valid answers, or that is not encoded as a TD, cannot be enforced. It is important to note that these three boundaries do not constitute defects of the implementation. They delineate the expressive envelope within which compile-time verification of non-functional requirements is feasible in C++.
+
+Collectively, these limitations do not invalidate the approach and instead delineate its expressive envelope. Consequently, the evaluation delineates the limits of the technique's expressive capacity, which is the question the RQ poses.

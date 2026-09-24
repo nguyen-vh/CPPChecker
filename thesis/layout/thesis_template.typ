@@ -121,7 +121,7 @@
   set par(leading: 1em)
 
   // --- Citations ---
-  set cite(style: "ieee")
+  set cite(style: "ieee.csl")
 
   // --- Figures ---
   show figure: set text(size: 0.85em)

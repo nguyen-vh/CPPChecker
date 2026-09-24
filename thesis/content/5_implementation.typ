@@ -13,7 +13,7 @@ The header file that incorporates the templates utilized for the purpose of veri
 
 Before the commencement of this thesis, another effort was made to address the challenge. At that time, the C++ language did not yet support reflection, so an alternative approach had to be adopted. The approach employed utilized Substitution Failure Is Not An Error (SFINAE) with conventional C++17 syntax, subsequently adapting to the more recent C++20 _Concepts_. The underlying rationale for this approach is to employ an overload of the template, thereby facilitating the deduced type. In the event of a failure, the specialization is discarded, a process that circumvents the occurrence of a compile error @cpprefernce2026sfinae.
 
-To complement that approach, it was necessary to have a set of fallback classes to which the compiler could refer in the event that a particular class was not found. Furthermore, an approach delineated in a blog post series by #cite(<chen2019namespaces>, form: "prose") was implemented. In this series, Chen placed namespaces in a way that necessitated a specific sequence for checking within those namespaces. Consequently, these namespaces offer an optimal location for the placement of fallback classes.
+To complement that approach, it was necessary to have a set of fallback classes to which the compiler could refer in the event that a particular class was not found. Furthermore, an approach delineated in a blog post series by #cite(<chen2019namespaces>, form: "author") was implemented. In this series, #cite(<chen2019namespaces>, form: "author") placed namespaces in a way that necessitated a specific sequence for checking within those namespaces. Consequently, these namespaces offer an optimal location for the placement of fallback classes.
 
 The objective was to implement standard template calls for the type and name verification of the requirements. However, it was observed that the template alone was incapable of generating nested namespaces and fallback classes, which resulted in issues when the template was used twice. In light of this deficiency, the utilization of C++ _Macros_ was employed to automate the generation of the majority of boilerplate code during the compile phase.
 
@@ -26,7 +26,7 @@ Precisely one month after the commencement of this thesis, GCC unveiled its late
 ==== String Literal TD
 
 The CPPChecker header file utilizes the latest feature of C++26 _Reflections_, to search for the task requirements.
-The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and #box[康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ]], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes string literal templates to pass the function name that has been searched for during compile time to the reflections. Formally, "a string [...] is a finite sequence of symbols" @sipser2013string. In C++, "literals represent values of various types" @stroustrup2014literal, and a "string literal is a series of characters enclosed in double quotes" @stroustrup2014literal. As literals, string literals "do not change in value" @savitch2016literal. In the header file, their string literal templates were utilized without modification.
+The foundation of the implementation is rooted in the code contributed by Stack Overflow#footnote[ https://stackoverflow.com/questions ] users Oersted#footnote[ https://stackoverflow.com/users/21691539/oersted ] and #box[康桓瑋 (Hewill Kang)#footnote[ https://stackoverflow.com/users/11638718/%e5%ba%b7%e6%a1%93%e7%91%8b ]], a distinguished figure who has been recognized as one of only three individuals to attain the prestigious C++20 gold badge on the platform, as documented in @fig:appendix:oersted. The program utilizes string literal templates to pass the function name that has been searched for during compile time to the reflections. Formally, "a string [...] is a finite sequence of symbols" @sipser2013string. In C++, "literals represent values of various types" @stroustrup2014literal, and a "string literal is a series of characters enclosed in double quotes" @stroustrup2014literal that represent a fixed string value directly in the program's source code @savitch2016literal. In the header file, their string literal templates were utilized without modification.
 
 
 
@@ -51,7 +51,7 @@ The implementation of this functionality was enabled by the application of "temp
 ) <fig:Template_class_has_memberfunc>
 \
 
-In line two of @fig:Template_class_has_memberfunc, the default argument is designated as "_unspecified_return_t_," which is defined as an empty _struct_. The final argument constitutes a template parameter pack, defined as "a template parameter that accepts zero or more template arguments" @cppreference2026pack.
+In the second line of @fig:Template_class_has_memberfunc, the default argument is designated as "_unspecified_return_t_," which is defined as an empty _struct_. The final argument constitutes a template parameter pack, defined as "a template parameter that accepts zero or more template arguments" @cppreference2026pack.
 
 In the 16th line of the template, a comparison is made between the instantiated template parameter, designated here as "_Returntype_," and the custom "_unspecified_return_t_." In the event that the two parameters are found to be congruent, it can be deduced that no return type has been specified, and the template will solely examine the presence of the function. In the event that the return type is found to be incompatible, a designated type has been allocated. As indicated on line 18, the templates have been programmed to verify if the pack contains more than zero arguments. In the scenario where zero arguments are in the "_Inputtype_," it can be deduced that no input arguments were provided. These cases involve a simple verification process that includes the function's existence and the appropriateness of the return type. In the event that input arguments are provided, the entirety of the function is subject to review.
 
@@ -59,7 +59,7 @@ In the 16th line of the template, a comparison is made between the instantiated 
 
 ==== Class Member Variable TD
 
-Before addressing the main subject, it is imperative to clarify the terminology. The most precise designation in this context would be "data member" instead of "member variable," as substantiated by #cite(<cppreference2026classes>, form: "prose"), which asserts that "a class can have the following kinds of members:
+Before addressing the main subject, it is imperative to clarify the terminology. The most precise designation in this context would be "data member" instead of "member variable," as substantiated by #cite(<cppreference2026classes>, form: "author"), which asserts that "a class can have the following kinds of members:
 
 1) data members
 
@@ -73,12 +73,12 @@ Before addressing the main subject, it is imperative to clarify the terminology.
 
 4) enumerators
 
-5) member templates."
+5) member templates" @cppreference2026classes.
 
 \
 
 An examination of  @fig:Template_class_has_membervar reveals that the utilization of "_std::meta::is_variable()_" on lines 10 and 11 is insufficient. This is due to the fact that "_std::meta::is_variable()_" exclusively applies to static data members, while "_std::meta::is_nonstatic_data_member()_" is necessary for non-static data members.
-In fact, the "_std::meta::is_static_data_member()_" function is not a viable option, documented in the papers by #cite(<isocpp2025reflections>, form: "prose"), as "_std::meta::is_variable()_" performs the same task.
+In fact, the "_std::meta::is_static_data_member()_" function is not a viable option, documented in the papers by the #cite(<isocpp2025reflections>, form: "author"), as "_std::meta::is_variable()_" performs the same task @isocpp2025reflections.
 
 \
 #figure(

@@ -130,13 +130,13 @@
 
   // --- Table of Contents ---
   show outline.entry.where(level: 1): it => {
-    v(15pt, weak: true)
+    v(14pt, weak: true)
     strong(it)
   }
   outline(
     title: {
       text(font: fonts.body, 1.5em, weight: 700, "Contents")
-      v(15mm)
+      v(14mm)
     },
     indent: 2em,
   )

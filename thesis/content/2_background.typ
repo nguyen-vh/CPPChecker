@@ -16,7 +16,7 @@ The employment of UT frameworks facilitates the development of unit tests, which
 #pagebreak()
 
 
-=== Frameworks
+=== Frameworks <ut_frameworks>
 
 In the domain of software development, the two most prevalent testing frameworks in the C++ programming language are Google Test#footnote[ https://github.com/google/googletest ] (GTest) and Catch2#footnote[ https://github.com/catchorg/Catch2 ]. GTest necessitates discrete compilation, a process that can influence the time required for setup. Conversely, Catch2 v2 is a lightweight, header-only testing framework that prioritizes simplicity @catch2 @pamela2025ut. Catch2 has also released version 3, which functions as a conventional library, incorporating multiple headers and a distinct implementation. For the purposes of this example, Catch2 v2 will be utilized due to its status as a single-header library and its close alignment with the solution space. However, it is imperative to acknowledge the applicability of the presented example across related frameworks. Frameworks such as Catch2 and GTest offer advanced unit testing capabilities, which is why Catch2 can serve as a representative example for the broader set of existing frameworks. Yet, when confronted with the problem delineated in @problem, it becomes apparent that a workaround is necessary.
 

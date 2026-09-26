@@ -6,7 +6,7 @@ This section is dedicated to the Macro Approach mentioned in @prior_reflections 
 
 \
 
-In @fig:macro_class_has_memberfunc, a macro template to verify the presence of a member function within a class is shown, similar to @fig:Template_class_has_memberfunc. The utilization of macros is necessitated by the requirement to place a function within the confines of the nested namespace construct. This is done to ensure the enforcement of an order of visibility and to guarantee uniqueness in the naming scheme. For a more comprehensive overview of this subject, readers are directed to consult the articles by #cite(<chen2019namespaces>, form: "prose").
+In @fig:macro_class_has_memberfunc, a macro template to verify the presence of a member function within a class is shown, similar to @fig:Template_class_has_memberfunc. The use of macros is necessary because a function must be placed within the boundaries of the nested namespace construct. This is done to ensure the enforcement of an order of visibility and to guarantee uniqueness in the naming scheme. For a more comprehensive overview of this subject, readers are directed to consult the articles by #cite(<chen2019namespaces>, form: "prose").
 
 \
 #figure(
@@ -25,7 +25,7 @@ The final namespace is concealed and is designated by a macro named "_NAMESPACE_
 ) <fig:macro_fallback>
 \
 
-The utilization of the aforementioned code can be achieved through the implementation of a specific configuration. This configuration involves the placement of the code inside a namespace, in @fig:macro_usecase "_check_in_here_." Additionally, the execution of the macro requires the invocation of the class name and the function name. This will result in the generation of a function within the "_check_" namespace, with the provided names, in this case "_check::class_X_has_memberfunc_foo_v_." This function will return a boolean value, shown in @fig:macro_usecase.
+The utilization of the aforementioned code can be achieved through the implementation of a specific configuration. This configuration involves the placement of the code inside a namespace, in @fig:macro_usecase "_check_in_here_." Additionally, the execution of the macro requires the invocation of the class name and the function name. This generates a function within the "_check_" namespace, with the provided names, in this case "_check::class_X_has_memberfunc_foo_v_." This function will return a boolean value, shown in @fig:macro_usecase.
 
 \
 #figure(
@@ -34,4 +34,4 @@ The utilization of the aforementioned code can be achieved through the implement
 ) <fig:macro_usecase>
 \
 
-A potential drawback of the code is that it will generate an error if multiple macros with identical inputs are utilized. Furthermore, it should be noted that the macros, which are designed to verify the return and input types, are incapable of testing a C++ type that utilizes multiple words, such as "_long long int_." This is due to a conflict with the name generation for the function. One possible solution to this issue is to define aliases in order to circumvent the conflict.
+A potential drawback of the code is that it will generate an error if multiple macros with identical inputs are used. Furthermore, the macros utilized to check return and input types are unable to verify a C++ type that uses multiple words, such as "_long long int_." This is due to a conflict with the name generation for the function. One possible solution to this issue is to define aliases in order to circumvent the conflict.

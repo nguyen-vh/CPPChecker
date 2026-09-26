@@ -69,7 +69,7 @@ Despite the fact that the system plays a secondary role in this thesis, it is st
 \
 #FR(
   "Task expansion",
-)[ The incorporation of new tasks into the verification process should not pose a significant challenge, provided that the existing codebase remains unaltered. This feature is imperative for preserving the flexibility and scalability of the future system over time. ]
+)[ The incorporation of new tasks into the verification process should not pose a significant challenge, provided that the existing codebase remains unaltered. This feature is essential for ensuring the long-term flexibility and scalability of the future system. ]
 
 \
 #FR(

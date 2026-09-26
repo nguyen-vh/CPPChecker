@@ -24,13 +24,12 @@ Existing work on NFR assessment in education remains sparse and largely manual. 
 
 C++ metaprogramming provides a distinct approach to structural verification. It involves the expression of requirements as compile-time constraints, thereby enabling the compiler to function as the verifier. Template metaprogramming, "_static_assert_", Substitution Failure Is Not An Error (SFINAE), C++20 _Concepts_ and C++26 _Reflections_ enable the examination of a broad spectrum of properties during compilation @vandevoorde2018template @eisenecker2024advanced.
 
-A number of studies have previously utilized these techniques in domains such as library design @rahaman2022lib and error messages @rude2009cpp. However, the application of these techniques as a systematic pedagogical verification mechanism for non-functional code requirements has not been the subject of extensive research.
+A number of studies have previously utilized these techniques in domains such as library design @rahaman2022lib and error messages @rude2009cpp. However, the application of these techniques as a systematic pedagogical verification mechanism for non-functional code requirements appear to not been subject of extensive research thus far.
 
 
 
 == Gap and Positioning<related_work_gap>
 
-The literatures reviewed above reveal a consistent gap. Automated assessment research concentrates on functional correctness. NFR research establishes the difficulty of evaluating non-functional requirements but offers few automated solutions for education. Compile-time verification is well understood as a language mechanism but has not been evaluated as a pedagogical verification mechanism.
+The literatures reviewed above reveal a consistent gap. Automated assessment research concentrates on functional correctness. NFR research establishes the difficulty of evaluating NFRs but offers few automated solutions for education. Compile-time verification is well understood as a language mechanism but has not been evaluated as a pedagogical verification mechanism.
 
-This thesis aims to address this gap by designing, implementing, and evaluating a header-based C++ framework that leverages metaprogramming to verify non-functional structural requirements. It operates entirely within the standard C++ toolchain. The contribution is a structured account of the expressive envelope
-of this technique, thereby answering the research question posed in the #link(<objectives>)[Objectives section].
+This thesis aims to address this gap by designing, implementing, and evaluating a header-based C++ framework that leverages metaprogramming to verify non-functional structural requirements. It operates entirely within the standard C++ toolchain. The contribution provides a structured overview of the range of expressions offered by this technique, thereby answering the research question posed in the #link(<objectives>)[Objectives section].

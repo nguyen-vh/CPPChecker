@@ -11,19 +11,19 @@
 
   (abb: "UI", desc: "User Interface"),
 
-  (abb: "UT", desc: "Unit Testing"),
-
   (abb: "RQ", desc: "Research Question"),
 
   (abb: "DSR", desc: "Design Science Research"),
+
+  (abb: "UT", desc: "Unit Testing"),
+
+  (abb: "GTest", desc: "Google Test"),
 
   (abb: "GCC", desc: "GNU Compiler Collection"),
 
   (abb: "GNU", desc: "Recursive Acronym for \"GNU's Not Unix!\""),
 
   (abb: "TMP", desc: "Template Metaprogramming"),
-
-  (abb: "GTest", desc: "Google Test"),
 
   (abb: "SFINAE", desc: "Substitution Failure Is Not An Error"),
 

@@ -130,7 +130,7 @@
 
   // --- Table of Contents ---
   show outline.entry.where(level: 1): it => {
-    v(14pt, weak: true)
+    v(5.1mm, weak: true)
     strong(it)
   }
   outline(

@@ -18,7 +18,7 @@ A comprehensive inspection of NFRs of classes, functions, variables, and the mos
 
 \
 #FR("Header-only")[ The verification logic and templates should be consolidated into a single C++ header file. ]
-The utilization of a single header file approach is of paramount importance, as header-only files exhibit a more simplified distribution process in comparison to that of compiled libraries. This approach is particularly well-suited for code that is predominantly template-heavy @codefinity2026header. The incorporation of simplified distribution and inclusion into existing projects ensures the practical application of the concept beyond the confines of the problem space.
+The single header file approach is of importance, as header-only files exhibit a more simplified distribution process in comparison to that of compiled libraries. This approach is particularly well-suited for code that is predominantly template-heavy @codefinity2026header. The incorporation of simplified distribution and inclusion into existing projects ensures the practical application of the concept beyond the confines of the problem space.
 
 
 
@@ -44,7 +44,7 @@ The utilization of a single header file approach is of paramount importance, as 
 
 #C(
   "Pure C++",
-)[ The sole constraint imposed pertains to the utilization of pure C++ language. Avoidance of the utilization of any alternative programming language is imperative to ensure fulfillment of @fr-header-only. ]
+)[ The sole constraint imposed pertains to the usage of pure C++ language. Avoidance of any alternative programming language is imperative to ensure fulfillment of @fr-header-only. ]
 
 
 

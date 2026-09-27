@@ -34,7 +34,7 @@ The REST API server and web UI stack functioned without error or unexpected beha
 
 The last two findings stem from imprecise task file requirements rather than from the checker itself. The abstract class requirement could not be verified, and the input type requirement admitted multiple valid answers. It is evident that the abstract class could have been omitted as a requirement, given the inability to verify its presence and the potential for multiple responses as input type, refer to the expanded version in @fig:Taskfile_Space, specifically lines 78 and 79.
 
-With regard to the initial two observations, it is conceivable that the _\<meta>_ standard library (reflections library) is not functioning as intended. This phenomenon could be attributed to the library being an early release that lacks some reflections features, or the TD for those findings being implemented incorrectly. It is important to note that both of these options are possible. In general, the issue is more likely to occur in the reflections library, as evidenced by the failure of the "_class_has_memberfunc<>_" to function properly when declaring an alias of type float for the evaluation and returning on a simple type check (refer to @fig:Eval_Alias_Check).
+With regard to the initial two observations, it is conceivable that the _\<meta>_ standard library (reflections library) is not functioning as intended. This phenomenon could be attributed to the library being an early release that lacks some reflections features, or the TD for those findings being implemented incorrectly. It is important to note that both of these options are possible. In general, the issue is more likely to occur in the reflections library, as evidenced by the failure of the "_class_has_memberfunc<>_" to function properly when declaring an alias of type "_float_" for the evaluation and returning on a simple type check (refer to @fig:Eval_Alias_Check).
 
 When considered as a whole, the observations can be classified into two categories: limitations inherent to the metaprogramming approach, and limitations arising from the requirement specification itself.
 
@@ -63,7 +63,7 @@ These findings address the RQ to a limited extent. They identify the points of f
 
 == Limitations
 
-The limitations of this evaluation can be categorized into two distinct classes. The initial category comprises limitations pertaining to the evaluation method. The second category comprises limitations pertaining to the system under evaluation. The former are addressed first, as they constitute the foundation of the confidence in the findings. Subsequently, these elements are restated as the expressive boundaries of the approach itself.
+This evaluation's limitations can be categorized into two distinct classes. The initial category comprises limitations pertaining to the evaluation method. The second category comprises limitations pertaining to the system under evaluation. The former are addressed first, as they constitute the foundation of the confidence in the findings. Subsequently, these elements are restated as the expressive boundaries of the approach itself.
 
 
 The evaluation approach that has been employed was to replicate the actual case scenario. However, in the absence of temporal constraints, a comprehensive UT would have identified the bugs irrespective of the initial conditions. Consequently, the probability of a bias in testing specific edge cases is high, and it is improbable that all anomalous behaviors have been identified.

@@ -3,7 +3,7 @@
 
   (abb: "LLM", desc: "Large Language Model"),
 
-  (abb: "NFR", desc: "Non-Functional Requirements"),
+  (abb: "NFR", desc: "Non-Functional Requirement"),
 
   (abb: "REST", desc: "Representational State Transfer"),
 

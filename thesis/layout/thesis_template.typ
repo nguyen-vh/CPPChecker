@@ -24,7 +24,7 @@
   abstract_de: "",
   acknowledgement: "",
   transparency_ai_tools: "",
-  is_print: false,
+  is_print: true,
   abbreviations_list: (),
   body,
 ) = {
